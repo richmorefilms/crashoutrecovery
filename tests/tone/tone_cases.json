@@ -1,0 +1,46 @@
+{
+  "humorous": [
+    "reply to every hater",
+    "ranting at everyone",
+    "meltdown incoming",
+    "clown behavior",
+    "replying to everyone",
+    "reply to haters"
+  ],
+  "direct": [
+    "I'm deleting everything",
+    "quit forever",
+    "burn it all down",
+    "reply-all disaster",
+    "I'm about to nuke my account"
+  ],
+  "strategic": [
+    "algorithm hates me",
+    "reach tanked",
+    "metrics dropped",
+    "platform punished my post"
+  ],
+  "calm": [
+    "I'm overwhelmed and spiraling",
+    "everything feels sharp",
+    "I'm exhausted",
+    "I'm losing my grip"
+  ],
+  "universal": [
+    "something vague and neutral",
+    "idk",
+    "everything feels weird",
+    "random text"
+  ],
+  "placeholder_universal": [
+    "Yeah, {feeling} - that hits hard",
+    "{impulse} is kicking in",
+    "Testing {micro_action} now"
+  ],
+  "xfail": {
+    "reply-all disaster": "Humorous 'disaster' pattern matches before direct 'reply-all'; spec wants direct",
+    "I'm about to nuke my account": "No irreversible-action regex for 'nuke account' yet",
+    "platform punished my post": "Strategic requires platform + drop/tank/crash/fail in same text",
+    "I'm losing my grip": "No calm regex for 'losing my grip' yet"
+  }
+}

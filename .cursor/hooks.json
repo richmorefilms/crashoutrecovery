@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "python .cursor/hooks/ui_copy_commit_check.py",
+        "matcher": "git(\\s|\\.exe\\s+)commit",
+        "failClosed": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "health": {
+    "status": "ok",
+    "app": "Crashout Recovery",
+    "version": "1.0.0"
+  },
+  "tones": {
+    "tones": [
+      "universal",
+      "calm",
+      "humorous",
+      "direct",
+      "strategic"
+    ],
+    "default": "universal"
+  },
+  "suggest_tests": [
+    {
+      "input": "delete quit",
+      "tone": "direct",
+      "blocked": false,
+      "source": "example",
+      "classification": "unknown",
+      "reason": "Matched direct pattern.",
+      "suggestion_preview": "That frustration is real when the work feels stuck. Before you delete anything, move the file to a parking lot folder an"
+    },
+    {
+      "input": "overwhelm",
+      "tone": "calm",
+      "blocked": false,
+      "source": "example",
+      "classification": "unknown",
+      "reason": "Matched calm pattern.",
+      "suggestion_preview": "That heavy spike is real \u2014 and it will soften. Step back for a moment, write privately, and pick one tiny step for today"
+    },
+    {
+      "input": "algorithm",
+      "tone": "strategic",
+      "blocked": false,
+      "source": "example",
+      "classification": "unknown",
+      "reason": "Matched strategic pattern.",
+      "suggestion_preview": "Yeah, {feeling} \u2014 that hits hard. Reach drops sting. Before you bail, run one small test this week \u2014 hook, time, or form"
+    },
+    {
+      "input": "rant",
+      "tone": "direct",
+      "blocked": false,
+      "source": "example",
+      "classification": "unknown",
+      "reason": "Matched direct pattern.",
+      "suggestion_preview": "That frustration is real when the work feels stuck. Before you delete anything, move the file to a parking lot folder an"
+    },
+    {
+      "input": "rejection override",
+      "tone": "strategic",
+      "blocked": false,
+      "source": "topic_override",
+      "classification": "override",
+      "reason": "Topic override: rejection handling",
+      "suggestion_preview": "Rejection is data, not a verdict. Log the feedback, make one revision or send one new submission. You're still in the ga"
+    },
+    {
+      "input": "blocked dox",
+      "tone": "universal",
+      "blocked": true,
+      "source": null,
+      "classification": "blocked",
+      "reason": "Blocked topic: harassment campaigns",
+      "suggestion_preview": "Can't go there. Here's a safer lane: pause, write privately, pick one small next step."
+    },
+    {
+      "input": "universal vague",
+      "tone": "universal",
+      "blocked": false,
+      "source": "pattern_template",
+      "classification": "unknown",
+      "reason": "No strong pattern \u2014 universal tone.",
+      "suggestion_preview": "That spike is real \u2014 and temporary. Default friendly redirect with universal card. You're still steering. One small move"
+    }
+  ]
+}

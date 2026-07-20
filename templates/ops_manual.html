@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% set uc = ui_copy or {} %}
+  <title>{{ app_name }} — Plain-Language Operations Guide</title>
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --muted: #555;
+      --rule: #ccc;
+      --accent: #8a6d1d;
+      --bg: #fff;
+      --soft: #f7f5f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 12pt;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: #111;
+      color: #eee;
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+    }
+
+    .toolbar a,
+    .toolbar button {
+      color: #f5c518;
+      background: transparent;
+      border: 1px solid rgba(245, 197, 24, 0.45);
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      text-decoration: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .manual {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      margin: 0 0 0.4rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      font-size: 1rem;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin: 1.85rem 0 0.65rem;
+      padding-top: 0.65rem;
+      border-top: 2px solid var(--ink);
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      margin: 1.15rem 0 0.45rem;
+      page-break-after: avoid;
+    }
+
+    p { margin: 0 0 0.85rem; }
+
+    ul, ol {
+      margin: 0 0 1rem;
+      padding-left: 1.35rem;
+    }
+
+    li { margin-bottom: 0.4rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 1.15rem;
+      font-size: 0.95rem;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid var(--rule);
+      padding: 0.5rem 0.6rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--soft); font-weight: 700; }
+
+    code, pre {
+      font-family: ui-monospace, Consolas, Menlo, monospace;
+      font-size: 0.85rem;
+    }
+
+    code {
+      background: var(--soft);
+      padding: 0.05rem 0.3rem;
+      border-radius: 3px;
+    }
+
+    pre {
+      background: var(--soft);
+      border: 1px solid var(--rule);
+      padding: 0.85rem 1rem;
+      overflow-x: auto;
+      margin: 0 0 1rem;
+      page-break-inside: avoid;
+      white-space: pre-wrap;
+    }
+
+    .flow {
+      font-family: ui-monospace, Consolas, Menlo, monospace;
+      font-size: 0.9rem;
+      border: 1px dashed var(--rule);
+      padding: 0.85rem 1rem;
+      margin: 0 0 1rem;
+      background: #fafafa;
+    }
+
+    .callout {
+      background: var(--soft);
+      border-left: 4px solid var(--accent);
+      padding: 0.75rem 1rem;
+      margin: 0 0 1.15rem;
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .toc {
+      background: var(--soft);
+      padding: 1rem 1.15rem;
+      margin: 0 0 1.5rem;
+      border: 1px solid var(--rule);
+    }
+
+    .toc ol { margin-bottom: 0; }
+
+    footer.manual-footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    @media print {
+      .toolbar { display: none !important; }
+      body { font-size: 11pt; }
+      .manual { max-width: none; padding: 0; }
+      a { color: inherit; text-decoration: none; }
+      pre, table, .callout, .flow { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar" role="banner">
+    <div>
+      <strong>Plain-Language Ops Guide</strong>
+      <span> — print or save as PDF</span>
+    </div>
+    <div class="toolbar-actions">
+      <button type="button" onclick="window.print()">Print / Save PDF</button>
+      <a href="/ops.md" download="Crashout-Recovery-Plain-Ops.md">Download Markdown</a>
+      <a href="/ops-full.md" download="Crashout-Recovery-OPERATIONS.md">Full technical PDF text</a>
+      <a href="/">Back to app</a>
+      <a href="/#ops">In-app Help</a>
+    </div>
+  </div>
+
+  <article class="manual">
+    <header>
+      <h1>{{ app_name }} — Plain-Language Operations Guide</h1>
+      <p class="subtitle">Pause before you post. Build calmer habits. Adults 18+ only.</p>
+      <p class="meta">
+        Account-enabled preview · No real billing · Run <code>python main.py</code> →
+        <a href="http://127.0.0.1:8777/">http://127.0.0.1:8777/</a><br>
+        This page: <a href="/ops">/ops</a> · Markdown: <a href="/ops.md">/ops.md</a> · Technical deep-dive: <a href="/ops-full.md">/ops-full.md</a>
+      </p>
+    </header>
+
+    <nav class="toc" aria-label="Contents">
+      <strong>Contents</strong>
+      <ol>
+        <li><a href="#what">What this app does</a></li>
+        <li><a href="#tabs">The feed tabs</a></li>
+        <li><a href="#pulse">The {{ uc.pulse_strip.label | lower }}</a></li>
+        <li><a href="#compose">Drafting ({{ uc.composer.label | lower }})</a></li>
+        <li><a href="#streak">{{ uc.recovery_streak.label }} &amp; {{ uc.momentum_score.label | lower }}</a></li>
+        <li><a href="#risk">{{ uc.bad_decision_predictor.label }}</a></li>
+        <li><a href="#signals">{{ uc.signals_pro.label }}</a></li>
+        <li><a href="#curated">Smart rewrites</a></li>
+        <li><a href="#premium">{{ uc.premium_tiers.label }}</a></li>
+        <li><a href="#alert">{{ uc.global_spike_alert.label }}</a></li>
+        <li><a href="#recipes">Everyday recipes</a></li>
+        <li><a href="#console">Console shortcuts</a></li>
+      </ol>
+    </nav>
+
+    <section id="what">
+      <h2>1. What this app does</h2>
+      <p>
+        Crashout Recovery helps you pause before posting something you might regret.
+        You type your thought, the app reads the vibe, suggests a calmer draft, and lets you save it as a
+        <strong>{{ uc.seed.label | lower }}</strong> instead of blasting it out. It’s about building habits, not therapy or payments.
+      </p>
+      <div class="callout">
+        Full suggestions send the entered text to this app's server. Suggestions are read-only unless you explicitly save. Guest activity is cached in this browser; signed-in recovery data, drafts, signals, and preview tier sync to the app's database. Logout does not clear browser-cached content.
+      </div>
+      <p><strong>Flow:</strong></p>
+      <div class="flow">Hot thought → vibe check → {{ uc.momentum_cta.label | lower }} → optional safe move → save {{ uc.seed.label | lower }} → {{ uc.recovery_streak.label | lower }} grows</div>
+    </section>
+
+    <section id="tabs">
+      <h2>2. The feed tabs</h2>
+      <p>At the top you’ll see tabs. Each one is a lane with its own focus:</p>
+      <table>
+        <thead>
+          <tr><th>Tab</th><th>What it’s for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Drama</strong></td><td>Examples of meltdowns, with suggestions for calmer moves</td></tr>
+          <tr><td><strong>Moments</strong></td><td>Shared YouTube clips; Creator+ can add or update video IDs</td></tr>
+          <tr><td><strong>Headlines</strong></td><td>Quick summaries of what’s trending or “spicy” online</td></tr>
+          <tr><td><strong>Signals</strong></td><td>Today’s world mood; {{ uc.signals_pro.label | lower }} unlocks forecasts and burnout clusters</td></tr>
+          <tr><td><strong>Posts</strong></td><td>Your saved {{ uc.seed.label | lower }}s and weekly {{ uc.recovery_streak.label | lower }} view</td></tr>
+          <tr><td><strong>Creator</strong></td><td>Your dashboard with {{ uc.recovery_streak.label | lower }}s, drafts, safe moves, and {{ uc.momentum_score.label | lower }}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="pulse">
+      <h2>3. The {{ uc.pulse_strip.label | lower }}</h2>
+      <p>Always visible at the top. {{ uc.pulse_strip.tooltip }}</p>
+      <ul>
+        <li><strong>Tap a chip</strong> → jumps to Signals tab and highlights that item</li>
+        <li><strong>If a chip flashes red</strong> → the world mood is “high” ({{ uc.global_spike_alert.label | lower }})</li>
+        <li><strong>Pro users</strong> also see forecast rows flash when relevant</li>
+      </ul>
+    </section>
+
+    <section id="compose">
+      <h2>4. Drafting ({{ uc.composer.label | lower }})</h2>
+      <p>Tap the <strong>+ Draft</strong> button to start. {{ uc.composer.tooltip }}</p>
+      <p><strong>Steps:</strong></p>
+      <ol>
+        <li>Type your thought.</li>
+        <li>Wait about 850 ms for automatic analysis, or tap <strong>Read vibe</strong> to run it immediately.</li>
+        <li>Compare calm, clear, and stable rewrites. Staff-reviewed content appears first; gap-filled wording is labeled <strong>AI-assisted</strong>.</li>
+        <li>If you have <strong>Creator+</strong> → <strong>{{ uc.bad_decision_predictor.label }}</strong> shows if it’s risky and offers a safe move.</li>
+        <li><strong>Save your {{ uc.seed.label | lower }}</strong> → adds to {{ uc.recovery_streak.label | lower }} and {{ uc.momentum_score.label | lower }}.</li>
+      </ol>
+      <p>Recovery actions and the risk check appear directly in the Draft box. There is no add-on install step.</p>
+      <div class="callout">
+        In the UI the main button may still say <strong>Read tone &amp; suggest a move</strong> — same step as “Read vibe.”
+      </div>
+    </section>
+
+    <section id="streak">
+      <h2>5. {{ uc.recovery_streak.label }} &amp; {{ uc.momentum_score.label | lower }}</h2>
+      <p><strong>{{ uc.recovery_streak.label }}</strong> = {{ uc.recovery_streak.tooltip }}</p>
+      <p><strong>{{ uc.momentum_score.label }}</strong> = {{ uc.momentum_score.tooltip }}</p>
+
+      <h3>Scoring</h3>
+      <table>
+        <thead>
+          <tr><th>Signal</th><th>Points</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Win-streak day</td><td>+4 (max 40)</td></tr>
+          <tr><td>Safe move</td><td>+20</td></tr>
+          <tr><td>Saved {{ uc.seed.label | lower }}</td><td>+2 each (max 20)</td></tr>
+          <tr><td>Spike history</td><td>calm +2, rising −1, hot −3</td></tr>
+          <tr><td>Installed add-on</td><td>+5 each (max 20)</td></tr>
+          <tr><td>Pro + calm world day</td><td>+10</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Levels</h3>
+      <ul>
+        <li><strong>Low (0–39)</strong> — rebuild with one safe move or {{ uc.seed.label | lower }}</li>
+        <li><strong>Medium (40–69)</strong> — building momentum, stay consistent</li>
+        <li><strong>High (70–100)</strong> — habits stabilizing</li>
+      </ul>
+    </section>
+
+    <section id="risk">
+      <h2>6. {{ uc.bad_decision_predictor.label }}</h2>
+      <p>{{ uc.bad_decision_predictor.tooltip }}</p>
+      <table>
+        <thead>
+          <tr><th>Who</th><th>What you get</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Basic</strong></td><td>Teaser only, locked</td></tr>
+          <tr><td><strong>Creator+</strong></td><td>Spike level, risk vs safe move, reason</td></tr>
+        </tbody>
+      </table>
+      <p>Lets you <strong>take</strong> or <strong>copy</strong> a safe move, which boosts {{ uc.recovery_streak.label | lower }} and {{ uc.momentum_score.label | lower }}.</p>
+    </section>
+
+    <section id="signals">
+      <h2>7. {{ uc.signals_pro.label }}</h2>
+      <p>{{ uc.signals_pro.tooltip }}</p>
+      <table>
+        <thead>
+          <tr><th>Who</th><th>What you get</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Everyone</strong></td><td>Today’s signals (free)</td></tr>
+          <tr><td><strong>Pro</strong></td><td>72h forecast, burnout clusters, algorithm recovery tips</td></tr>
+          <tr><td><strong>Non‑Pro</strong></td><td>Lock banner with “Unlock Pro”</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="curated">
+      <h2>8. Smart rewrites</h2>
+      <p>The Composer checks staff-curated crashout episodes, commentary, rewrites, and recovery actions first.</p>
+      <ol>
+        <li>Choose a calm, clear, or stable rewrite.</li>
+        <li>Check the source label before using it.</li>
+        <li>Edit the wording so it still sounds like you.</li>
+        <li>Save locally, or sign in to submit it for private staff review.</li>
+      </ol>
+    </section>
+
+    <section id="premium">
+      <h2>9. {{ uc.premium_tiers.label }}</h2>
+      <p>{{ uc.premium_tiers.tooltip }}</p>
+      <table>
+        <thead>
+          <tr><th>Level</th><th>Price label</th><th>What unlocks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Basic</strong></td><td>Free</td><td>Core feed, database-guided {{ uc.composer.label | lower }}, today’s signals</td></tr>
+          <tr><td><strong>Plus</strong></td><td>$4.99</td><td>Reserved deeper tone / action-coaching feature flags</td></tr>
+          <tr><td><strong>Creator</strong></td><td>$9.99</td><td>{{ uc.bad_decision_predictor.label }}, Creator dashboard, add Moments videos</td></tr>
+          <tr><td><strong>Pro</strong></td><td>$14.99</td><td>{{ uc.signals_pro.label }}, fuller streak graphs, calm‑day progress bonus</td></tr>
+        </tbody>
+      </table>
+      <p>No real billing. Preview levels require sign-in and are saved to the account.</p>
+    </section>
+
+    <section id="alert">
+      <h2>10. {{ uc.global_spike_alert.label }}</h2>
+      <p>{{ uc.global_spike_alert.tooltip }}</p>
+      <ul>
+        <li>Chips + {{ uc.pulse_strip.label | lower }} flash red for <strong>1.5s</strong></li>
+        <li>Tap → jumps to Signals tab and flashes that row</li>
+        <li>Pro users also see forecast rows flash</li>
+      </ul>
+    </section>
+
+    <section id="recipes">
+      <h2>11. Everyday recipes</h2>
+      <table>
+        <thead>
+          <tr><th>Situation</th><th>What to do</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>About to post something risky</td>
+            <td>Draft → Read vibe → Take safe move → Save {{ uc.seed.label | lower }} → Done</td>
+          </tr>
+          <tr>
+            <td>Feed feels spicy</td>
+            <td>Watch {{ uc.pulse_strip.label | lower }} → Tap flashing chip → Read Signals → Save {{ uc.seed.label | lower }} instead of posting</td>
+          </tr>
+          <tr>
+            <td>Want better wording tools</td>
+            <td>Draft → compare database-guided rewrites → edit the clearest option</td>
+          </tr>
+          <tr>
+            <td>Check habits</td>
+            <td>Creator tab → {{ uc.momentum_score.label | lower }} + {{ uc.recovery_streak.label | lower }}</td>
+          </tr>
+          <tr>
+            <td>Add a YouTube clip</td>
+            <td>Sign in with Creator+ → Moments → Add Video → enter a query and optional YouTube ID or URL → Submit</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout">
+        Added videos are written to the shared server <code>videos.json</code> catalog and appear for every user. Query-only search needs <code>CRASHOUT_YOUTUBE_API_KEY</code> unless cached. There is currently no delete control.
+      </div>
+    </section>
+
+    <section id="console">
+      <h2>12. Console shortcuts (for testing)</h2>
+      <p>Open browser DevTools → Console while the app is running:</p>
+      <pre>CrashoutAuth.openModal('login')           // sign in first
+CrashoutMonetization.setTier('creator')  // preview Creator features
+CrashoutMonetization.setTier('pro')      // preview Pro features
+CrashoutMomentumScore.compute()          // check raw {{ uc.momentum_score.label | lower }}
+CrashoutSpikeAlert.check()               // refresh {{ uc.global_spike_alert.label | lower }}
+CrashoutVideos.openAddVideoModal()       // Creator+ shared catalog tool</pre>
+      <p>More shortcuts: see Help → Console (developer names stay the same). Technical guide: <a href="/ops-full.md">/ops-full.md</a>.</p>
+    </section>
+
+    <footer class="manual-footer">
+      <p>One small move beats one big crashout.</p>
+      <p>Source: <code>PLAIN_OPS.md</code> · Technical ops: <code>OPERATIONS.md</code></p>
+    </footer>
+  </article>
+</body>
+</html>

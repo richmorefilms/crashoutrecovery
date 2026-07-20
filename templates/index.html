@@ -1,0 +1,871 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main feed-layout feed-layout--native">
+  <div class="feed-shell">
+
+    {# Native feed screen: tabs + one lane panel #}
+    <div id="feed" class="feed-stream feed-stream--native" aria-live="polite">
+
+      <section
+        class="world-signals-bar"
+        id="world-signals-bar"
+        aria-label="{{ uc.signals_pro.label }} · {{ uc.pulse_strip.label }}"
+        title="{{ uc.pulse_strip.tooltip }}"
+        data-ui-copy="pulse_strip"
+        data-ui-field="tooltip"
+        data-ui-attr="title"
+      >
+        <header class="world-signals-header">
+          <span class="world-signals-live" aria-hidden="true"></span>
+          <h3 class="world-signals-title" data-ui-copy="signals_pro">{{ uc.signals_pro.label }}</h3>
+          <p class="world-signals-sub">{{ uc.pulse_strip.tooltip }}</p>
+        </header>
+        <div class="world-signals-track" id="world-signals-track" role="list"></div>
+      </section>
+
+      <nav class="feed-tabs" id="feed-tabs" role="tablist" aria-label="Feed lanes">
+        <button type="button" class="feed-tab feed-tab--active" role="tab" id="tab-drama" data-lane="drama" aria-selected="true" aria-controls="feed-lane-panel">
+          Drama
+        </button>
+        <button type="button" class="feed-tab" role="tab" id="tab-moments" data-lane="moments" aria-selected="false" aria-controls="feed-lane-panel">
+          Moments
+        </button>
+        <button type="button" class="feed-tab" role="tab" id="tab-headlines" data-lane="headlines" aria-selected="false" aria-controls="feed-lane-panel">
+          Headlines
+        </button>
+        <button type="button" class="feed-tab" role="tab" id="tab-signals" data-lane="signals" aria-selected="false" aria-controls="feed-lane-panel">
+          Signals
+        </button>
+        <button type="button" class="feed-tab" role="tab" id="tab-posts" data-lane="posts" aria-selected="false" aria-controls="feed-lane-panel">
+          Posts
+        </button>
+        <button type="button" class="feed-tab feed-tab--creator" role="tab" id="tab-creator" data-lane="creator" aria-selected="false" aria-controls="feed-lane-panel">
+          Creator
+        </button>
+      </nav>
+
+      <div
+        id="feed-lane-panel"
+        class="feed-lane-panel"
+        role="tabpanel"
+        aria-labelledby="tab-drama"
+      >
+        <header class="feed-lane-intro">
+          <div class="feed-lane-intro-text">
+            <h3 class="feed-lane-intro-title" id="feed-lane-title">Drama feed</h3>
+            <p class="feed-lane-intro-desc" id="feed-lane-desc">Learn from others' mistakes — meltdowns, beefs, and bad decisions.</p>
+            <p class="feed-lane-intro-sort" id="feed-lane-sort-label">Drama teaches. Spikes become {{ uc.seed.label | lower }}s.</p>
+          </div>
+          <div class="feed-lane-actions" id="feed-lane-actions" hidden></div>
+        </header>
+
+        <div id="feed-posts-personal" class="feed-posts-personal stage-hidden">
+          <div class="feed-timeline" id="feed-timeline">
+            <article class="feed-stage stage-hidden" id="stage-tone-card" data-step="2">
+              <div class="stage-rail"><span class="stage-dot"></span></div>
+              <div class="stage-body">
+                <div class="tone-card tone-card--compact" id="tone-card" aria-label="Tone reaction">
+                  <div class="tone-card-inner">
+                    <span class="tone-card-badge" id="tone-card-badge">universal</span>
+                    <p class="tone-card-reason" id="tone-card-reason"></p>
+                  </div>
+                </div>
+              </div>
+            </article>
+            <article class="feed-stage stage-hidden" id="stage-crashout" data-step="3">
+              <div class="stage-rail"><span class="stage-dot"></span></div>
+              <div class="stage-body">
+                <header class="stage-header stage-header--recovery">
+                  <span class="stage-kicker">Deep support</span>
+                  <h2 class="stage-title">Recovery tools</h2>
+                </header>
+                <div id="crashout-container" class="crashout-stage" aria-label="Crashout Recovery support"></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="feed-empty feed-empty--lane" id="feed-empty">
+          <p class="feed-empty-title" id="feed-empty-title">Drama lane</p>
+          <p class="feed-empty-text" id="feed-empty-text">Switch lanes above. Tap <strong>Draft</strong> to turn a spike into a {{ uc.seed.label | lower }}.</p>
+        </div>
+
+        <section id="recovery-week-card" class="recovery-week-card" hidden aria-label="Your week">
+          <header class="recovery-week-header">
+            <h3 class="recovery-week-title">Your Week</h3>
+            <span class="recovery-week-badge" id="recovery-week-badge">Recovery</span>
+          </header>
+
+          <div class="recovery-streak-row">
+            <span class="recovery-streak-count" id="recovery-streak-count">0</span>
+            <span class="recovery-streak-label" title="{{ uc.recovery_streak.tooltip }}">day {{ uc.recovery_streak.label | lower }}</span>
+          </div>
+
+          <div class="recovery-graph-block">
+            <span class="recovery-graph-label">Spike history</span>
+            <div class="spike-history-graph" id="spike-history-graph" role="img" aria-label="Spike history"></div>
+          </div>
+
+          <div id="recovery-tone-trend" class="recovery-tone-trend-slot"></div>
+
+          <p class="recovery-week-note" id="recovery-week-note">
+            Drafts saved, safe moves taken, and tone shifts build your streak.
+          </p>
+
+          <div id="recovery-week-upgrade" class="recovery-week-upgrade" hidden></div>
+        </section>
+
+        <section id="creator-dashboard" class="creator-dashboard" hidden aria-label="Creator Mode dashboard">
+          <section
+            class="creator-block creator-momentum-block"
+            aria-label="{{ uc.momentum_score.label }}"
+            title="{{ uc.momentum_score.tooltip }}"
+          >
+            <h3 class="creator-block-title" data-ui-copy="momentum_score">{{ uc.momentum_score.label }}</h3>
+            <p class="creator-momentum-readout">
+              <span class="momentum-score low" id="creator-momentum-score">0</span>
+              <span class="creator-momentum-unit">/ 100</span>
+            </p>
+            <p class="momentum-desc low" id="creator-momentum-desc">Your progress is low — keep taking safe moves.</p>
+          </section>
+
+          <div class="creator-dashboard-body" id="creator-dashboard-body">
+            <section class="creator-block creator-streak-block" title="{{ uc.recovery_streak.tooltip }}">
+              <h3 class="creator-block-title" data-ui-copy="recovery_streak">{{ uc.recovery_streak.label }}</h3>
+              <p class="creator-streak-readout">
+                <span class="creator-streak-count" id="creator-streak-count">0</span>
+                <span class="creator-streak-unit">days</span>
+              </p>
+              <p class="creator-streak-meta" id="creator-wins-count">0 wins</p>
+            </section>
+
+            <section class="creator-block creator-tone-block">
+              <h3 class="creator-block-title">Tone trend (last 7 inputs)</h3>
+              <div class="creator-tone-dots" id="creator-tone-dots" aria-label="Tone trend"></div>
+            </section>
+
+            <section class="creator-block creator-spike-block">
+              <h3 class="creator-block-title">Spike history</h3>
+              <div class="creator-spike-bars" id="creator-spike-bars" role="img" aria-label="Spike history"></div>
+            </section>
+
+            <section class="creator-block creator-seeds-block" title="{{ uc.seed.tooltip }}">
+              <h3 class="creator-block-title">Saved {{ uc.seed.label | lower }}s</h3>
+              <ul id="creator-seed-list" class="creator-seed-list"></ul>
+              <p class="creator-empty-note" id="creator-seeds-empty" hidden>No {{ uc.seed.label | lower }}s saved yet — open Draft and save one.</p>
+            </section>
+
+            <section class="creator-block creator-last-safe-block">
+              <h3 class="creator-block-title">Last safe move you took</h3>
+              <p class="creator-last-safe-move" id="creator-last-safe-move">None yet.</p>
+              <p class="creator-last-safe-time" id="creator-last-safe-time" hidden></p>
+            </section>
+          </div>
+
+          <div id="creator-dashboard-locked" class="creator-dashboard-locked" hidden>
+            <p class="creator-locked-copy">Creator Mode dashboard unlocks {{ uc.seed.label | lower }}s, spikes, and tone trends in one place.</p>
+            <button type="button" class="creator-locked-btn" data-monetization-action="upgrade" data-tier="creator">Unlock Creator Mode</button>
+          </div>
+        </section>
+
+        <section
+          id="signals-pro-panel"
+          class="signals-pro-panel"
+          hidden
+          aria-label="{{ uc.signals_pro.label }}"
+          title="{{ uc.signals_pro.tooltip }}"
+        >
+          <section class="signals-block signals-today-block">
+            <h3 class="signals-block-title">Today's signals</h3>
+            <ul id="signals-today-list" class="signals-list"></ul>
+          </section>
+
+          <section id="signals-pro-expand" class="signals-pro-expand" hidden>
+            <section class="signals-block">
+              <h3 class="signals-block-title">Pro forecast (72h)</h3>
+              <ul id="signals-forecast-list" class="signals-list"></ul>
+            </section>
+
+            <section class="signals-block">
+              <h3 class="signals-block-title">Burnout clusters</h3>
+              <ul id="signals-burnout-list" class="signals-list"></ul>
+            </section>
+
+            <section class="signals-block signals-tip-block">
+              <h3 class="signals-block-title">Algorithm dip recovery tip</h3>
+              <p id="signals-algo-tip" class="signals-tip"></p>
+            </section>
+          </section>
+
+          <div id="signals-pro-locked" class="signals-pro-locked" hidden>
+            <p class="signals-locked-copy">{{ uc.signals_pro.label }} unlocks 72h forecast, burnout clusters, and algorithm dip recovery tips.</p>
+            <button type="button" class="signals-locked-btn" data-monetization-action="upgrade" data-tier="pro">Unlock Pro</button>
+          </div>
+        </section>
+
+        <div class="feed-lane-list" id="feed-lane-list"></div>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      id="compose-fab"
+      class="compose-fab"
+      aria-label="Open {{ uc.composer.label | lower }}"
+      title="{{ uc.composer.tooltip }}"
+    >
+      <span class="compose-fab-icon" aria-hidden="true">+</span>
+      <span class="compose-fab-label">Draft</span>
+    </button>
+
+    <p id="upgrade-toast" class="upgrade-toast" hidden role="status"></p>
+  </div>
+</main>
+
+{# Full-screen composer modal #}
+<div id="composer-modal" class="composer-modal" hidden aria-hidden="true">
+  <div class="composer-modal-backdrop" data-close-modal tabindex="-1"></div>
+  <div
+    class="composer-modal-sheet"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="composer-modal-title"
+  >
+    <header class="composer-modal-header">
+      <button type="button" class="composer-modal-close" data-close-modal aria-label="Close {{ uc.composer.label | lower }}">×</button>
+      <h2 id="composer-modal-title" class="composer-modal-title" title="{{ uc.composer.tooltip }}">{{ uc.composer.label }}</h2>
+      <button type="button" class="composer-modal-done" id="composer-modal-done" data-close-modal hidden>Done</button>
+    </header>
+
+    <div class="composer-modal-body">
+      <section
+        id="crashout-social"
+        class="crashout-social"
+        data-tones="{{ tones | join(',') }}"
+        aria-label="Crashout Recovery Social"
+      >
+        <div class="crashout-social-glow" aria-hidden="true"></div>
+        <div class="crashout-social-noise" aria-hidden="true"></div>
+
+        <p class="crashout-social-tagline">Turn the spike into a {{ uc.seed.label | lower }}.</p>
+        <p class="crashout-social-sub">
+          {{ uc.composer.tooltip }} Then take one {{ uc.momentum_cta.label | lower }}.
+        </p>
+
+        <div class="crashout-social-compose">
+          <div class="crashout-compose-avatar" aria-hidden="true">You</div>
+          <div class="crashout-social-input">
+            <label for="crashout-input">What's running through your head?</label>
+            <textarea
+              id="crashout-input"
+              placeholder="e.g. I'm deleting everything and quitting forever..."
+              rows="4"
+              autocomplete="off"
+              spellcheck="true"
+            ></textarea>
+            <div class="crashout-social-toolbar">
+              <button type="button" id="crashout-submit">
+                <span class="crashout-submit-icon" aria-hidden="true">◎</span>
+                Read tone &amp; suggest a move
+              </button>
+              <a class="crashout-social-embed embed-link" href="/embed?tone=universal" target="_blank" rel="noopener">Embed</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="crashout-tone-block">
+          <p class="crashout-tone-label" id="crashout-tone-label" hidden>Tone read</p>
+          <div
+            id="crashout-tone-row"
+            class="crashout-tone-row"
+            aria-label="{{ uc.tone_pills.label }}"
+            title="{{ uc.tone_pills.tooltip }}"
+          ></div>
+          <p id="crashout-tone-hint" class="crashout-tone-hint" hidden></p>
+        </div>
+
+        <div
+          id="crashout-cta-card"
+          class="crashout-cta-card hidden"
+          aria-label="{{ uc.momentum_cta.label }}"
+          title="{{ uc.momentum_cta.tooltip }}"
+        ></div>
+
+        <div
+          id="bad-decision-predictor"
+          class="bad-decision-predictor"
+          hidden
+          aria-label="{{ uc.bad_decision_predictor.label }}"
+          title="{{ uc.bad_decision_predictor.tooltip }}"
+        ></div>
+
+        <div id="premium-predictor-teaser" class="premium-predictor-teaser" hidden></div>
+
+        <div id="composer-upsell" class="composer-upsell" hidden></div>
+
+        <div id="composer-premium-strip" class="composer-premium-strip" hidden></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+{# Upgrade modal — UI scaffolding, no billing #}
+<div id="upgrade-modal" class="upgrade-modal" hidden aria-hidden="true">
+  <div class="upgrade-modal-backdrop" data-close-upgrade tabindex="-1"></div>
+  <div
+    class="upgrade-modal-sheet"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="upgrade-modal-title"
+  >
+    <header class="upgrade-modal-header">
+      <button type="button" class="upgrade-modal-close" data-close-upgrade aria-label="Close upgrade">×</button>
+      <h2 id="upgrade-modal-title" class="upgrade-modal-title">Crashout Recovery unlock levels</h2>
+      <span class="upgrade-modal-spacer" aria-hidden="true"></span>
+    </header>
+
+    <div class="upgrade-modal-body">
+      <p class="upgrade-tagline">Unlock deeper tone analysis, creator tools, and {{ uc.signals_pro.label | lower }}.</p>
+
+      <section class="upgrade-tiers" id="upgrade-tiers" aria-label="{{ uc.premium_tiers.label }}" title="{{ uc.premium_tiers.tooltip }}">
+        <article class="tier-card" data-tier="basic">
+          <div class="tier-card-head">
+            <h3 class="tier-card-name">Basic</h3>
+            <span class="tier-card-price">Free</span>
+          </div>
+          <p class="tier-card-desc">Core feed + {{ uc.composer.label | lower }}</p>
+          <button type="button" class="upgrade-select" data-tier="basic">Current plan</button>
+        </article>
+
+        <article class="tier-card" data-tier="plus">
+          <div class="tier-card-head">
+            <h3 class="tier-card-name">Plus</h3>
+            <span class="tier-card-price">$4.99/mo</span>
+          </div>
+          <p class="tier-card-desc">Deeper rewrites + action coaching</p>
+          <button type="button" class="upgrade-select" data-tier="plus">Preview Plus</button>
+        </article>
+
+        <article class="tier-card" data-tier="creator">
+          <div class="tier-card-head">
+            <h3 class="tier-card-name">Creator Mode</h3>
+            <span class="tier-card-price">$9.99/mo</span>
+          </div>
+          <p class="tier-card-desc">Draft-idea optimizer + progress meter</p>
+          <button type="button" class="upgrade-select" data-tier="creator">Preview Creator</button>
+        </article>
+
+        <article class="tier-card tier-card--pro" data-tier="pro">
+          <div class="tier-card-head">
+            <h3 class="tier-card-name">Recovery Pro</h3>
+            <span class="tier-card-price">$14.99/mo</span>
+          </div>
+          <p class="tier-card-desc">{{ uc.bad_decision_predictor.label }} + {{ uc.signals_pro.label | lower }}</p>
+          <button type="button" class="upgrade-select upgrade-select--pro" data-tier="pro">Try Pro</button>
+        </article>
+      </section>
+
+      <section class="upgrade-preview" id="upgrade-preview" aria-label="{{ uc.premium_tiers.label }} preview">
+        <h3 class="upgrade-preview-title">{{ uc.premium_tiers.label }} preview</h3>
+        <ul class="upgrade-preview-list" id="upgrade-preview-list"></ul>
+      </section>
+
+      <footer class="upgrade-footer">
+        <p class="upgrade-footer-note">UI preview only — connect App Store / Play Billing when ready.</p>
+        <button type="button" class="upgrade-footer-close" data-close-upgrade>Close</button>
+      </footer>
+    </div>
+  </div>
+</div>
+
+{# Help / Ops instruction panel #}
+<div id="ops-help-modal" class="ops-help-modal" hidden aria-hidden="true">
+  <div class="ops-help-modal-backdrop" data-close-ops-help tabindex="-1"></div>
+  <div
+    class="ops-help-modal-sheet"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ops-help-title"
+  >
+    <header class="ops-help-header">
+      <button type="button" class="ops-help-close" data-close-ops-help aria-label="Close help">×</button>
+      <h2 id="ops-help-title" class="ops-help-title">Help / Ops Manual</h2>
+      <p class="ops-help-tagline">Full operations guide — modes, options, how-to, tiers, alerts, and console testing. Adults 18+. No real billing.</p>
+    </header>
+
+    <nav class="ops-help-nav" aria-label="Help sections">
+      <button type="button" class="ops-help-nav-btn ops-help-nav-btn--active" data-ops-section="overview">Overview</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="modes">Modes</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="composer" title="{{ uc.composer.tooltip }}">{{ uc.composer.label }}</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="streak" title="{{ uc.recovery_streak.tooltip }}">{{ uc.recovery_streak.label }}</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="premium" title="{{ uc.premium_tiers.tooltip }}">{{ uc.premium_tiers.label }}</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="alerts" title="{{ uc.global_spike_alert.tooltip }}">{{ uc.global_spike_alert.label }}</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="howto">How-to</button>
+      <button type="button" class="ops-help-nav-btn" data-ops-section="console">Console</button>
+    </nav>
+
+    <div class="ops-help-body">
+      <section class="ops-help-section" id="ops-section-overview" data-ops-panel="overview">
+        <h3 class="ops-help-h">What this app does</h3>
+        <p class="ops-help-p">Crashout Recovery helps you pause before posting something you might regret. You type your thought, the app reads the vibe, suggests a calmer draft, and lets you save it as a {{ uc.seed.label | lower }} instead of blasting it out. It’s about building habits, not therapy or payments.</p>
+        <p class="ops-help-p ops-help-pipeline">Hot thought → vibe check → {{ uc.momentum_cta.label | lower }} → optional safe move → save {{ uc.seed.label | lower }} → {{ uc.recovery_streak.label | lower }} grows</p>
+
+        <h3 class="ops-help-h">Accounts, privacy, and sync</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Guest:</strong> recovery history, draft ideas, and signals stay in this browser's local cache.</li>
+          <li><strong>Account:</strong> those four caches and the selected preview tier sync to this app's SQLite database. Registration uploads current guest data; signing into an existing account pulls its saved data.</li>
+          <li><strong>Tone requests:</strong> full suggestions send the entered text to this app's server. The server records pattern previews and may retain successful inputs in its local training-review log; a browser-only fallback runs if the request fails.</li>
+          <li><strong>Logout:</strong> ends the account session but leaves browser-cached drafts and activity in place. Clear the browser demo cache after logout on a shared device.</li>
+        </ul>
+
+        <h3 class="ops-help-h">Quick map</h3>
+        <ul class="ops-help-list">
+          <li><strong>Drama</strong> — examples of meltdowns, with suggestions for calmer moves</li>
+          <li><strong>Moments</strong> — a shared YouTube clip catalog; Creator+ can add or update IDs</li>
+          <li><strong>Headlines</strong> — what’s trending or “spicy” online</li>
+          <li><strong>Signals</strong> — today’s world mood; {{ uc.signals_pro.label | lower }} unlocks forecasts</li>
+          <li><strong>Posts</strong> — saved {{ uc.seed.label | lower }}s + weekly {{ uc.recovery_streak.label | lower }}</li>
+          <li><strong>Creator</strong> — {{ uc.recovery_streak.label | lower }}s, {{ uc.seed.label | lower }}s, safe moves, {{ uc.momentum_score.label | lower }}</li>
+        </ul>
+
+        <h3 class="ops-help-h">Everyday recipes</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>About to post something risky</strong> — Draft → Read vibe → Take safe move → Save {{ uc.seed.label | lower }} → Done</li>
+          <li><strong>Feed feels spicy</strong> — Tap flashing chip → Signals → Save {{ uc.seed.label | lower }} instead of posting</li>
+          <li><strong>Want better wording</strong> — Draft → choose a database-guided rewrite → edit before saving</li>
+          <li><strong>Check habits</strong> — Creator → {{ uc.momentum_score.label | lower }} + {{ uc.recovery_streak.label | lower }}</li>
+        </ul>
+
+        <div class="ops-help-tier-row">
+          <a class="ops-help-cta" href="/ops" target="_blank" rel="noopener">Printable plain guide</a>
+          <a class="ops-help-cta ops-help-cta--ghost" href="/ops.md" download>Download Markdown</a>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="compose">Open {{ uc.composer.label | lower }}</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="section" data-ops-section="howto">How-to tour</button>
+        </div>
+        <p class="ops-help-note">Plain guide: <a href="/ops" target="_blank" rel="noopener">/ops</a> · Download: <a href="/ops.md" download>/ops.md</a> · Technical deep-dive: <a href="/ops-full.md" download>/ops-full.md</a></p>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-modes" data-ops-panel="modes" hidden>
+        <h3 class="ops-help-h">How lanes work</h3>
+        <p class="ops-help-p">The tab bar switches one panel at a time. {{ uc.pulse_strip.label }} stays visible on every lane. Special panels include {{ uc.signals_pro.label | lower }} and the Creator dashboard. Feed cards appear for Drama, Moments, Headlines, and Posts.</p>
+
+        <h3 class="ops-help-h">Mode A — Drama</h3>
+        <p class="ops-help-p">Learn from others' mistakes: meltdowns, beefs, algorithm dips, impulsive decisions, turnarounds. Each card has a micro-action that opens the draft box with a hint in the placeholder.</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>When to use:</strong> you feel heated and need perspective before posting</li>
+          <li><strong>Primary action:</strong> tap card action → Draft</li>
+          <li><strong>Tone sort:</strong> after a tone read, Drama re-sorts toward matching tone</li>
+        </ul>
+        <button type="button" class="ops-help-link" data-ops-action="lane" data-lane="drama">Open Drama</button>
+
+        <h3 class="ops-help-h">Mode B — Moments</h3>
+        <p class="ops-help-p">Moments loads the shared clip catalog from <code>/videos.json</code>. Tap a thumbnail to open a privacy-enhanced YouTube player. Clips without a resolved ID use a YouTube search fallback.</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>When to use:</strong> you want a fast visual / narrative spike example</li>
+          <li><strong>Primary action:</strong> tap Play or Search on a clip thumbnail</li>
+          <li><strong>Add Video (Creator+):</strong> enter a search query and, optionally, an 11-character YouTube ID or supported YouTube URL</li>
+          <li><strong>Query-only lookup:</strong> requires <code>CRASHOUT_YOUTUBE_API_KEY</code> on the server unless that query is already cached</li>
+          <li><strong>Shared catalog:</strong> Add Video and Set ID write to the server-wide <code>videos.json</code> file, refresh the grid, and affect every user; there is currently no delete control</li>
+        </ul>
+        <button type="button" class="ops-help-link" data-ops-action="lane" data-lane="moments">Open Moments</button>
+
+        <h3 class="ops-help-h">Mode C — Headlines</h3>
+        <p class="ops-help-p">Pop-culture and platform context: drama summaries, creator news, meltdown moments, algorithm dips. Good for “is this just me, or is the feed spicy today?”</p>
+        <button type="button" class="ops-help-link" data-ops-action="lane" data-lane="headlines">Open Headlines</button>
+
+        <h3 class="ops-help-h">Mode D — Signals</h3>
+        <p class="ops-help-p">{{ uc.signals_pro.label }} home. Replaces the normal feed list on this tab.</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Everyone:</strong> Today's signals (chips, categories, headlines)</li>
+          <li><strong>Pro:</strong> 72h forecast, burnout clusters, algorithm dip recovery tip</li>
+          <li><strong>Basic/Plus/Creator:</strong> locked Pro block + Unlock Pro button</li>
+          <li><strong>Entry:</strong> tab or any pulse chip from the {{ uc.pulse_strip.label | lower }}</li>
+        </ul>
+        <button type="button" class="ops-help-link" data-ops-action="lane" data-lane="signals">Open Signals</button>
+
+        <h3 class="ops-help-h">Mode E — Posts</h3>
+        <p class="ops-help-p">Your circle: draft ideas, threads, replies, micro-threads. Also hosts:</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Your Week</strong> — {{ uc.recovery_streak.label | lower }} card (spike history + tone trend slots)</li>
+          <li><strong>{{ uc.bad_decision_predictor.label }} summary</strong> — after a {{ uc.composer.label | lower }} analysis (Creator-gated depth)</li>
+          <li><strong>Personal stages</strong> — tone card + deeper crashout tools after Draft</li>
+        </ul>
+        <button type="button" class="ops-help-link" data-ops-action="lane" data-lane="posts">Open Posts</button>
+
+        <h3 class="ops-help-h">Mode F — Creator</h3>
+        <p class="ops-help-p">Ops dashboard. {{ uc.momentum_score.label }} sits above the locked body (always visible). Below: {{ uc.recovery_streak.label | lower }}, tone dots, spike bars, saved {{ uc.seed.label | lower }}s, last safe move. Unlock Creator Mode to undim and read clearly.</p>
+        <button type="button" class="ops-help-link" data-ops-action="lane" data-lane="creator">Open Creator</button>
+
+        <h3 class="ops-help-h">{{ uc.pulse_strip.label }} (every mode)</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>A</strong> Tap any chip → switch to Signals + highlight matching row</li>
+          <li><strong>B</strong> Tap <em>high</em> chip → same + {{ uc.global_spike_alert.label | lower }} row flash (1.5s)</li>
+          <li><strong>C</strong> Bar/chips auto-flash when any today signal is high</li>
+          <li><strong>D</strong> Unlock lock chip (if shown) → upgrade toward Pro</li>
+          <li><strong>Pro bonus:</strong> jump can also flash related forecast rows</li>
+        </ul>
+        <p class="ops-help-note">Flash is visual only — not paid. Basic users still get flash + lane jump.</p>
+
+        <div id="crashout-videos-spike" class="crashout-video-shelf" data-video-module="spike_alert"></div>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-composer" data-ops-panel="composer" hidden>
+        <h3 class="ops-help-h">Why the {{ uc.composer.label | lower }} exists</h3>
+        <p class="ops-help-p">The {{ uc.composer.label | lower }} is the recovery workbench. You enter the hot thought, get a tone read, receive one {{ uc.momentum_cta.label | lower }} (a {{ uc.seed.label | lower }}), then optionally a {{ uc.bad_decision_predictor.label }} for safer next steps. A completed tone read switches the underlying feed to Posts; Done closes the draft box and leaves Posts active.</p>
+
+        <h3 class="ops-help-h">How-to — full {{ uc.composer.label | lower }} loop</h3>
+        <ol class="ops-help-steps">
+          <li>Tap the floating <strong>+ Draft</strong> button (any lane).</li>
+          <li>Type (or paste) the raw spike — e.g. “I'm deleting everything and quitting forever…”</li>
+          <li>While typing, watch the live local tone preview on the {{ uc.tone_pills.label | lower }}.</li>
+          <li>After about 850 ms without typing, the full server suggestion runs automatically. Tap <strong>Read tone &amp; suggest a move</strong> or press Ctrl/Cmd+Enter to run it immediately.</li>
+          <li>{{ uc.tone_pills.label }} appear with a short reason. Tap a button to override tone manually.</li>
+          <li>{{ uc.momentum_cta.label }} card appears: hook, micro-action, editable draft preview.</li>
+          <li>If Creator+: {{ uc.bad_decision_predictor.label }} shows spike level, risk vs safe move, reason.</li>
+          <li>Optional: <strong>Take safe move</strong> (writes into draft preview + {{ uc.recovery_streak.label | lower }}) or <strong>Copy safe move</strong>.</li>
+          <li>Optional: <strong>Save {{ uc.seed.label | lower }}</strong> — updates the browser cache, bumps {{ uc.recovery_streak.label | lower }}, updates {{ uc.momentum_score.label | lower }}, and syncs when logged in.</li>
+          <li>Choose a curated or clearly labeled AI-assisted rewrite, then edit it before saving.</li>
+          <li>Tap <strong>Done</strong> to close; Posts remains active so you can see Your Week.</li>
+        </ol>
+        <p class="ops-help-p ops-help-pipeline">Spike text → Tone read → {{ uc.momentum_cta.label }} ({{ uc.seed.label | lower }}) → {{ uc.bad_decision_predictor.label }}</p>
+        <button type="button" class="ops-help-cta" data-ops-action="compose">Open {{ uc.composer.label | lower }} now</button>
+
+        <h3 class="ops-help-h">Tone system (options)</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>humorous</strong> — spark / meme-level energy</li>
+          <li><strong>direct</strong> — blunt signal; often higher spike risk</li>
+          <li><strong>strategic</strong> — draft idea / one-variable thinking</li>
+          <li><strong>calm</strong> — draft / soft rewrite</li>
+          <li><strong>universal</strong> — default steady draft idea</li>
+        </ul>
+        <p class="ops-help-p">Team model / topic blocks apply on <code>/api/suggest</code>. The request sends the entered text to this app's server; local decision-flow can fill in when the network fails.</p>
+
+        <h3 class="ops-help-h">Action options after tone read</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Turn this into a post</strong> — expand post framing on the draft idea</li>
+          <li><strong>Start a thread</strong> — swaps draft to a thread-starter line</li>
+          <li><strong>Save draft idea</strong> — persists to <code>crashout_seeds</code>, streak win, progress meter refresh</li>
+          <li><strong>See drama lane</strong> — jump Drama for similar examples</li>
+          <li><strong>Watch moments</strong> — jump Moments for clip-style examples</li>
+          <li><strong>Rewrite choices</strong> — calm, clear, and stable options drawn from reviewed content first</li>
+          <li><strong>Recovery actions</strong> — contextual safe moves shown directly in the draft box</li>
+        </ul>
+
+        <h3 class="ops-help-h">{{ uc.bad_decision_predictor.label }} options (Creator+)</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Basic:</strong> locked / teaser + Unlock Creator Mode</li>
+          <li><strong>Creator+:</strong> spike label, risk language, safe move, reason</li>
+          <li><strong>Take safe move:</strong> apply text to draft preview + record win + lastSafeMove</li>
+          <li><strong>Copy safe move:</strong> clipboard</li>
+          <li><strong>Posts lane:</strong> summary card after analysis</li>
+        </ul>
+        <div class="ops-help-tier-row">
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="tier" data-tier="creator">Unlock Creator preview</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="compose">Draft</button>
+        </div>
+
+        <div id="crashout-videos-risk" class="crashout-video-shelf" data-video-module="risk_check"></div>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-streak" data-ops-panel="streak" hidden>
+        <h3 class="ops-help-h">{{ uc.recovery_streak.label }} — what it tracks</h3>
+        <p class="ops-help-p">Streaks reward reversible habits, not posting hot takes. Wins come from saving {{ uc.seed.label | lower }}s and taking safe moves. Data lives in <code>crashout_recovery</code>.</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>streak</strong> — consecutive days with a win</li>
+          <li><strong>history</strong> — last ~7 spike levels (low / steady / rising / hot)</li>
+          <li><strong>tones</strong> — last ~7 tone reads</li>
+          <li><strong>wins</strong> — total wins</li>
+          <li><strong>lastSafeMove / lastSafeAt</strong> — last applied risk-check safe move</li>
+        </ul>
+
+        <h3 class="ops-help-h">Where to see it</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Posts → Your Week</strong> — streak count, spike graph, tone trend slot, upgrade slot</li>
+          <li><strong>Creator dashboard</strong> — denser streak + draft ideas + last safe move</li>
+          <li><strong>Toasts</strong> — “Draft saved” / “Safe move taken” confirmations</li>
+        </ul>
+
+        <h3 class="ops-help-h">How wins happen</h3>
+        <ol class="ops-help-steps">
+          <li><strong>Save draft idea</strong> in draft box → win / streak hold or +1 for a new day</li>
+          <li><strong>Take safe move</strong> in risk check → win + lastSafeMove set</li>
+          <li>Pipeline tone reads can add spike history entries for progress meter scoring</li>
+        </ol>
+
+        <h3 class="ops-help-h">{{ uc.momentum_score.label }} (Creator tab, always visible)</h3>
+        <p class="ops-help-p">Heuristic 0–100. Not gated as a card — even locked dashboards show it. Levels: low (0–39), medium (40–69), high (70–100). {{ uc.momentum_score.tooltip }}</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li>Win-streak day: <strong>+4 per day</strong> (max 40)</li>
+          <li>Safe move taken: <strong>+20</strong></li>
+          <li>Draft ideas saved: <strong>+2 each</strong> (max 20)</li>
+          <li>Spike history: low <strong>+2</strong>, rising <strong>−1</strong>, hot <strong>−3</strong></li>
+          <li>Add-ons installed: <strong>+5 each</strong> (max 20)</li>
+          <li>Pro tier + no high world signal today: <strong>+10</strong></li>
+          <li>Final score clamped 0–100</li>
+        </ul>
+        <div class="ops-help-tier-row">
+          <button type="button" class="ops-help-cta" data-ops-action="lane" data-lane="posts">Open Posts / Your Week</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="lane" data-lane="creator">Open Creator</button>
+        </div>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-premium" data-ops-panel="premium" hidden>
+        <h3 class="ops-help-h">{{ uc.premium_tiers.label }} (scaffolding)</h3>
+        <p class="ops-help-p">Use Upgrade buttons in the UI, or Preview below. No billing is performed. Preview changes require login and are saved to the account so the selected tier can be restored later.</p>
+
+        <h3 class="ops-help-h">Basic — Free</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li>All feed lanes + {{ uc.composer.label | lower }} core (tone + {{ uc.momentum_cta.label | lower }})</li>
+          <li>{{ uc.pulse_strip.label }} + {{ uc.global_spike_alert.label | lower }} / jump</li>
+          <li>Signals: today's list</li>
+          <li>Database-guided rewrite choices in the draft box</li>
+          <li>Creator: {{ uc.momentum_score.label | lower }} visible; body locked</li>
+          <li>{{ uc.bad_decision_predictor.label }}: teaser / locked state</li>
+        </ul>
+
+        <h3 class="ops-help-h">Plus — $4.99/mo label</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li>Deeper tone analysis and action coaching are reserved feature flags; a separate Plus analysis flow is not implemented yet</li>
+          <li>More contextual rewrite and recovery guidance</li>
+        </ul>
+
+        <h3 class="ops-help-h">Creator Mode — $9.99/mo label</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>{{ uc.bad_decision_predictor.label }}</strong> full panel</li>
+          <li><strong>Creator dashboard</strong> unlock ({{ uc.seed.label | lower }}s, tones, spikes, last safe move)</li>
+          <li><strong>Database-guided rewrites</strong> shown directly in Draft</li>
+          <li><strong>Moments Add Video / Set ID</strong> controls for the shared YouTube catalog</li>
+          <li>{{ uc.seed.label }} optimizer / algo plan are reserved feature flags</li>
+        </ul>
+
+        <h3 class="ops-help-h">Recovery Pro — $14.99/mo label</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li>Everything Creator includes (tier inheritance)</li>
+          <li><strong>{{ uc.signals_pro.label }}</strong> — forecast, burnout clusters, algo tip</li>
+          <li>Fuller {{ uc.recovery_streak.label | lower }} / spike history presentation</li>
+          <li>{{ uc.momentum_score.label }} calm-day +10 when no high pulses</li>
+          <li>Deeper {{ uc.global_spike_alert.label | lower }} highlight on forecast rows</li>
+        </ul>
+
+        <h3 class="ops-help-h">Feature → unlock level map</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li>tone_deep / cta_coach → Plus+</li>
+          <li>predictor / creator_dashboard / Add Video → Creator+</li>
+          <li>signals_dashboard / spike_history / recovery_streaks → Pro</li>
+        </ul>
+
+        <div class="ops-help-tier-row">
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="tier" data-tier="basic">Basic</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="tier" data-tier="plus">Plus</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="tier" data-tier="creator">Creator</button>
+          <button type="button" class="ops-help-cta" data-ops-action="tier" data-tier="pro">Pro</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="upgrade" data-tier="creator">Open upgrade UI</button>
+        </div>
+        <p class="ops-help-note">After Preview, open Creator, Signals, and Draft to feel the unlocks. UI copy still says “preview only — connect billing when ready.”</p>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-alerts" data-ops-panel="alerts" hidden>
+        <h3 class="ops-help-h">{{ uc.global_spike_alert.label }} — detailed</h3>
+        <p class="ops-help-p">Module: <code>CrashoutSpikeAlert</code>. Watches today's world signals. If any item is “high” (pulse or text), it flashes the {{ uc.pulse_strip.label | lower }} on every lane. {{ uc.global_spike_alert.tooltip }}</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>.pulse-alert</strong> — high chips only</li>
+          <li><strong>.pulse-alert-global</strong> — whole signal bar</li>
+          <li><strong>.signal-row-alert</strong> — Signals list row after jump</li>
+          <li>Animation: <code>pulseFlash</code> / <code>rowFlash</code> for 1.5s</li>
+        </ul>
+
+        <h3 class="ops-help-h">When check() runs</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li>App load</li>
+          <li>Lane switch</li>
+          <li>Tier change</li>
+          <li>Signals strip / panel refresh</li>
+        </ul>
+
+        <h3 class="ops-help-h">Lane jump how-to</h3>
+        <ol class="ops-help-steps">
+          <li>Look for red flash on pulse chips (e.g. Algo dip ↑, Delete impulse, 2am spike).</li>
+          <li>Tap a high chip.</li>
+          <li>App switches to Signals, highlights the tab, scrolls the row, flashes <code>.signal-row-alert</code>.</li>
+          <li>If Pro: related forecast lines (“spike”, “surge”, “high”) may flash too.</li>
+        </ol>
+        <button type="button" class="ops-help-cta" data-ops-action="lane" data-lane="signals">Open Signals</button>
+
+        <h3 class="ops-help-h">{{ uc.signals_pro.label }} content</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Today</strong> — free for everyone</li>
+          <li><strong>72h forecast</strong> — Pro</li>
+          <li><strong>Burnout clusters</strong> — Pro</li>
+          <li><strong>Algorithm dip tip</strong> — Pro</li>
+          <li>Storage: <code>crashout_world_signals</code></li>
+        </ul>
+
+        <h3 class="ops-help-h">Progress meter ↔ alerts</h3>
+        <p class="ops-help-p">If you are Pro and today's signals have no high pulses, progress meter gets +10. On turbulent days that bonus is withheld — use Signals + safe moves instead.</p>
+        <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="lane" data-lane="creator">View progress meter</button>
+
+        <div id="crashout-videos-spike-signals" class="crashout-video-shelf" data-video-module="spike_alert"></div>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-howto" data-ops-panel="howto" hidden>
+        <h3 class="ops-help-h">Recommended 10-minute operator tour</h3>
+        <p class="ops-help-p">Follow in order the first time. Use Preview buttons if Unlock UI feels slow.</p>
+        <ol class="ops-help-steps">
+          <li><strong>Drama</strong> — skim 1–2 cards; tap an action so Draft opens with a prompted placeholder.</li>
+          <li>Type a realistic crashout thought → wait for automatic analysis or tap <strong>Read tone</strong> → note tone buttons, suggested next step, draft idea, risk check state.</li>
+          <li>Preview <strong>Creator</strong> → Take safe move → Save draft idea → watch toast.</li>
+          <li>Close Done → open <strong>Posts</strong> → inspect Your Week (win streak, graph slots).</li>
+          <li>Draft again → compare calm, clear, and stable rewrites → edit one before saving.</li>
+          <li>Open <strong>Creator</strong> → read progress meter number + description; confirm draft idea list.</li>
+          <li>Open <strong>Moments</strong> → play a thumbnail; Creator+ can use Add Video with a query and optional YouTube ID.</li>
+          <li>From any lane, tap a <strong>flashing high pulse</strong> → land on Signals with row flash.</li>
+          <li>Preview <strong>Pro</strong> → expand forecast, burnout clusters, algo tip.</li>
+          <li>Optional: log out, then use Console → Reset browser demo cache for a guest-only clean pass.</li>
+        </ol>
+
+        <div id="crashout-videos-momentum" class="crashout-video-shelf" data-video-module="momentum"></div>
+
+        <h3 class="ops-help-h">Everyday how-to recipes</h3>
+        <ul class="ops-help-list">
+          <li>
+            <strong>I'm about to post something I'll regret</strong>
+            <p class="ops-help-p">Draft → Read tone → Take safe move (Creator) → Save draft idea → Done. Do not open the real social apps until the draft idea feels calm.</p>
+          </li>
+          <li>
+            <strong>The feed feels spicy today</strong>
+            <p class="ops-help-p">Check signal bar flash → Signals. If Pro, read forecast / burnout. Save one draft idea instead of a reply-all essay.</p>
+          </li>
+          <li>
+            <strong>I want better wording tools</strong>
+            <p class="ops-help-p">Draft → compare database-guided rewrites → edit the clearest option.</p>
+          </li>
+          <li>
+            <strong>I want to know if habits are holding</strong>
+            <p class="ops-help-p">Creator → progress meter + win streak. Posts → Your Week for weekly framing.</p>
+          </li>
+          <li>
+            <strong>I want to add a YouTube clip</strong>
+            <p class="ops-help-p">Sign in with a Creator or Pro preview → Moments → Add Video → enter a search query → optionally paste a YouTube ID or URL → Submit. The clip is saved to the shared server catalog.</p>
+          </li>
+        </ul>
+
+        <h3 class="ops-help-h">What this is / isn't</h3>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><strong>Is:</strong> creator recovery UI with server-assisted tone suggestions, account sync, a shared video catalog, and unlock-level scaffolding</li>
+          <li><strong>Isn't:</strong> live billing, therapy, a production social feed, or diagnosis</li>
+        </ul>
+
+        <div class="ops-help-tier-row">
+          <button type="button" class="ops-help-cta" data-ops-action="lane" data-lane="drama">1. Drama</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="compose">2. Draft</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="tier" data-tier="creator">3. Creator tier</button>
+          <button type="button" class="ops-help-cta ops-help-cta--ghost" data-ops-action="tier" data-tier="pro">4. Pro</button>
+        </div>
+      </section>
+
+      <section class="ops-help-section" id="ops-section-console" data-ops-panel="console" hidden>
+        <h3 class="ops-help-h">Console ops (browser DevTools)</h3>
+        <p class="ops-help-p">Open DevTools → Console on the running app. These globals are the ops remote control.</p>
+
+        <div id="crashout-videos-console" class="crashout-video-shelf" data-video-module="console_recipes"></div>
+
+        <h3 class="ops-help-h">Account &amp; sync</h3>
+        <pre class="ops-help-code">CrashoutAuth.isLoggedIn()
+CrashoutAuth.user()
+CrashoutAuth.openModal('login')
+await CrashoutUserStore.push()
+await CrashoutUserStore.pull()
+await CrashoutAuth.logout()</pre>
+        <p class="ops-help-note"><code>pull()</code> replaces the four browser data caches with the signed-in account's saved data. Logout removes session keys but does not clear those content caches.</p>
+
+        <h3 class="ops-help-h">{{ uc.premium_tiers.label }} &amp; upgrade</h3>
+        <pre class="ops-help-code">CrashoutMonetization.getTier()
+CrashoutMonetization.setTier('basic')
+CrashoutMonetization.setTier('plus')
+CrashoutMonetization.setTier('creator')
+CrashoutMonetization.setTier('pro')
+CrashoutMonetization.openUpgrade('creator')
+CrashoutMonetization.isFeatureUnlocked('predictor')</pre>
+        <p class="ops-help-note"><code>setTier()</code> and <code>openUpgrade()</code> require login. Preview tiers are account-synced; no payment is processed.</p>
+
+        <h3 class="ops-help-h">Moments &amp; YouTube catalog</h3>
+        <pre class="ops-help-code">CrashoutVideos.openAddVideoModal()
+CrashoutVideos.allClips()
+await CrashoutVideos.resolveClip('turn0video18')
+await CrashoutVideos.resolveQuery('search text')
+await CrashoutVideos.refreshCatalog()
+CrashoutVideos.pick('console_recipes')
+CrashoutVideos.showToast(CrashoutVideos.pick('spike_alert'))</pre>
+        <p class="ops-help-note">Manual or persistent video resolution changes the shared server <code>videos.json</code> catalog. Query search requires the server YouTube API key unless cached.</p>
+
+        <h3 class="ops-help-h">Navigation &amp; draft box</h3>
+        <pre class="ops-help-code">CrashoutTabbedFeed.switchLane('drama')
+CrashoutTabbedFeed.switchLane('signals')
+CrashoutTabbedFeed.switchLane('creator')
+CrashoutTabbedFeed.openCreatorDashboard()
+CrashoutComposerModal.open()
+CrashoutOpsHelp.open('howto')</pre>
+
+        <h3 class="ops-help-h">Signals &amp; world flash</h3>
+        <pre class="ops-help-code">CrashoutSpikeAlert.check()
+CrashoutSpikeAlert.applyFlash()
+CrashoutSpikeAlert.clearFlash()
+CrashoutSpikeAlert.jumpToSignals('ws3')
+CrashoutWorldSignals.renderStrip(null)
+CrashoutWorldSignals.renderProPanel()</pre>
+
+        <h3 class="ops-help-h">Progress meter &amp; win streak</h3>
+        <pre class="ops-help-code">CrashoutMomentumScore.compute()
+CrashoutMomentumScore.describe(62)
+CrashoutMomentumScore.render()
+CrashoutRecoveryStreak.load()
+CrashoutCreatorDashboard.render()</pre>
+
+        <h3 class="ops-help-h">Browser cache &amp; session keys</h3>
+        <p class="ops-help-p">The first four keys are offline/browser caches. When logged in, updates sync to structured SQLite records for the account.</p>
+        <ul class="ops-help-list ops-help-list--plain">
+          <li><code>crashout_recovery</code> — win streak, history, tones, wins, lastSafeMove</li>
+          <li><code>crashout_seeds</code> — saved draft ideas</li>
+          <li><code>crashout_world_signals</code> — world trends + today list for alerts</li>
+          <li><code>crashout_jwt</code>, <code>crashout_refresh</code>, <code>crashout_user</code> — signed-in session and cached account identity</li>
+        </ul>
+
+        <h3 class="ops-help-h">Reset browser demo cache</h3>
+        <pre class="ops-help-code">localStorage.removeItem('crashout_recovery')
+localStorage.removeItem('crashout_seeds')
+localStorage.removeItem('crashout_world_signals')
+location.reload()</pre>
+        <p class="ops-help-note">Log out first for a guest-only reset. If you remain logged in, account data may sync back after reload. This does not erase account records, session keys, <code>videos.json</code>, the YouTube cache, or server logs.</p>
+        <button type="button" class="ops-help-cta ops-help-cta--danger" data-ops-action="reset-demo">Reset browser cache + reload</button>
+        <div class="ops-help-tier-row">
+          <a class="ops-help-cta" href="/ops" target="_blank" rel="noopener">Plain guide (print/PDF)</a>
+          <a class="ops-help-cta ops-help-cta--ghost" href="/ops.md" download>Download plain Markdown</a>
+          <a class="ops-help-cta ops-help-cta--ghost" href="/ops-full.md" download>Download technical Markdown</a>
+        </div>
+        <p class="ops-help-note">Sources: <code>PLAIN_OPS.md</code> (plain) · <code>OPERATIONS.md</code> (technical). Restart the server if new routes 404.</p>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/crashout-recovery.js"></script>
+<script src="/static/decision-flow.js"></script>
+<script src="/static/world-signals.js"></script>
+<script src="/static/global-spike-alert.js"></script>
+<script src="/static/monetization.js"></script>
+<script src="/static/auth.js"></script>
+<script src="/static/bad-decision-predictor.js"></script>
+<script src="/static/recovery-streak.js"></script>
+<script src="/static/momentum-score.js"></script>
+<script src="/static/creator-dashboard.js"></script>
+<script src="/static/crashout-videos.js"></script>
+<script src="/static/feed-tabbed.js"></script>
+<script src="/static/crashout-social.js"></script>
+<script src="/static/ops-help.js"></script>
+{% endblock %}

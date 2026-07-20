@@ -1,0 +1,704 @@
+{
+  "example_responses": [
+    {
+      "id": "hum-001",
+      "input": "replying to everyone",
+      "trigger": "replying to everyone",
+      "tone": "humorous",
+      "response": "Holster the dynamite — write the rant privately, then drop one meme-level reply."
+    },
+    {
+      "id": "hum-002",
+      "input": "everyone is clowning me",
+      "trigger": "everyone is clowning me",
+      "tone": "humorous",
+      "response": "Clown energy detected — turn it into a fun-sized post instead of a meltdown."
+    },
+    {
+      "id": "hum-003",
+      "input": "reply to every hater",
+      "trigger": "reply to every hater",
+      "tone": "humorous",
+      "response": "Replying to every hater is a full-time job — riff privately, then ping one safe joke."
+    },
+    {
+      "id": "hum-004",
+      "input": "meltdown incoming",
+      "trigger": "meltdown incoming",
+      "tone": "humorous",
+      "response": "Meltdown energy spotted — holster the dynamite and post the fun-sized version."
+    },
+    {
+      "id": "hum-005",
+      "input": "rant thread brewing",
+      "trigger": "rant thread brewing",
+      "tone": "humorous",
+      "response": "Draft the rant thread privately — drop one micro-meme, not the whole season finale."
+    },
+    {
+      "id": "hum-006",
+      "input": "main character moment",
+      "trigger": "main character moment",
+      "tone": "humorous",
+      "response": "Main-character energy is loud — nudge it into a tiny chaos post, not a demolition."
+    },
+    {
+      "id": "hum-007",
+      "input": "worst day ever online",
+      "trigger": "worst day ever online",
+      "tone": "humorous",
+      "response": "Worst-day comedy of errors — write the rant, meme one line, close the tab."
+    },
+    {
+      "id": "hum-008",
+      "input": "comedy of errors posting",
+      "trigger": "comedy of errors posting",
+      "tone": "humorous",
+      "response": "Fun-sized chaos only — poke the idea privately before you spark a public spiral."
+    },
+    {
+      "id": "hum-009",
+      "input": "venting at strangers",
+      "trigger": "venting at strangers",
+      "tone": "humorous",
+      "response": "Vent in a private note — strangers get one soft joke, not the full script."
+    },
+    {
+      "id": "hum-010",
+      "input": "clown energy in comments",
+      "trigger": "clown energy in comments",
+      "tone": "humorous",
+      "response": "Too much clown in the comments — riff offline, reply with one safe joke."
+    },
+    {
+      "id": "hum-011",
+      "input": "tempted to drag everyone",
+      "trigger": "tempted to drag everyone",
+      "tone": "humorous",
+      "response": "Drag energy is tempting — holster it and drop one meme-level reply instead."
+    },
+    {
+      "id": "hum-012",
+      "input": "season finale energy",
+      "trigger": "season finale energy",
+      "tone": "humorous",
+      "response": "No season finale today — write the rant privately, post the fun-sized version."
+    },
+    {
+      "id": "hum-013",
+      "input": "dynamite in the replies",
+      "trigger": "dynamite in the replies",
+      "tone": "humorous",
+      "response": "Dynamite in the replies? Holster it — ping one line and log off."
+    },
+    {
+      "id": "hum-014",
+      "input": "everyone hates my post",
+      "trigger": "everyone hates my post",
+      "tone": "humorous",
+      "response": "Heat on the post stings — riff privately, then one micro-meme if you still want to respond."
+    },
+    {
+      "id": "hum-015",
+      "input": "ratio incoming",
+      "trigger": "ratio incoming",
+      "tone": "humorous",
+      "response": "Ratio panic is real — poke a private draft, not a public war."
+    },
+    {
+      "id": "hum-016",
+      "input": "quote tweeting haters",
+      "trigger": "quote tweeting haters",
+      "tone": "humorous",
+      "response": "Quote-tweeting haters is a trap — meme privately, nudge one calm boundary."
+    },
+    {
+      "id": "hum-017",
+      "input": "screaming into the void",
+      "trigger": "screaming into the void",
+      "tone": "humorous",
+      "response": "Scream in a private note — the void gets a fun-sized post, not the meltdown."
+    },
+    {
+      "id": "hum-018",
+      "input": "so done with this app",
+      "trigger": "so done with this app",
+      "tone": "humorous",
+      "response": "Done energy is valid — spark one tiny draft before you rage-quit the app."
+    },
+    {
+      "id": "hum-019",
+      "input": "roast battle starting",
+      "trigger": "roast battle starting",
+      "tone": "humorous",
+      "response": "Roast battle loading — write the burns privately, drop one soft joke publicly."
+    },
+    {
+      "id": "hum-020",
+      "input": "meme war with strangers",
+      "trigger": "meme war with strangers",
+      "tone": "humorous",
+      "response": "Meme war with strangers? Fun-sized chaos only — one ping, then peace."
+    },
+    {
+      "id": "dir-001",
+      "input": "I'm deleting everything",
+      "trigger": "I'm deleting everything",
+      "tone": "direct",
+      "response": "Stop. Draft, don't delete. Pick one reversible move and breathe."
+    },
+    {
+      "id": "dir-002",
+      "input": "quit forever",
+      "trigger": "quit forever",
+      "tone": "direct",
+      "response": "Pause before the forever move — draft the next step, not the final action."
+    },
+    {
+      "id": "dir-003",
+      "input": "burn it all down",
+      "trigger": "burn it all down",
+      "tone": "direct",
+      "response": "Stop the irreversible move — redirect into a draft version first."
+    },
+    {
+      "id": "dir-004",
+      "input": "nuking my account",
+      "trigger": "nuking my account",
+      "tone": "direct",
+      "response": "Account nuke impulse is loud — pick one safe step and draft, don't delete."
+    },
+    {
+      "id": "dir-005",
+      "input": "wiping all my posts",
+      "trigger": "wiping all my posts",
+      "tone": "direct",
+      "response": "Wiping posts is permanent — reset with a parking-lot folder, one reversible move."
+    },
+    {
+      "id": "dir-006",
+      "input": "walk away forever",
+      "trigger": "walk away forever",
+      "tone": "direct",
+      "response": "Walk-away energy is real — pause and write the next step, not goodbye."
+    },
+    {
+      "id": "dir-007",
+      "input": "trashing the whole project",
+      "trigger": "trashing the whole project",
+      "tone": "direct",
+      "response": "Trash impulse hits hard — cut nothing yet; draft one paragraph instead."
+    },
+    {
+      "id": "dir-008",
+      "input": "done forever with publishing",
+      "trigger": "done forever with publishing",
+      "tone": "direct",
+      "response": "Forever-quit is a big swing — draft a tiny test post before you bail."
+    },
+    {
+      "id": "dir-009",
+      "input": "screw this platform",
+      "trigger": "screw this platform",
+      "tone": "direct",
+      "response": "Intensity is valid — stop, reset, pick one reversible action on-platform."
+    },
+    {
+      "id": "dir-010",
+      "input": "irreversible delete impulse",
+      "trigger": "irreversible delete impulse",
+      "tone": "direct",
+      "response": "Irreversible delete urge — draft first, decide later."
+    },
+    {
+      "id": "dir-011",
+      "input": "deleting my draft folder",
+      "trigger": "deleting my draft folder",
+      "tone": "direct",
+      "response": "Draft folder panic — move files to a parking lot, don't delete."
+    },
+    {
+      "id": "dir-012",
+      "input": "never posting again deleting all",
+      "trigger": "never posting again deleting all",
+      "tone": "direct",
+      "response": "Never-again energy — write the next step, not the nuclear option."
+    },
+    {
+      "id": "dir-013",
+      "input": "reply all disaster",
+      "trigger": "reply all disaster",
+      "tone": "direct",
+      "response": "Reply-all disaster brewing — stop, draft privately, one reversible send."
+    },
+    {
+      "id": "dir-014",
+      "input": "burning bridges publicly",
+      "trigger": "burning bridges publicly",
+      "tone": "direct",
+      "response": "Public bridge-burning stings later — draft the heat, post a tiny test instead."
+    },
+    {
+      "id": "dir-015",
+      "input": "destroying my portfolio",
+      "trigger": "destroying my portfolio",
+      "tone": "direct",
+      "response": "Portfolio destroy impulse — pause, one safe step, draft version only."
+    },
+    {
+      "id": "dir-016",
+      "input": "walking away from everything I built",
+      "trigger": "walking away from everything I built",
+      "tone": "direct",
+      "response": "Walking away from the build hurts — redirect into one reversible move."
+    },
+    {
+      "id": "dir-017",
+      "input": "can't undo send panic",
+      "trigger": "can't undo send panic",
+      "tone": "direct",
+      "response": "Send panic is real — stop before the irreversible move hits send."
+    },
+    {
+      "id": "dir-018",
+      "input": "quitting and deleting account",
+      "trigger": "quitting and deleting account",
+      "tone": "direct",
+      "response": "Quit-and-delete combo — draft, don't delete. One safe step first."
+    },
+    {
+      "id": "dir-019",
+      "input": "wipe everything and bail",
+      "trigger": "wipe everything and bail",
+      "tone": "direct",
+      "response": "Wipe-and-bail urge — pick one reversible move before you cut."
+    },
+    {
+      "id": "dir-020",
+      "input": "final meltdown post then delete",
+      "trigger": "final meltdown post then delete",
+      "tone": "direct",
+      "response": "Meltdown-then-delete plan — post a tiny test, not the finale."
+    },
+    {
+      "id": "str-001",
+      "input": "algorithm hates me",
+      "trigger": "algorithm hates me",
+      "tone": "strategic",
+      "response": "The algorithm isn't mad — the signal dipped. Test one variable and post a tiny version."
+    },
+    {
+      "id": "str-002",
+      "input": "reach tanked",
+      "trigger": "reach tanked",
+      "tone": "strategic",
+      "response": "Reach tanked — this spike is data. Run a micro-experiment and post the tiny version."
+    },
+    {
+      "id": "str-003",
+      "input": "metrics dropped",
+      "trigger": "metrics dropped",
+      "tone": "strategic",
+      "response": "Metrics dropped — sample one variable and share the data spike with your circle."
+    },
+    {
+      "id": "str-004",
+      "input": "engagement crashed",
+      "trigger": "engagement crashed",
+      "tone": "strategic",
+      "response": "Engagement crashed — adjust one factor and post a seed, not a spiral."
+    },
+    {
+      "id": "str-005",
+      "input": "funnel broken",
+      "trigger": "funnel broken",
+      "tone": "strategic",
+      "response": "Funnel feels broken — measure one step and try a controlled experiment post."
+    },
+    {
+      "id": "str-006",
+      "input": "platform punished my post",
+      "trigger": "platform punished my post",
+      "tone": "strategic",
+      "response": "Signal dip, not a verdict — test hook or timing and post the small version."
+    },
+    {
+      "id": "str-007",
+      "input": "conversion rate collapsed",
+      "trigger": "conversion rate collapsed",
+      "tone": "strategic",
+      "response": "Conversion collapsed — one micro-experiment beats one crashout."
+    },
+    {
+      "id": "str-008",
+      "input": "test failed badly",
+      "trigger": "test failed badly",
+      "tone": "strategic",
+      "response": "Failed test = data — adjust one variable and post the tiny version."
+    },
+    {
+      "id": "str-009",
+      "input": "analytics look terrible",
+      "trigger": "analytics look terrible",
+      "tone": "strategic",
+      "response": "Analytics sting — sample one metric and share a tiny insight with your circle."
+    },
+    {
+      "id": "str-010",
+      "input": "audience not responding",
+      "trigger": "audience not responding",
+      "tone": "strategic",
+      "response": "Audience quiet — post a seed thread and test one variable publicly."
+    },
+    {
+      "id": "str-011",
+      "input": "pivot not working",
+      "trigger": "pivot not working",
+      "tone": "strategic",
+      "response": "Pivot friction is data — measure one change and post the fun-sized version."
+    },
+    {
+      "id": "str-012",
+      "input": "launch flopped",
+      "trigger": "launch flopped",
+      "tone": "strategic",
+      "response": "Launch flop hurts — log the signal and run one micro-experiment post."
+    },
+    {
+      "id": "str-013",
+      "input": "shadowbanned maybe",
+      "trigger": "shadowbanned maybe",
+      "tone": "strategic",
+      "response": "Reach mystery — test one variable before you bail on the platform."
+    },
+    {
+      "id": "str-014",
+      "input": "impressions in the gutter",
+      "trigger": "impressions in the gutter",
+      "tone": "strategic",
+      "response": "Impressions dipped — this spike is data. Post a tiny version and measure."
+    },
+    {
+      "id": "str-015",
+      "input": "strategy isn't working",
+      "trigger": "strategy isn't working",
+      "tone": "strategic",
+      "response": "Strategy stall — adjust one lever and share a small piece with your circle."
+    },
+    {
+      "id": "str-016",
+      "input": "experiment failed",
+      "trigger": "experiment failed",
+      "tone": "strategic",
+      "response": "Experiment failed — sample the data and post one controlled test."
+    },
+    {
+      "id": "str-017",
+      "input": "platform reach died",
+      "trigger": "platform reach died",
+      "tone": "strategic",
+      "response": "Reach died — test timing or format and post the seed, not the rant."
+    },
+    {
+      "id": "str-018",
+      "input": "post tanked overnight",
+      "trigger": "post tanked overnight",
+      "tone": "strategic",
+      "response": "Overnight tank is data — one variable test beats spiraling offline."
+    },
+    {
+      "id": "str-019",
+      "input": "metrics spiral",
+      "trigger": "metrics spiral",
+      "tone": "strategic",
+      "response": "Metrics spiral — measure one thing and turn it into a micro-thread."
+    },
+    {
+      "id": "str-020",
+      "input": "algorithm change ruined reach",
+      "trigger": "algorithm change ruined reach",
+      "tone": "strategic",
+      "response": "Algorithm shift stings — post a tiny version and test one variable."
+    },
+    {
+      "id": "calm-001",
+      "input": "I'm overwhelmed",
+      "trigger": "I'm overwhelmed",
+      "tone": "calm",
+      "response": "Take a breath — write the first line only. Ease the moment."
+    },
+    {
+      "id": "calm-002",
+      "input": "spiraling anxious",
+      "trigger": "spiraling anxious",
+      "tone": "calm",
+      "response": "Spiral energy is real — soften with one gentle draft and a soft step."
+    },
+    {
+      "id": "calm-003",
+      "input": "can't breathe panic",
+      "trigger": "can't breathe panic",
+      "tone": "calm",
+      "response": "Panic spike — breathe, ground, write the first line only."
+    },
+    {
+      "id": "calm-004",
+      "input": "everything feels sharp",
+      "trigger": "everything feels sharp",
+      "tone": "calm",
+      "response": "Sharp moment — ease it with a soft step and a private note."
+    },
+    {
+      "id": "calm-005",
+      "input": "exhausted burnt out",
+      "trigger": "exhausted burnt out",
+      "tone": "calm",
+      "response": "Burnout is heavy — slow down and draft a gentle version of the post."
+    },
+    {
+      "id": "calm-006",
+      "input": "losing my grip",
+      "trigger": "losing my grip",
+      "tone": "calm",
+      "response": "Grip slipping — ground yourself and take one soft step today."
+    },
+    {
+      "id": "calm-007",
+      "input": "stacked against me",
+      "trigger": "stacked against me",
+      "tone": "calm",
+      "response": "Stacked day — breathe, write privately, one tiny step is enough."
+    },
+    {
+      "id": "calm-008",
+      "input": "need a moment reset",
+      "trigger": "need a moment reset",
+      "tone": "calm",
+      "response": "Reset moment — put the phone down 30 seconds, then one gentle draft."
+    },
+    {
+      "id": "calm-009",
+      "input": "panicking about post",
+      "trigger": "panicking about post",
+      "tone": "calm",
+      "response": "Post panic — ease the moment; first line only, then pause."
+    },
+    {
+      "id": "calm-010",
+      "input": "heavy moment publishing",
+      "trigger": "heavy moment publishing",
+      "tone": "calm",
+      "response": "Heavy publish moment — soften with a draft, not a deadline."
+    },
+    {
+      "id": "calm-011",
+      "input": "drained from comments",
+      "trigger": "drained from comments",
+      "tone": "calm",
+      "response": "Comment drain — step back and write the first line only."
+    },
+    {
+      "id": "calm-012",
+      "input": "intense overwhelm thread",
+      "trigger": "intense overwhelm thread",
+      "tone": "calm",
+      "response": "Thread overwhelm — ground, private note, one soft step."
+    },
+    {
+      "id": "calm-013",
+      "input": "step back need pause",
+      "trigger": "step back need pause",
+      "tone": "calm",
+      "response": "Pause is smart — gentle draft first, decide later."
+    },
+    {
+      "id": "calm-014",
+      "input": "anxious before posting",
+      "trigger": "anxious before posting",
+      "tone": "calm",
+      "response": "Pre-post anxiety — breathe and post a seed, not the whole essay."
+    },
+    {
+      "id": "calm-015",
+      "input": "burned out creator",
+      "trigger": "burned out creator",
+      "tone": "calm",
+      "response": "Creator burnout — ease the moment with one reversible micro-action."
+    },
+    {
+      "id": "calm-016",
+      "input": "sharp spike of stress",
+      "trigger": "sharp spike of stress",
+      "tone": "calm",
+      "response": "Stress spike — soften it; one line in a private note."
+    },
+    {
+      "id": "calm-017",
+      "input": "spiraling comparison",
+      "trigger": "spiraling comparison",
+      "tone": "calm",
+      "response": "Comparison spiral — ground and take one soft step in your lane."
+    },
+    {
+      "id": "calm-018",
+      "input": "moment feels too big",
+      "trigger": "moment feels too big",
+      "tone": "calm",
+      "response": "Big moment — shrink it: first line only, gentle draft."
+    },
+    {
+      "id": "calm-019",
+      "input": "exhausted from feed",
+      "trigger": "exhausted from feed",
+      "tone": "calm",
+      "response": "Feed exhaustion — slow down and bookmark this for tomorrow."
+    },
+    {
+      "id": "calm-020",
+      "input": "gentle overwhelm wave",
+      "trigger": "gentle overwhelm wave",
+      "tone": "calm",
+      "response": "Overwhelm wave — breathe, ease, one soft step forward."
+    },
+    {
+      "id": "uni-001",
+      "input": "everything feels weird",
+      "trigger": "everything feels weird",
+      "tone": "universal",
+      "response": "Share a tiny spark — one sentence is enough to start."
+    },
+    {
+      "id": "uni-002",
+      "input": "something vague and off",
+      "trigger": "something vague and off",
+      "tone": "universal",
+      "response": "Weird moment — write one sentence and save the seed privately."
+    },
+    {
+      "id": "uni-003",
+      "input": "idk what to do",
+      "trigger": "idk what to do",
+      "tone": "universal",
+      "response": "Unclear spike — react with one emoji or write one line."
+    },
+    {
+      "id": "uni-004",
+      "input": "random rough moment",
+      "trigger": "random rough moment",
+      "tone": "universal",
+      "response": "Rough moment — share a tiny version of the thought with your circle."
+    },
+    {
+      "id": "uni-005",
+      "input": "off day online",
+      "trigger": "off day online",
+      "tone": "universal",
+      "response": "Off day — bookmark this and drop a small spark tomorrow."
+    },
+    {
+      "id": "uni-006",
+      "input": "not sure why upset",
+      "trigger": "not sure why upset",
+      "tone": "universal",
+      "response": "Fuzzy frustration — write one sentence to name the signal."
+    },
+    {
+      "id": "uni-007",
+      "input": "weird energy today",
+      "trigger": "weird energy today",
+      "tone": "universal",
+      "response": "Weird energy — save a draft seed and connect with one soft check-in."
+    },
+    {
+      "id": "uni-008",
+      "input": "stuck on a thought",
+      "trigger": "stuck on a thought",
+      "tone": "universal",
+      "response": "Stuck thought — post a seed, not the final version."
+    },
+    {
+      "id": "uni-009",
+      "input": "odd frustration spike",
+      "trigger": "odd frustration spike",
+      "tone": "universal",
+      "response": "Odd spike — share a tiny spark; momentum starts small."
+    },
+    {
+      "id": "uni-010",
+      "input": "unclear why mad",
+      "trigger": "unclear why mad",
+      "tone": "universal",
+      "response": "Unclear heat — write one line privately, then one micro-action."
+    },
+    {
+      "id": "uni-011",
+      "input": "fuzzy bad mood",
+      "trigger": "fuzzy bad mood",
+      "tone": "universal",
+      "response": "Bad mood fuzz — react with one emoji or save the idea."
+    },
+    {
+      "id": "uni-012",
+      "input": "meh day scrolling",
+      "trigger": "meh day scrolling",
+      "tone": "universal",
+      "response": "Meh scroll day — bookmark a seed for when energy returns."
+    },
+    {
+      "id": "uni-013",
+      "input": "urge to post hot take",
+      "trigger": "urge to post hot take",
+      "tone": "universal",
+      "response": "Hot-take itch — draft first; share a tiny version, not the blast."
+    },
+    {
+      "id": "uni-014",
+      "input": "can't name the feeling",
+      "trigger": "can't name the feeling",
+      "tone": "universal",
+      "response": "Unnamed feeling — one sentence is enough to start a thread."
+    },
+    {
+      "id": "uni-015",
+      "input": "low signal day",
+      "trigger": "low signal day",
+      "tone": "universal",
+      "response": "Low-signal day — tiny signals matter; write one line."
+    },
+    {
+      "id": "uni-016",
+      "input": "blank on what to say",
+      "trigger": "blank on what to say",
+      "tone": "universal",
+      "response": "Blank page — post the seed: one sentence, your circle will meet you."
+    },
+    {
+      "id": "uni-017",
+      "input": "weird tension building",
+      "trigger": "weird tension building",
+      "tone": "universal",
+      "response": "Tension building — nudge it into a draft, not a dump."
+    },
+    {
+      "id": "uni-018",
+      "input": "neutral but restless",
+      "trigger": "neutral but restless",
+      "tone": "universal",
+      "response": "Restless neutral — share a small piece and see what resonates."
+    },
+    {
+      "id": "uni-019",
+      "input": "undecided about posting",
+      "trigger": "undecided about posting",
+      "tone": "universal",
+      "response": "Undecided — save a draft seed; decide after one breath."
+    },
+    {
+      "id": "uni-020",
+      "input": "small itch to react",
+      "trigger": "small itch to react",
+      "tone": "universal",
+      "response": "Small react itch — one emoji or one line keeps momentum alive."
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crashout Recovery — friendly redirects when impulses run hot. Adults 18+.">
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/crashout-recovery.css">
+  {% block head %}{% endblock %}
+</head>
+<body class="crashout-layout--full">
+  <div class="page-ambient" aria-hidden="true">
+    <span class="ambient-orb ambient-orb--gold"></span>
+    <span class="ambient-orb ambient-orb--blue"></span>
+    <span class="ambient-grid"></span>
+  </div>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div>
+        <h1 class="app-title">{{ app_name }}</h1>
+        <p class="app-tagline">{{ app_tagline }}</p>
+      </div>
+      <div class="app-header-actions">
+        <a class="app-help-btn app-help-btn--link" href="/ops" target="_blank" rel="noopener">Plain guide</a>
+        <button type="button" class="app-help-btn" id="ops-help-open" aria-haspopup="dialog" aria-controls="ops-help-modal">
+          Help / Ops
+        </button>
+        <div class="auth-header-slot" id="auth-header-slot">
+          <button
+            type="button"
+            class="auth-header-login"
+            id="auth-open-btn"
+            aria-haspopup="dialog"
+            aria-controls="auth-modal"
+            title="Account"
+          >
+            <span class="auth-header-login-mark" aria-hidden="true"></span>
+            <span class="auth-header-login-text">Log in</span>
+          </button>
+          <div class="auth-session" id="auth-session" hidden>
+            <span class="auth-user-chip" id="auth-user-chip"></span>
+            <button type="button" class="auth-header-logout" id="auth-logout-btn">Log out</button>
+          </div>
+        </div>
+        <span class="app-badge">18+</span>
+      </div>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  {# Account modal #}
+  <div id="auth-modal" class="auth-modal" hidden aria-hidden="true">
+    <div class="auth-modal-backdrop" data-close-auth tabindex="-1"></div>
+    <div class="auth-modal-sheet" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+      <div class="auth-modal-accent" aria-hidden="true"></div>
+      <header class="auth-modal-header">
+        <div class="auth-modal-brand">
+          <span class="auth-modal-kicker">Account</span>
+          <h2 id="auth-modal-title" class="auth-modal-title">Log in</h2>
+        </div>
+        <button type="button" class="auth-modal-close" data-close-auth aria-label="Close">×</button>
+      </header>
+
+      <div class="auth-modal-body">
+        <p class="auth-modal-lede" id="auth-modal-lede">
+          Sync draft ideas and unlock levels across sessions. Guests can still draft offline.
+        </p>
+
+        <div class="auth-tabs" role="tablist" aria-label="Account mode">
+          <button type="button" class="auth-tab auth-tab--active" role="tab" aria-selected="true" data-auth-panel="login" id="auth-tab-login">Log in</button>
+          <button type="button" class="auth-tab" role="tab" aria-selected="false" data-auth-panel="register" id="auth-tab-register">Create account</button>
+        </div>
+
+        <p id="auth-status" class="auth-status" hidden role="status"></p>
+
+        <div id="auth-panel-login" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-login">
+          <form id="auth-login-form" class="auth-form" autocomplete="on">
+            <div class="auth-field">
+              <label class="auth-label" for="auth-login-identity">Username or email</label>
+              <input id="auth-login-identity" name="username_or_email" type="text" required maxlength="254" autocomplete="username" placeholder="you@email.com">
+            </div>
+            <div class="auth-field">
+              <label class="auth-label" for="auth-login-password">Password</label>
+              <input id="auth-login-password" name="password" type="password" required maxlength="128" autocomplete="current-password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="auth-submit">Log in</button>
+          </form>
+          <p class="auth-guest-note">No account yet? Guests can draft offline — sync when you create one.</p>
+        </div>
+
+        <div id="auth-panel-register" class="auth-panel" role="tabpanel" aria-labelledby="auth-tab-register" hidden>
+          <form id="auth-register-form" class="auth-form" autocomplete="on">
+            <div class="auth-field">
+              <label class="auth-label" for="auth-register-username">Username</label>
+              <input id="auth-register-username" name="username" type="text" required minlength="3" maxlength="32" autocomplete="username" placeholder="coolhead">
+            </div>
+            <div class="auth-field">
+              <label class="auth-label" for="auth-register-email">Email</label>
+              <input id="auth-register-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@email.com">
+            </div>
+            <div class="auth-field">
+              <label class="auth-label" for="auth-register-password">Password</label>
+              <input id="auth-register-password" name="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" placeholder="At least 8 characters">
+              <span class="auth-hint">8+ characters. Stored hashed — never shared.</span>
+            </div>
+            <button type="submit" class="auth-submit">Create account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>One small move beats one big crashout.</p>
+  </footer>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

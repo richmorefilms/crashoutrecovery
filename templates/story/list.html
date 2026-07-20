@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Stories — {{ app_name }}{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="/static/css/story.css">
+{% endblock %}
+{% block content %}
+<section class="story-list-page">
+  <header class="story-list-hero">
+    <p class="story-kicker">{{ app_name }}</p>
+    <h2 class="story-list-title">Recovery stories</h2>
+    <p class="story-list-lede">Short, grounded redirects with room to breathe.</p>
+  </header>
+  <ul class="story-card-grid">
+    {% for story in stories %}
+    <li class="story-card">
+      <a class="story-card-link" href="/stories/{{ story.id }}">
+        {% if story.thumbnail_url or story.image_url %}
+        <img
+          class="story-card-thumb"
+          src="{{ story.thumbnail_url or story.image_url }}"
+          alt=""
+          loading="lazy"
+        >
+        {% else %}
+        <div class="story-card-thumb story-card-thumb--empty" aria-hidden="true"></div>
+        {% endif %}
+        <h3 class="story-card-title">{{ story.title }}</h3>
+      </a>
+    </li>
+    {% else %}
+    <li class="story-empty">No published stories yet.</li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

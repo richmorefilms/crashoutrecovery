@@ -1,0 +1,61 @@
+---
+description: Team-guided trainable micro-model — opinions, topic controls, safe gap-filling from team_model.json
+alwaysApply: true
+---
+
+# Team-Guided Trainable Micro-Model
+
+Before generating **subjective** content, check `team_model.json` at the project root.
+
+## Required behavior
+
+1. **Team opinions first** — use documented stances from `team_opinions`. Never invent new positions.
+2. **Topic firewall** — enforce `topic_blocks` (hard block + safe redirect), `topic_shaping` (constraints), `topic_overrides` (custom responses).
+3. **Safe gap-filling** — use `stance_templates`, `example_responses`, and `training_examples` only. Follow `missing_context_rules`.
+4. **Tone alignment** — match `team_tone` voice, vocabulary, and phrasing rules.
+5. **Escalate when uncertain** — no matching opinion, blocked topic, or high-risk language → flag team review.
+6. **Preserve autonomy** — redirects not commands. Adults 18+ only.
+
+## Do NOT
+
+- Invent new team opinions or values
+- Bypass `topic_blocks` or ignore `topic_shaping` constraints
+- Diagnose, prescribe, or encourage harmful/illegal actions
+- Hardcode subjective content in Python — edit `team_model.json` or use API
+
+## Helper module (`team_model.py`)
+
+| Function | Purpose |
+|----------|---------|
+| `detect_topic(text)` | Classify: blocked / override / shaping / allowed / unknown |
+| `apply_topic_blocks(text)` | Hard block + safe redirect |
+| `apply_topic_overrides(text)` | Team-defined custom response |
+| `apply_topic_shaping(text)` | Apply constraints to allowed topics |
+| `apply_team_opinion(topic, context)` | Find documented stance |
+| `fill_missing_context(partial, context)` | Templates + examples only |
+| `align_tone(text)` | Vocabulary normalization |
+| `check_response(proposed, context)` | Full alignment pass |
+| `train(examples)` | Log to `data/training_log.jsonl` |
+| `promote_example(example)` | Move approved example into live model |
+| `prepare_for_finetune()` | Export `data/finetune_export.jsonl` |
+
+## API endpoints
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /team/model` | Full micro-model |
+| `POST /team/update` | Merge team data |
+| `GET /team/topics` | View topic rules |
+| `POST /team/topics` | Modify topic rules |
+| `POST /team/check` | Align proposed response |
+| `POST /team/block` | Topic block check |
+| `POST /team/preview` | Preview without saving |
+| `POST /team/train` | Submit training examples |
+| `POST /team/promote` | Approve into live model |
+| `GET /team/export` | Export fine-tune JSONL |
+
+## `/api/suggest` pipeline
+
+Topic detection → blocks → overrides → shaping → tone → crashout redirect → alignment → auto training log.
+
+See `TEAM_MODEL.md` for growth workflow.

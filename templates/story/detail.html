@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}{{ story.title }} — {{ app_name }}{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="/static/css/story.css">
+  {% if adsense_enabled %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense_client_id }}"
+    crossorigin="anonymous"></script>
+  {% endif %}
+{% endblock %}
+{% block content %}
+<article class="story-page">
+  {# top_banner_slot #}
+  <aside class="ad-slot ad-slot--top" data-slot="top_banner_slot" aria-label="Sponsored">
+    {% if ads.top_banner %}
+    <a class="premium-ad premium-ad--banner" href="{{ ads.top_banner.target_url }}" rel="sponsored noopener" target="_blank">
+      <img src="{{ ads.top_banner.media_url }}" alt="">
+    </a>
+    {% elif adsense_enabled and adsense_slot_top %}
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ adsense_client_id }}"
+         data-ad-slot="{{ adsense_slot_top }}"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    {% endif %}
+  </aside>
+
+  <header class="story-hero">
+    <p class="story-kicker">{{ app_name }}</p>
+    <h1 class="story-title">{{ story.title }}</h1>
+  </header>
+
+  {% if story.image_url %}
+  <figure class="story-hero-media">
+    <img src="{{ story.image_url }}" alt="" class="story-hero-image">
+  </figure>
+  {% endif %}
+
+  {% if story.video_url %}
+  <div class="story-video-wrap">
+    <video class="story-video" controls playsinline preload="metadata"
+      {% if story.thumbnail_url %}poster="{{ story.thumbnail_url }}"{% endif %}>
+      <source src="{{ story.video_url }}">
+      Your browser does not support embedded video.
+    </video>
+  </div>
+  {% endif %}
+
+  <div class="story-layout">
+    <div class="story-main">
+      <div class="story-body">{{ story.body }}</div>
+
+      {# mid_story_slot #}
+      <aside class="ad-slot ad-slot--mid" data-slot="mid_story_slot" aria-label="Sponsored">
+        {% if ads.mid_story %}
+        <a class="premium-ad premium-ad--mid" href="{{ ads.mid_story.target_url }}" rel="sponsored noopener" target="_blank">
+          {% if ads.mid_story.ad_type == 'video' %}
+          <video class="premium-ad-video" controls playsinline preload="metadata" src="{{ ads.mid_story.media_url }}"></video>
+          {% else %}
+          <img src="{{ ads.mid_story.media_url }}" alt="">
+          {% endif %}
+        </a>
+        {% elif adsense_enabled and adsense_slot_mid %}
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="{{ adsense_client_id }}"
+             data-ad-slot="{{ adsense_slot_mid }}"
+             data-ad-format="fluid"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        {% endif %}
+      </aside>
+    </div>
+
+    {# sidebar_slot — club promotions #}
+    <aside class="story-sidebar ad-slot" data-slot="sidebar_slot" aria-label="Club spotlight">
+      {% if ads.sidebar %}
+      <div class="club-promo">
+        {% if ads.sidebar.media_url %}
+        <img class="club-promo-media" src="{{ ads.sidebar.media_url }}" alt="">
+        {% endif %}
+        {% if ads.sidebar.video_url %}
+        <video class="club-promo-video" controls playsinline preload="metadata" src="{{ ads.sidebar.video_url }}"></video>
+        {% endif %}
+        <h2 class="club-promo-title">{{ ads.sidebar.title }}</h2>
+        <p class="club-promo-desc">{{ ads.sidebar.description }}</p>
+      </div>
+      {% endif %}
+    </aside>
+  </div>
+
+  {# footer_slot #}
+  <aside class="ad-slot ad-slot--footer" data-slot="footer_slot" aria-label="Sponsored">
+    {% if ads.footer %}
+    <a class="premium-ad premium-ad--footer" href="{{ ads.footer.target_url }}" rel="sponsored noopener" target="_blank">
+      <img src="{{ ads.footer.media_url }}" alt="">
+    </a>
+    {% elif adsense_enabled and adsense_slot_footer %}
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ adsense_client_id }}"
+         data-ad-slot="{{ adsense_slot_footer }}"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    {% endif %}
+  </aside>
+</article>
+{% endblock %}

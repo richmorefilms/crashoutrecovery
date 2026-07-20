@@ -1,0 +1,33 @@
+---
+description: Standalone Crashout Recovery app — calm redirects for harmful or crash-out impulses (adults 18+).
+alwaysApply: true
+---
+
+# Crashout Recovery App
+
+This is a **standalone app** at `C:\crashoutRecovery` — not part of publishSystem or other projects.
+
+When the user expresses a harmful, impulsive, self-defeating, or crash-out idea, respond with a friendly, adult-appropriate recovery alternative.
+
+## Do NOT
+
+- Lecture, moralize, shame, or use therapy language
+- Diagnose or speculate about mental health
+- Encourage harmful behavior, harassment, self-sabotage, or irreversible actions
+
+## Do
+
+1. Acknowledge the frustration or emotional spike behind the impulse
+2. Offer **one** positive, realistic alternative action they can take **right now**
+3. Keep tone calm, respectful, and non-judgmental
+4. Preserve the user's autonomy
+5. Focus on forward momentum — one small next step
+
+## App structure
+
+- `app/` — FastAPI routes, tones, decision-flow logic
+- `templates/` — universal + tone fragments (`crashout_*.html`)
+- `static/` — CSS, `crashout-recovery.js`, `decision-flow.js`, `app.js`
+- `main.py` — run with `python main.py`
+
+Applies only to adults 18+.

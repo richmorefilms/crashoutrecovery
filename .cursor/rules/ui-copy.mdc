@@ -1,0 +1,32 @@
+---
+description: Enforce UI_COPY.json for all user-facing labels, tooltips, CTAs, and Help copy.
+globs: templates/**/*.{html,md},static/**/*.js,UI_COPY.json,PLAIN_OPS.md,scripts/check_ui_copy.py
+alwaysApply: true
+---
+
+# UI copy dictionary
+
+All user-facing wording (tooltips, modal headers, CTA labels, Help text, in-app messages) must come from `UI_COPY.json` — not hard-coded strings.
+
+## Required pattern
+
+- **Templates:** `{{ uc.<key>.label }}` / `{{ uc.<key>.tooltip }}` (from `ui_copy` context)
+- **JS:** `CrashoutUICopy.label('<key>')` or `uiLabel('<key>', 'Fallback')`
+- **HTML attrs:** `data-ui-copy="<key>"` (optional for `applyDom`)
+
+## Do NOT
+
+- Hard-code dictionary labels (e.g. `"Progress meter"`, `"Risk check"`) in templates/JS
+- Reintroduce insider terms (momentum score, tone pills, pulse strip, Bad Decision Predictor, …)
+- Rename localStorage keys, CSS ids/classes, or module APIs (`CrashoutMomentumScore`, `composer-modal`, `crashout_seeds`)
+- Edit `OPERATIONS.md` / `/ops-full.md` for plain-language renames
+
+## Before every commit
+
+Run (report only — does not auto-replace):
+
+```bash
+python scripts/check_ui_copy.py --working
+```
+
+If findings appear: fix by wiring through `UI_COPY.json`, or add a new key to the dictionary when the concept is new. Do not silence the checker by hard-coding.

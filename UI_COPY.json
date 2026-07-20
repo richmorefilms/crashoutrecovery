@@ -1,0 +1,78 @@
+{
+  "pulse_strip": {
+    "label": "Signal bar",
+    "tooltip": "Shows the current world mood. Tap to jump to Signals."
+  },
+  "composer": {
+    "label": "Draft box",
+    "tooltip": "Type your thought here and get vibe suggestions."
+  },
+  "seed": {
+    "label": "Draft idea",
+    "tooltip": "A safe, reversible version of your post."
+  },
+  "tone_pills": {
+    "label": "Tone buttons",
+    "tooltip": "Choose the vibe: calm, funny, direct, strategic."
+  },
+  "momentum_cta": {
+    "label": "Suggested next step",
+    "tooltip": "The app’s recommended action after reading your tone."
+  },
+  "compose_rewrites": {
+    "label": "Safer rewrite choices",
+    "tooltip": "Reviewed examples appear first; AI-assisted options fill uncovered gaps."
+  },
+  "compose_edit": {
+    "label": "Edit rewrite",
+    "tooltip": "Review and change the suggested wording before saving."
+  },
+  "compose_save_review": {
+    "label": "Save and submit for review",
+    "tooltip": "Saves your draft and, when signed in, queues it for private staff moderation."
+  },
+  "recovery_streak": {
+    "label": "Win streak",
+    "tooltip": "Your count of consecutive days making safe moves."
+  },
+  "momentum_score": {
+    "label": "Progress meter",
+    "tooltip": "Shows how steady your habits are (0–100)."
+  },
+  "bad_decision_predictor": {
+    "label": "Risk check",
+    "tooltip": "Warns if your draft looks risky and suggests a safer move."
+  },
+  "signals_pro": {
+    "label": "World trends",
+    "tooltip": "Today’s signals plus forecasts and burnout clusters (Pro)."
+  },
+  "marketplace_packs": {
+    "label": "Add-on tools",
+    "tooltip": "Extra tone styles, CTA buttons, and draft templates."
+  },
+  "premium_tiers": {
+    "label": "Unlock levels",
+    "tooltip": "Free vs. paid features (Basic, Plus, Creator, Pro)."
+  },
+  "global_spike_alert": {
+    "label": "World flash",
+    "tooltip": "Flashes when the world mood spikes high."
+  },
+  "auth": {
+    "label": "Account",
+    "tooltip": "Sign in to sync draft ideas and unlock levels across sessions."
+  },
+  "auth_login": {
+    "label": "Log in",
+    "tooltip": "Sign in with your username or email."
+  },
+  "auth_register": {
+    "label": "Create account",
+    "tooltip": "Register with a username, email, and password."
+  },
+  "auth_logout": {
+    "label": "Log out",
+    "tooltip": "Sign out and clear this device’s session token."
+  }
+}

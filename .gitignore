@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Logs
+*.log
+
+# Team model expansion logs (optional commit)
+data/pattern_log.jsonl
+data/training_log.jsonl
+data/finetune_export.jsonl
+data/crashout.db
+data/crashout.db-*

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}TikTok Recovery Feed — {{ app_name }}{% endblock %}
+{% block head %}
+  <script async src="https://www.tiktok.com/embed.js"></script>
+{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main feed-page feed-page--tiktok">
+  <header class="tiktok-feed-header">
+    <h1 class="tiktok-feed-title" data-ui-copy="tiktok_recovery_feed">{{ uc.tiktok_recovery_feed.label }}</h1>
+    <p class="tiktok-feed-desc" data-ui-copy="tiktok_recovery_feed" data-ui-field="tooltip">{{ uc.tiktok_recovery_feed.tooltip }}</p>
+    <p><a href="/?lane=tiktok">Open in main feed tab</a> · <a href="/feed">Alias /feed</a></p>
+  </header>
+  <div id="tiktok-feed-root" class="tiktok-feed-root" aria-live="polite"></div>
+  <p id="tiktok-feed-empty" class="tiktok-feed-empty" hidden>No clips yet — check back soon.</p>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/tiktok-feed.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutTikTokFeed?.mount?.("#tiktok-feed-root");
+  });
+</script>
+{% endblock %}

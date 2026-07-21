@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Profile — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main profile-page">
+  <section class="profile-card">
+    <h1 class="profile-title" data-ui-copy="auth">{{ uc.auth.label }}</h1>
+    <div id="profile-crashout" class="profile-block">
+      <p class="profile-label">Crashout</p>
+      <p id="profile-username" class="profile-username">Not signed in</p>
+      <p id="profile-email" class="profile-email"></p>
+    </div>
+
+    <div id="profile-tiktok" class="profile-block profile-tiktok" hidden>
+      <p class="profile-label" data-ui-copy="tiktok_profile">{{ uc.tiktok_profile.label }}</p>
+      <div class="profile-tiktok-row">
+        <img id="profile-tiktok-avatar" class="profile-tiktok-avatar" alt="" width="56" height="56" hidden>
+        <div>
+          <p id="profile-tiktok-name" class="profile-tiktok-name"></p>
+          <p id="profile-tiktok-id" class="profile-tiktok-id"></p>
+          <span
+            id="profile-tiktok-badge"
+            class="tiktok-connected-badge"
+            hidden
+            data-ui-copy="tiktok_connected_badge"
+          >{{ uc.tiktok_connected_badge.label if uc.tiktok_connected_badge else 'Connected' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-actions">
+      <a class="tiktok-login-btn" href="/auth/tiktok/login" data-tiktok-oauth data-ui-copy="tiktok_connect" id="profile-tiktok-connect">
+        {{ uc.tiktok_connect.label }}
+      </a>
+      <a class="auth-submit auth-submit--ghost" href="/">Back to feed</a>
+    </div>
+    <p id="profile-status" class="auth-status" hidden role="status"></p>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/auth.js"></script>
+<script src="/static/tiktok-profile.js"></script>
+<script src="/static/tiktok-auth.js"></script>
+{% endblock %}

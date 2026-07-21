@@ -74,5 +74,33 @@
   "auth_logout": {
     "label": "Log out",
     "tooltip": "Sign out and clear this device’s session token."
+  },
+  "tiktok_recovery_feed": {
+    "label": "TikTok Recovery Feed",
+    "tooltip": "Recovery-themed TikTok clips (#recovery, #motivation, #mentalhealth)."
+  },
+  "tiktok_login": {
+    "label": "Sign in with TikTok",
+    "tooltip": "Sign in with TikTok Login Kit to sync your profile."
+  },
+  "tiktok_connect": {
+    "label": "Connect TikTok",
+    "tooltip": "Link TikTok to share and publish from Crashout Recovery."
+  },
+  "tiktok_profile": {
+    "label": "TikTok",
+    "tooltip": "Your linked TikTok avatar and display name."
+  },
+  "tiktok_connected_badge": {
+    "label": "Connected",
+    "tooltip": "TikTok account is linked to this Crashout profile."
+  },
+  "tiktok_share": {
+    "label": "Share to TikTok",
+    "tooltip": "Open TikTok share with a recovery-safe caption."
+  },
+  "tiktok_publish": {
+    "label": "Publish to TikTok",
+    "tooltip": "Upload a video to TikTok from Creator tools."
   }
 }

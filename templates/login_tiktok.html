@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Sign in with TikTok — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main auth-page auth-page--tiktok">
+  <section class="auth-page-card">
+    <h1 class="auth-page-title" data-ui-copy="tiktok_login">{{ uc.tiktok_login.label }}</h1>
+    <p class="auth-page-lede" data-ui-copy="tiktok_login" data-ui-field="tooltip">{{ uc.tiktok_login.tooltip }}</p>
+
+    <div class="tiktok-auth-actions">
+      <a
+        class="tiktok-login-btn"
+        href="/auth/tiktok/login"
+        data-tiktok-oauth
+        data-ui-copy="tiktok_login"
+        id="tiktok-login-link"
+      >{{ uc.tiktok_login.label }}</a>
+    </div>
+
+    <hr class="auth-page-divider" />
+
+    <p class="auth-guest-note">
+      Prefer email?
+      <a href="/login">{{ uc.auth_login.label }}</a>
+      · <a href="/">Back to feed</a>
+    </p>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/auth.js"></script>
+<script src="/static/tiktok-auth.js"></script>
+{% endblock %}

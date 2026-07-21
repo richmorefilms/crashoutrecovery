@@ -1,0 +1,23 @@
+[Unit]
+Description=Crashout Recovery (FastAPI / Uvicorn)
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/root/crashoutrecovery
+Environment=CRASHOUT_ENV=production
+EnvironmentFile=-/root/crashoutrecovery/.env
+ExecStart=/root/crashoutrecovery/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8777
+Restart=always
+RestartSec=5
+TimeoutStopSec=30
+
+NoNewPrivileges=true
+PrivateTmp=true
+ReadWritePaths=/root/crashoutrecovery
+
+[Install]
+WantedBy=multi-user.target

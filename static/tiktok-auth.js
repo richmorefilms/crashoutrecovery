@@ -55,7 +55,23 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => bindLinks(document));
+  document.addEventListener("DOMContentLoaded", () => {
+    bindLinks(document);
+    const drawerEl = document.getElementById("app-nav-drawer");
+    if (drawerEl) {
+      CrashoutTikTokAuth.bindLinks(drawerEl);
+    }
+
+    // Re-bind drawer OAuth links after the nav drawer opens
+    document.getElementById("app-nav-toggle")?.addEventListener("click", () => {
+      requestAnimationFrame(() => {
+        const openDrawer = document.getElementById("app-nav-drawer");
+        if (openDrawer && !openDrawer.hidden) {
+          CrashoutTikTokAuth.bindLinks(openDrawer);
+        }
+      });
+    });
+  });
 
   const api = { startOAuth, bindLinks };
   window.CrashoutTikTokAuth = api;

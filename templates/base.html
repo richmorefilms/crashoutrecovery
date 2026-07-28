@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/crashout-recovery.css">
+  <script async src="https://www.tiktok.com/embed.js"></script>
   {% block head %}{% endblock %}
 </head>
 <body class="crashout-layout--full">
@@ -23,11 +24,34 @@
         <h1 class="app-title">{{ app_name }}</h1>
         <p class="app-tagline">{{ app_tagline }}</p>
       </div>
+      <button
+        type="button"
+        class="app-nav-toggle"
+        id="app-nav-toggle"
+        aria-expanded="false"
+        aria-controls="app-nav-drawer"
+        data-ui-copy="nav_menu"
+        data-ui-field="tooltip"
+        data-ui-attr="aria-label"
+        aria-label="Menu"
+      >
+        <span class="app-nav-toggle-bars" aria-hidden="true"></span>
+      </button>
       <div class="app-header-actions">
         <a class="app-help-btn app-help-btn--link" href="/ops" target="_blank" rel="noopener">Plain guide</a>
         <button type="button" class="app-help-btn" id="ops-help-open" aria-haspopup="dialog" aria-controls="ops-help-modal">
           Help / Ops
         </button>
+        <a
+          class="tiktok-nav-btn"
+          href="/auth/tiktok/login"
+          id="tiktok-nav-login"
+          data-tiktok-oauth
+          data-ui-copy="tiktok_profile"
+          data-ui-attr="title"
+          data-ui-field="tooltip"
+          title=""
+        ><span data-ui-copy="tiktok_profile">TikTok</span></a>
         <div class="auth-header-slot" id="auth-header-slot">
           <button
             type="button"
@@ -41,7 +65,7 @@
             <span class="auth-header-login-text">Log in</span>
           </button>
           <div class="auth-session" id="auth-session" hidden>
-            <span class="auth-user-chip" id="auth-user-chip"></span>
+            <a class="auth-user-chip" id="auth-user-chip" href="/profile"></a>
             <button type="button" class="auth-header-logout" id="auth-logout-btn">Log out</button>
           </div>
         </div>
@@ -49,6 +73,48 @@
       </div>
     </div>
   </header>
+
+  <div class="app-nav-drawer-backdrop" id="app-nav-drawer-backdrop" hidden></div>
+  <nav
+    id="app-nav-drawer"
+    class="app-nav-drawer"
+    hidden
+    aria-hidden="true"
+    aria-labelledby="app-nav-drawer-title"
+  >
+    <div class="app-nav-drawer-header">
+      <h2 id="app-nav-drawer-title" class="app-nav-drawer-title" data-ui-copy="nav_menu">Menu</h2>
+      <button type="button" class="app-nav-drawer-close" id="app-nav-drawer-close" aria-label="Close">×</button>
+    </div>
+    <ul class="app-nav-drawer-list">
+      <li>
+        <a class="app-nav-drawer-link" href="/ops" target="_blank" rel="noopener">Plain guide</a>
+      </li>
+      <li>
+        <button type="button" class="app-nav-drawer-link" data-nav-open-ops>Help / Ops</button>
+      </li>
+      <li>
+        <a
+          class="app-nav-drawer-link tiktok-nav-btn"
+          href="/auth/tiktok/login"
+          data-tiktok-oauth
+          data-ui-copy="tiktok_login"
+        >Sign in with TikTok</a>
+      </li>
+      <li>
+        <button type="button" class="app-nav-drawer-link" data-nav-open-auth data-ui-copy="auth_login">Log in</button>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/profile" data-ui-copy="auth">Account</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/feed" data-ui-copy="tiktok_recovery_feed">TikTok Recovery Feed</a>
+      </li>
+      <li>
+        <span class="app-nav-drawer-badge app-badge">18+</span>
+      </li>
+    </ul>
+  </nav>
 
   {% block content %}{% endblock %}
 
@@ -89,6 +155,14 @@
             </div>
             <button type="submit" class="auth-submit">Log in</button>
           </form>
+          <div class="tiktok-auth-actions tiktok-auth-actions--modal">
+            <a
+              class="tiktok-login-btn"
+              href="/auth/tiktok/login"
+              data-tiktok-oauth
+              data-ui-copy="tiktok_login"
+            >Continue with TikTok</a>
+          </div>
           <p class="auth-guest-note">No account yet? Guests can draft offline — sync when you create one.</p>
         </div>
 
@@ -119,5 +193,9 @@
   </footer>
 
   {% block scripts %}{% endblock %}
+  {# Global scripts after page block so child templates do not drop them #}
+  <script src="/static/auth.js"></script>
+  <script src="/static/tiktok-auth.js"></script>
+  <script src="/static/nav-drawer.js"></script>
 </body>
 </html>

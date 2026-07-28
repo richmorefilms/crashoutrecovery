@@ -31,7 +31,7 @@ def test_compose_persists_receipt_row(tmp_path, monkeypatch):
 
     conn = open_connection(db_path)
     try:
-        assert get_user_version(conn) == 9
+        assert get_user_version(conn) == 10
         row = conn.execute(
             "SELECT * FROM compose_receipts WHERE request_id = ?",
             (request_id,),
@@ -60,7 +60,7 @@ def test_migration_creates_compose_receipts_with_retention(tmp_path):
     init_db(db_path)
     conn = open_connection(db_path)
     try:
-        assert get_user_version(conn) == 9
+        assert get_user_version(conn) == 10
         cols = {row[1] for row in conn.execute("PRAGMA table_info(compose_receipts)")}
         assert {
             "id",

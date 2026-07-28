@@ -31,6 +31,8 @@ PUBLIC_PREFIXES = (
     "/api/compose",
     "/api/suggest",
     "/api/youtube",
+    "/api/tiktok/feed",
+    "/api/tiktok/share",
     "/api/stories",
     "/ads",
     "/stories",
@@ -39,8 +41,13 @@ PUBLIC_PREFIXES = (
     "/auth/register",
     "/auth/login",
     "/auth/refresh",
+    "/auth/tiktok",
     "/register",
     "/login",
+    "/login/tiktok",
+    "/profile",
+    "/feed",
+    "/feed/tiktok",
 )
 
 PUBLIC_EXACT = {"/", "/favicon.ico"}

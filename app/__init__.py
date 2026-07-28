@@ -32,6 +32,7 @@ from app.suggest_engine import build_suggestion
 from app.staff_routes import router as staff_router
 from app.story_routes import router as story_router
 from app.team_routes import router as team_router
+from app.tiktok_routes import router as tiktok_router
 from app.tones import DEFAULT_TONE, TONE_TEMPLATES, resolve_tone
 from app.ui_copy import ui_copy_context
 from app.user_data_routes import router as user_data_router
@@ -86,6 +87,7 @@ def create_app() -> FastAPI:
     app.include_router(staff_router)
     app.include_router(story_router)
     app.include_router(ads_router)
+    app.include_router(tiktok_router)
     templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
     @app.get("/health")
@@ -156,6 +158,66 @@ def create_app() -> FastAPI:
     @app.get("/manual", response_class=HTMLResponse)
     async def ops_manual_alias(request: Request):
         return await ops_manual(request)
+
+    @app.get("/login", response_class=HTMLResponse)
+    async def login_page(request: Request):
+        return templates.TemplateResponse(
+            request,
+            "login.html",
+            {
+                "app_name": APP_NAME,
+                "app_tagline": APP_TAGLINE,
+                "ui_copy": ui_copy_context(),
+            },
+        )
+
+    @app.get("/login/tiktok", response_class=HTMLResponse)
+    async def login_tiktok_page(request: Request):
+        return templates.TemplateResponse(
+            request,
+            "login_tiktok.html",
+            {
+                "app_name": APP_NAME,
+                "app_tagline": APP_TAGLINE,
+                "ui_copy": ui_copy_context(),
+            },
+        )
+
+    @app.get("/profile", response_class=HTMLResponse)
+    async def profile_page(request: Request):
+        return templates.TemplateResponse(
+            request,
+            "profile.html",
+            {
+                "app_name": APP_NAME,
+                "app_tagline": APP_TAGLINE,
+                "ui_copy": ui_copy_context(),
+            },
+        )
+
+    @app.get("/feed", response_class=HTMLResponse)
+    async def feed_page(request: Request):
+        return templates.TemplateResponse(
+            request,
+            "feed_tiktok.html",
+            {
+                "app_name": APP_NAME,
+                "app_tagline": APP_TAGLINE,
+                "ui_copy": ui_copy_context(),
+            },
+        )
+
+    @app.get("/feed/tiktok", response_class=HTMLResponse)
+    async def feed_tiktok_page(request: Request):
+        return templates.TemplateResponse(
+            request,
+            "feed_tiktok.html",
+            {
+                "app_name": APP_NAME,
+                "app_tagline": APP_TAGLINE,
+                "ui_copy": ui_copy_context(),
+            },
+        )
 
     @app.get("/embed", response_class=HTMLResponse)
     async def embed(request: Request, tone: str | None = Query(default=DEFAULT_TONE)):

@@ -29,6 +29,17 @@
   <header class="story-hero">
     <p class="story-kicker">{{ app_name }}</p>
     <h1 class="story-title">{{ story.title }}</h1>
+    <div class="story-share-row">
+      <button
+        type="button"
+        class="tiktok-share-btn"
+        data-tiktok-share
+        data-ui-copy="tiktok_share"
+        data-caption="{{ story.title | e }}"
+        data-hashtags="recovery,crashoutrecovery"
+        {% if story.video_url %}data-video-url="{{ story.video_url }}"{% endif %}
+      >{{ (ui_copy or {}).tiktok_share.label if ui_copy and ui_copy.tiktok_share else 'Share to TikTok' }}</button>
+    </div>
   </header>
 
   {% if story.image_url %}
@@ -106,4 +117,10 @@
     {% endif %}
   </aside>
 </article>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson if ui_copy is defined else '{}' }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/auth.js"></script>
+<script src="/static/tiktok-share.js"></script>
 {% endblock %}

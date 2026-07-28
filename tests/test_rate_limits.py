@@ -38,7 +38,7 @@ def test_migration_v5_rate_limits_and_abuse_tables(tmp_path):
     init_db(db_path)
     conn = open_connection(db_path)
     try:
-        assert get_user_version(conn) == 9
+        assert get_user_version(conn) == 10
         rate_cols = {row[1] for row in conn.execute("PRAGMA table_info(rate_limits)")}
         abuse_cols = {row[1] for row in conn.execute("PRAGMA table_info(abuse_events)")}
         assert {

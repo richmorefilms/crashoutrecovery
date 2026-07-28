@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Log in — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main auth-page">
+  <section class="auth-page-card">
+    <h1 class="auth-page-title" data-ui-copy="auth_login">{{ uc.auth_login.label }}</h1>
+    <p class="auth-page-lede">{{ uc.auth.tooltip }}</p>
+
+    <div class="tiktok-auth-actions">
+        <a
+          class="tiktok-login-btn"
+          href="/auth/tiktok/login"
+          data-ui-copy="tiktok_login"
+          data-tiktok-oauth
+          id="tiktok-login-link"
+        >{{ uc.tiktok_login.label }}</a>
+      <p class="tiktok-auth-note" data-ui-copy="tiktok_login" data-ui-field="tooltip">{{ uc.tiktok_login.tooltip }}</p>
+    </div>
+
+    <hr class="auth-page-divider" />
+
+    <button type="button" class="auth-submit" id="auth-page-open-modal" data-ui-copy="auth_login">
+      {{ uc.auth_login.label }} with email
+    </button>
+    <p class="auth-guest-note"><a href="/">Back to feed</a></p>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/auth.js"></script>
+<script src="/static/tiktok-auth.js"></script>
+<script>
+  document.getElementById("auth-page-open-modal")?.addEventListener("click", () => {
+    window.CrashoutAuth?.openModal?.("login");
+  });
+</script>
+{% endblock %}

@@ -59,6 +59,10 @@
     "label": "World flash",
     "tooltip": "Flashes when the world mood spikes high."
   },
+  "nav_menu": {
+    "label": "Menu",
+    "tooltip": "Open navigation"
+  },
   "auth": {
     "label": "Account",
     "tooltip": "Sign in to sync draft ideas and unlock levels across sessions."

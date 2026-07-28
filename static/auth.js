@@ -10,6 +10,8 @@
  *   }
  */
 (function () {
+  if (window.CrashoutAuth) return;
+
   const TOKEN_KEY = "crashout_jwt";
   const REFRESH_KEY = "crashout_refresh";
   const USER_KEY = "crashout_user";

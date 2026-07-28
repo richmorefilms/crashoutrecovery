@@ -20,7 +20,7 @@ def test_schema_v6_to_v9_tables(tmp_path):
     init_db(db)
     conn = open_connection(db)
     try:
-        assert get_user_version(conn) == 9
+        assert get_user_version(conn) == 10
         for table in ("stories", "premium_ads", "club_promotions", "ad_impressions"):
             row = conn.execute(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name=?",

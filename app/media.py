@@ -82,6 +82,30 @@ async def upload_video(file: UploadFile) -> str:
     )
 
 
+def save_video_bytes(
+    content: bytes,
+    *,
+    filename: str | None = None,
+    content_type: str | None = None,
+) -> str:
+    """Persist raw video bytes into the media pipeline; return public URL."""
+    if not content:
+        raise MediaUploadError("Empty upload")
+    if len(content) > MAX_VIDEO_BYTES:
+        raise MediaUploadError(f"File exceeds {MAX_VIDEO_BYTES} bytes")
+    # Prefer filename extension; fall back from content-type
+    default = "mp4"
+    if content_type and "webm" in content_type:
+        default = "webm"
+    ext = _extension(filename, VIDEO_EXTENSIONS, default)
+    dest_dir = MEDIA_LOCAL_DIR / "videos"
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    name = f"{uuid.uuid4().hex}.{ext}"
+    path = dest_dir / name
+    path.write_bytes(content)
+    return _public_url(f"videos/{name}")
+
+
 def ensure_media_dirs() -> Path:
     """Create local media directories used as Hostinger staging/fallback."""
     (MEDIA_LOCAL_DIR / "images").mkdir(parents=True, exist_ok=True)

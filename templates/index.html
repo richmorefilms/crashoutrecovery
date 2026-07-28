@@ -41,6 +41,10 @@
         <button type="button" class="feed-tab" role="tab" id="tab-posts" data-lane="posts" aria-selected="false" aria-controls="feed-lane-panel">
           Posts
         </button>
+        <button type="button" class="feed-tab feed-tab--tiktok" role="tab" id="tab-tiktok" data-lane="tiktok" aria-selected="false" aria-controls="feed-lane-panel" data-ui-copy="tiktok_recovery_feed">
+          TikTok Recovery Feed
+          <span id="tiktok-feed-mode-badge-tab" class="tiktok-feed-mode-badge" hidden></span>
+        </button>
         <button type="button" class="feed-tab feed-tab--creator" role="tab" id="tab-creator" data-lane="creator" aria-selected="false" aria-controls="feed-lane-panel">
           Creator
         </button>
@@ -58,7 +62,9 @@
             <p class="feed-lane-intro-desc" id="feed-lane-desc">Learn from others' mistakes — meltdowns, beefs, and bad decisions.</p>
             <p class="feed-lane-intro-sort" id="feed-lane-sort-label">Drama teaches. Spikes become {{ uc.seed.label | lower }}s.</p>
           </div>
-          <div class="feed-lane-actions" id="feed-lane-actions" hidden></div>
+          <div class="feed-lane-actions" id="feed-lane-actions" hidden>
+            <span id="tiktok-feed-mode-badge-main" class="tiktok-feed-mode-badge" hidden></span>
+          </div>
         </header>
 
         <div id="feed-posts-personal" class="feed-posts-personal stage-hidden">
@@ -866,6 +872,9 @@ location.reload()</pre>
 <script src="/static/creator-dashboard.js"></script>
 <script src="/static/crashout-videos.js"></script>
 <script src="/static/feed-tabbed.js"></script>
+<script src="/static/tiktok-feed.js"></script>
+<script src="/static/tiktok-share.js"></script>
+<script src="/static/tiktok-upload.js"></script>
 <script src="/static/crashout-social.js"></script>
 <script src="/static/ops-help.js"></script>
 {% endblock %}

@@ -90,3 +90,20 @@ ADMOB_BANNER_UNIT_ID = os.environ.get("CRASHOUT_ADMOB_BANNER_UNIT_ID", "").strip
 ADMOB_INTERSTITIAL_UNIT_ID = os.environ.get(
     "CRASHOUT_ADMOB_INTERSTITIAL_UNIT_ID", ""
 ).strip()
+
+# TikTok Open Platform (Login Kit / Content Posting / Display)
+TIKTOK_CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "").strip()
+TIKTOK_CLIENT_SECRET = os.environ.get("TIKTOK_CLIENT_SECRET", "").strip()
+TIKTOK_REDIRECT_URI = os.environ.get(
+    "TIKTOK_REDIRECT_URI", "http://127.0.0.1:8777/auth/tiktok/callback"
+).strip()
+TIKTOK_MOBILE_REDIRECT_URI = os.environ.get(
+    "TIKTOK_MOBILE_REDIRECT_URI", "crashout://tiktok/callback"
+).strip()
+# Optional app-level tokens (Display/Research) when user OAuth is not used
+TIKTOK_ACCESS_TOKEN = os.environ.get("TIKTOK_ACCESS_TOKEN", "").strip()
+TIKTOK_REFRESH_TOKEN = os.environ.get("TIKTOK_REFRESH_TOKEN", "").strip()
+TIKTOK_SCOPES = os.environ.get(
+    "TIKTOK_SCOPES",
+    "user.info.basic,video.upload,video.publish",
+).strip()

@@ -41,7 +41,34 @@
         title: "Creator Mode",
         desc: `Your ${uiLower("seed", "draft idea")}s, tone trends, spikes, and ${uiLower("recovery_streak", "win streak")}.`,
       },
+      tiktok: {
+        title: uiLabel("tiktok_recovery_feed", "TikTok Recovery Feed"),
+        desc: uiTip("tiktok_recovery_feed") || "Recovery-themed TikTok clips — #recovery, #motivation, #mentalhealth.",
+      },
     };
+  }
+
+  function uiTip(key) {
+    return window.CrashoutUICopy?.tooltip?.(key) || "";
+  }
+
+  function isTikTokLiveMode(mode) {
+    if (window.CrashoutTikTokFeed?.isLiveMode) {
+      return window.CrashoutTikTokFeed.isLiveMode(mode);
+    }
+    return mode === "research" || mode === "display";
+  }
+
+  function applyMainTikTokModeBadge(mode) {
+    const badge = document.getElementById("tiktok-feed-mode-badge-main");
+    if (!badge) return;
+    const live = isTikTokLiveMode(mode);
+    badge.hidden = false;
+    badge.classList.remove("tiktok-feed-mode-badge--live", "tiktok-feed-mode-badge--curated");
+    badge.classList.add(live ? "tiktok-feed-mode-badge--live" : "tiktok-feed-mode-badge--curated");
+    badge.textContent = live
+      ? uiLabel("tiktok_feed_live", "Live")
+      : uiLabel("tiktok_feed_curated", "Curated");
   }
 
   const VIDEO_CATEGORIES = {
@@ -535,6 +562,7 @@
 
     if (isCreator) {
       window.CrashoutCreatorDashboard?.show?.();
+      window.CrashoutTikTokUpload?.mountCreatorControls?.("#creator-dashboard-body");
     } else {
       window.CrashoutCreatorDashboard?.hide?.();
     }
@@ -552,6 +580,21 @@
     if (lane === "signals") {
       toggleCreatorLane(false);
       toggleSignalsProLane(true);
+      return;
+    }
+
+    if (lane === "tiktok") {
+      toggleCreatorLane(false);
+      toggleSignalsProLane(false);
+      if (emptyEl) emptyEl.hidden = true;
+      const renderPromise = window.CrashoutTikTokFeed?.renderInto?.(listEl, {
+        hashtags: "recovery,motivation,mentalhealth",
+      });
+      Promise.resolve(renderPromise).then((data) => {
+        if (activeLane !== "tiktok") return;
+        const mode = data?.meta?.mode || "curated";
+        applyMainTikTokModeBadge(mode);
+      });
       return;
     }
 
@@ -603,6 +646,8 @@
           ? `Tap a pulse above — tiny signals become ${seedPlural}.`
           : lane === "creator"
             ? `Your dashboard — spikes become ${seedPlural}.`
+            : lane === "tiktok"
+              ? uiLabel("tiktok_recovery_feed", "TikTok Recovery Feed")
             : `Drama teaches. Spikes become ${seedPlural}.`;
     }
 
@@ -611,6 +656,15 @@
       if (lane === "moments") {
         actions.hidden = false;
         actions.innerHTML = `<button type="button" class="moments-add-video-btn" data-video-manual-open>Add Video</button>`;
+      } else if (lane === "tiktok") {
+        actions.hidden = false;
+        // Keep feed link; append mode badge for curated vs live
+        actions.innerHTML = `
+          <span class="tiktok-feed-mode-badge" id="tiktok-feed-mode-badge-main" hidden></span>
+          <a class="moments-add-video-btn" href="/feed">${uiLabel(
+            "tiktok_recovery_feed",
+            "TikTok Recovery Feed"
+          )}</a>`;
       } else {
         actions.hidden = true;
         actions.innerHTML = "";
@@ -724,6 +778,12 @@
     window.CrashoutVideos?.load?.().then(() => {
       if (activeLane === "moments") renderLaneList("moments");
     });
+    try {
+      const lane = new URLSearchParams(window.location.search).get("lane");
+      if (lane && laneMeta()[lane]) switchLane(lane);
+    } catch (_) {
+      /* ignore */
+    }
   }
 
   const api = {

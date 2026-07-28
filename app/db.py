@@ -218,6 +218,7 @@ def open_connection(path: Path | None = None) -> sqlite3.Connection:
 # Phase E: MIGRATIONS[4] adds staff_audit_log for oversight actions.
 # Phase F: MIGRATIONS[5] adds rate_limits + abuse_events.
 # Phase G: MIGRATIONS[6–9] stories media, premium ads, club promos, impressions.
+# Phase H: MIGRATIONS[10] TikTok / user_social_auth.
 MIGRATIONS: dict[int, Callable[[sqlite3.Connection], None]] = {}
 
 CURATED_USER_VERSION = 1
@@ -229,6 +230,7 @@ STORIES_MEDIA_USER_VERSION = 6
 PREMIUM_ADS_USER_VERSION = 7
 CLUB_PROMOS_USER_VERSION = 8
 AD_IMPRESSIONS_USER_VERSION = 9
+USER_SOCIAL_AUTH_USER_VERSION = 10
 
 COMPOSE_RECEIPTS_DDL = """
 CREATE TABLE IF NOT EXISTS compose_receipts (
@@ -330,6 +332,26 @@ CREATE TABLE IF NOT EXISTS ad_impressions (
     surface TEXT NOT NULL DEFAULT 'web',
     created_at TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+)
+"""
+
+USER_SOCIAL_AUTH_DDL = """
+CREATE TABLE IF NOT EXISTS user_social_auth (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    provider TEXT NOT NULL,
+    access_token TEXT,
+    refresh_token TEXT,
+    expires_at INTEGER,
+    tiktok_user_id TEXT,
+    username TEXT,
+    avatar_url TEXT,
+    scopes TEXT,
+    raw_profile_json TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    UNIQUE(user_id, provider),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )
 """
 
@@ -475,6 +497,67 @@ def _migrate_to_v9(conn: sqlite3.Connection) -> None:
     )
 
 
+def migrate_tiktok_user_social_auth(conn: sqlite3.Connection) -> None:
+    """TikTok / social OAuth token store (UserSocialAuth)."""
+    conn.execute(USER_SOCIAL_AUTH_DDL)
+    # Compat: older v10 drafts used provider_user_id / display_name / token_expires_at
+    cols = {row[1] for row in conn.execute("PRAGMA table_info(user_social_auth)")}
+    alters = []
+    if "tiktok_user_id" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN tiktok_user_id TEXT")
+    if "username" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN username TEXT")
+    if "expires_at" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN expires_at INTEGER")
+    if "scopes" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN scopes TEXT")
+    if "raw_profile_json" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN raw_profile_json TEXT")
+    if "created_at" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN created_at TEXT")
+    if "updated_at" not in cols:
+        alters.append("ALTER TABLE user_social_auth ADD COLUMN updated_at TEXT")
+    for sql in alters:
+        conn.execute(sql)
+    # Backfill from legacy column names when present
+    if "provider_user_id" in cols:
+        conn.execute(
+            """
+            UPDATE user_social_auth
+            SET tiktok_user_id = COALESCE(tiktok_user_id, provider_user_id)
+            WHERE tiktok_user_id IS NULL OR tiktok_user_id = ''
+            """
+        )
+    if "display_name" in cols:
+        conn.execute(
+            """
+            UPDATE user_social_auth
+            SET username = COALESCE(username, display_name)
+            WHERE username IS NULL OR username = ''
+            """
+        )
+    if "token_expires_at" in cols:
+        conn.execute(
+            """
+            UPDATE user_social_auth
+            SET expires_at = COALESCE(expires_at, CAST(token_expires_at AS INTEGER))
+            WHERE expires_at IS NULL
+            """
+        )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_social_auth_user "
+        "ON user_social_auth(user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_social_auth_provider "
+        "ON user_social_auth(provider, tiktok_user_id)"
+    )
+
+
+def _migrate_to_v10(conn: sqlite3.Connection) -> None:
+    migrate_tiktok_user_social_auth(conn)
+
+
 MIGRATIONS[COMPOSE_RECEIPTS_USER_VERSION] = _migrate_to_v2
 MIGRATIONS[COMPOSE_RETENTION_USER_VERSION] = _migrate_to_v3
 MIGRATIONS[STAFF_AUDIT_USER_VERSION] = _migrate_to_v4
@@ -483,6 +566,7 @@ MIGRATIONS[STORIES_MEDIA_USER_VERSION] = _migrate_to_v6
 MIGRATIONS[PREMIUM_ADS_USER_VERSION] = _migrate_to_v7
 MIGRATIONS[CLUB_PROMOS_USER_VERSION] = _migrate_to_v8
 MIGRATIONS[AD_IMPRESSIONS_USER_VERSION] = _migrate_to_v9
+MIGRATIONS[USER_SOCIAL_AUTH_USER_VERSION] = migrate_tiktok_user_social_auth
 
 
 def migrate(conn: sqlite3.Connection) -> None:

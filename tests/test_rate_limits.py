@@ -38,7 +38,7 @@ def test_migration_v5_rate_limits_and_abuse_tables(tmp_path):
     init_db(db_path)
     conn = open_connection(db_path)
     try:
-        assert get_user_version(conn) == 10
+        assert get_user_version(conn) == 15
         rate_cols = {row[1] for row in conn.execute("PRAGMA table_info(rate_limits)")}
         abuse_cols = {row[1] for row in conn.execute("PRAGMA table_info(abuse_events)")}
         assert {
@@ -259,3 +259,59 @@ def test_staff_modify_http_rate_limit(tmp_path, monkeypatch):
         second = client.post("/api/staff/receipts/req-b/soft-delete", headers=headers)
         assert second.status_code == 429
         assert second.json()["detail"]["limit_type"] == LIMIT_STAFF_MODIFY
+
+
+@pytest.mark.compose_receipts
+def test_endpoint_rate_limit_user_id_api(tmp_path, monkeypatch):
+    """v15: check_rate_limit(user_id, endpoint) + reset_rate_limits()."""
+    db_path = tmp_path / "endpoint_rl.db"
+    monkeypatch.setattr("app.db.DATABASE_PATH", db_path)
+    init_db(db_path)
+    from app.rate_limits import (
+        check_rate_limit,
+        increment_rate_limit,
+        reset_rate_limits,
+        enforce_endpoint_rate_limit,
+    )
+
+    assert check_rate_limit(7, "/api/growth/score", path=db_path, max_count=2) is True
+    increment_rate_limit(7, "/api/growth/score", path=db_path, max_count=2)
+    assert check_rate_limit(7, "/api/growth/score", path=db_path, max_count=2) is True
+    increment_rate_limit(7, "/api/growth/score", path=db_path, max_count=2)
+    assert check_rate_limit(7, "/api/growth/score", path=db_path, max_count=2) is False
+
+    blocked = enforce_endpoint_rate_limit(7, "/api/growth/score", path=db_path, max_count=2)
+    assert blocked is not None
+    assert blocked.status_code == 429
+    body = blocked.body
+    import json
+
+    payload = json.loads(body.decode("utf-8"))
+    assert payload["ok"] is False
+    assert payload["reason"] == "rate_limit_exceeded"
+
+    reset_rate_limits(path=db_path)
+    assert check_rate_limit(7, "/api/growth/score", path=db_path, max_count=2) is True
+
+
+@pytest.mark.compose_receipts
+def test_migration_v15_endpoint_rate_limits_and_fraud(tmp_path):
+    db_path = tmp_path / "v15.db"
+    init_db(db_path)
+    conn = open_connection(db_path)
+    try:
+        assert get_user_version(conn) == 15
+        ep_cols = {
+            row[1] for row in conn.execute("PRAGMA table_info(endpoint_rate_limits)")
+        }
+        fraud_cols = {
+            row[1] for row in conn.execute("PRAGMA table_info(fraud_signals)")
+        }
+        flag_cols = {
+            row[1] for row in conn.execute("PRAGMA table_info(flagged_items)")
+        }
+        assert {"id", "user_id", "endpoint", "count", "window_start"}.issubset(ep_cols)
+        assert {"id", "user_id", "signal", "timestamp"}.issubset(fraud_cols)
+        assert {"id", "item_id", "active"}.issubset(flag_cols)
+    finally:
+        conn.close()

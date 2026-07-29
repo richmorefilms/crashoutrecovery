@@ -28,6 +28,14 @@ from app.config import (
     assert_jwt_secret_safe,
 )
 from app.ads_routes import router as ads_router
+from app.creator_routes import router as creator_router
+from app.feed_routes import router as feed_router
+from app.growth_routes import router as growth_router
+from app.monetization_routes import router as monetization_router
+from app.multiplatform_routes import router as multiplatform_router
+from app.oauth_routes import router as oauth_router
+from app.ranking_routes import router as ranking_router
+from app.recommendation_routes import router as recommendation_router
 from app.suggest_engine import build_suggestion
 from app.staff_routes import router as staff_router
 from app.story_routes import router as story_router
@@ -79,21 +87,68 @@ def create_app() -> FastAPI:
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
     ensure_media_dirs()
     app.mount("/media", StaticFiles(directory=str(MEDIA_LOCAL_DIR)), name="media")
+
+    # --- API routers first (never after HTML pages; avoid /api/* shadowing) ---
+    app.include_router(feed_router, prefix="/api/feed")
+    app.include_router(recommendation_router)
+    app.include_router(growth_router)
+    app.include_router(multiplatform_router)
+    app.include_router(monetization_router)
+    app.include_router(youtube_router)
+    app.include_router(tiktok_router)
+    app.include_router(ranking_router)
+    app.include_router(oauth_router)
+    app.include_router(creator_router)
     app.include_router(auth_router)
     app.include_router(user_data_router)
     app.include_router(team_router)
-    app.include_router(youtube_router)
     app.include_router(compose_router)
     app.include_router(staff_router)
     app.include_router(story_router)
     app.include_router(ads_router)
-    app.include_router(tiktok_router)
+
     templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
     @app.get("/health")
     async def health():
         return {"status": "ok", "app": APP_NAME, "version": APP_VERSION}
 
+    @app.get("/api/tones")
+    async def list_tones():
+        return {"tones": list(TONE_TEMPLATES.keys()), "default": DEFAULT_TONE}
+
+    @app.get("/api/crashout")
+    async def crashout_json(tone: str | None = Query(default=DEFAULT_TONE)):
+        selected = resolve_tone(tone)
+        return {
+            "tone": selected,
+            "template": TONE_TEMPLATES[selected],
+        }
+
+    @app.post("/api/suggest")
+    async def suggest_tone(body: SuggestRequest):
+        return build_suggestion(body.text)
+
+    @app.post("/api/valuation")
+    async def valuation(body: ValuationRequest):
+        return build_valuation_projection(
+            user_count=body.user_count,
+            conversion_rate=body.conversion_rate,
+            arpu=body.arpu,
+            ev_sales_multiple=body.ev_sales_multiple,
+        )
+
+    @app.post("/api/growth-valuation")
+    async def growth_valuation(body: SeededGrowthRequest):
+        return build_seeded_growth_projection(
+            launch_users=body.launch_users,
+            conversion_rate=body.conversion_rate,
+            retention_rate=body.retention_rate,
+            arpu=body.arpu,
+            ev_sales_multiple=body.ev_sales_multiple,
+        )
+
+    # --- Exact HTML page routes (no catch-alls; do not shadow /api/*) ---
     @app.get("/", response_class=HTMLResponse)
     async def index(request: Request, tone: str | None = Query(default=DEFAULT_TONE)):
         selected = resolve_tone(tone)
@@ -219,6 +274,185 @@ def create_app() -> FastAPI:
             },
         )
 
+    def _page_ctx(**extra):
+        ctx = {
+            "app_name": APP_NAME,
+            "app_tagline": APP_TAGLINE,
+            "ui_copy": ui_copy_context(),
+        }
+        ctx.update(extra)
+        return ctx
+
+    @app.get("/feed/all", response_class=HTMLResponse)
+    async def feed_all_page(request: Request):
+        return templates.TemplateResponse(request, "feed_all.html", _page_ctx())
+
+    @app.get("/feed/trending", response_class=HTMLResponse)
+    async def feed_trending_page(request: Request):
+        return templates.TemplateResponse(request, "feed_trending.html", _page_ctx())
+
+    @app.get("/feed/recommended", response_class=HTMLResponse)
+    async def feed_recommended_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "recommended_feed.html", _page_ctx(user_id=id or "")
+        )
+
+    @app.get("/youtube/video/{video_id}", response_class=HTMLResponse)
+    async def youtube_video_page(request: Request, video_id: str):
+        return templates.TemplateResponse(
+            request, "youtube_video.html", _page_ctx(video_id=video_id)
+        )
+
+    @app.get("/youtube/channel/{channel_id}", response_class=HTMLResponse)
+    async def youtube_channel_page(request: Request, channel_id: str):
+        return templates.TemplateResponse(
+            request, "youtube_channel.html", _page_ctx(channel_id=channel_id)
+        )
+
+    @app.get("/youtube/search", response_class=HTMLResponse)
+    async def youtube_search_page(
+        request: Request, q: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "youtube_search.html", _page_ctx(query=q or "")
+        )
+
+    @app.get("/oauth/youtube", response_class=HTMLResponse)
+    async def oauth_youtube_login_page(request: Request):
+        return templates.TemplateResponse(
+            request, "oauth_youtube_login.html", _page_ctx()
+        )
+
+    @app.get("/oauth/youtube/callback", response_class=HTMLResponse)
+    async def oauth_youtube_callback_page(request: Request):
+        return templates.TemplateResponse(
+            request, "oauth_youtube_callback.html", _page_ctx()
+        )
+
+    @app.get("/creator/dashboard", response_class=HTMLResponse)
+    async def creator_dashboard_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "creator_dashboard.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/monetization", response_class=HTMLResponse)
+    async def monetization_lanes_page(request: Request):
+        return templates.TemplateResponse(
+            request, "monetization_lanes.html", _page_ctx()
+        )
+
+    @app.get("/monetization/ads", response_class=HTMLResponse)
+    async def monetization_ads_page(request: Request):
+        return templates.TemplateResponse(
+            request, "monetization_ads.html", _page_ctx()
+        )
+
+    @app.get("/earnings", response_class=HTMLResponse)
+    async def creator_earnings_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "creator_earnings.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/ranked", response_class=HTMLResponse)
+    async def ranked_feed_page(request: Request):
+        return templates.TemplateResponse(request, "ranked_feed.html", _page_ctx())
+
+    @app.get("/personalized", response_class=HTMLResponse)
+    async def personalized_feed_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "personalized_feed.html", _page_ctx(user_id=id or "")
+        )
+
+    @app.get("/recommendations", response_class=HTMLResponse)
+    async def recommendations_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "recommendations.html", _page_ctx(user_id=id or "")
+        )
+
+    @app.get("/topics", response_class=HTMLResponse)
+    async def topic_clusters_page(request: Request):
+        return templates.TemplateResponse(
+            request, "topic_clusters.html", _page_ctx()
+        )
+
+    @app.get("/topic-graph", response_class=HTMLResponse)
+    async def topic_graph_page(request: Request):
+        return templates.TemplateResponse(request, "topic_graph.html", _page_ctx())
+
+    @app.get("/growth/score", response_class=HTMLResponse)
+    async def growth_score_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "growth_score.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/growth/trends", response_class=HTMLResponse)
+    async def growth_trends_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "growth_trends.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/growth/opportunities", response_class=HTMLResponse)
+    async def growth_opportunities_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "growth_opportunities.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/staff/overview", response_class=HTMLResponse)
+    async def staff_overview_page(request: Request):
+        return templates.TemplateResponse(
+            request, "staff_overview.html", _page_ctx()
+        )
+
+    @app.get("/staff/flags", response_class=HTMLResponse)
+    async def staff_flags_page(request: Request):
+        return templates.TemplateResponse(request, "staff_flags.html", _page_ctx())
+
+    @app.get("/public", response_class=HTMLResponse)
+    async def public_home_page(request: Request):
+        return templates.TemplateResponse(request, "home_public.html", _page_ctx())
+
+    @app.get("/publish", response_class=HTMLResponse)
+    async def publish_ready_page(request: Request):
+        return templates.TemplateResponse(request, "publish_ready.html", _page_ctx())
+
+    @app.get("/multi/instagram", response_class=HTMLResponse)
+    async def multi_instagram_page(request: Request):
+        return templates.TemplateResponse(
+            request, "multi_instagram.html", _page_ctx()
+        )
+
+    @app.get("/multi/facebook", response_class=HTMLResponse)
+    async def multi_facebook_page(request: Request):
+        return templates.TemplateResponse(
+            request, "multi_facebook.html", _page_ctx()
+        )
+
+    @app.get("/multi/twitter", response_class=HTMLResponse)
+    async def multi_twitter_page(request: Request):
+        return templates.TemplateResponse(request, "multi_twitter.html", _page_ctx())
+
+    @app.get("/multi/pinterest", response_class=HTMLResponse)
+    async def multi_pinterest_page(request: Request):
+        return templates.TemplateResponse(
+            request, "multi_pinterest.html", _page_ctx()
+        )
+
     @app.get("/embed", response_class=HTMLResponse)
     async def embed(request: Request, tone: str | None = Query(default=DEFAULT_TONE)):
         selected = resolve_tone(tone)
@@ -240,41 +474,6 @@ def create_app() -> FastAPI:
             request,
             TONE_TEMPLATES[selected],
             {"tone": selected},
-        )
-
-    @app.get("/api/tones")
-    async def list_tones():
-        return {"tones": list(TONE_TEMPLATES.keys()), "default": DEFAULT_TONE}
-
-    @app.get("/api/crashout")
-    async def crashout_json(tone: str | None = Query(default=DEFAULT_TONE)):
-        selected = resolve_tone(tone)
-        return {
-            "tone": selected,
-            "template": TONE_TEMPLATES[selected],
-        }
-
-    @app.post("/api/suggest")
-    async def suggest_tone(body: SuggestRequest):
-        return build_suggestion(body.text)
-
-    @app.post("/api/valuation")
-    async def valuation(body: ValuationRequest):
-        return build_valuation_projection(
-            user_count=body.user_count,
-            conversion_rate=body.conversion_rate,
-            arpu=body.arpu,
-            ev_sales_multiple=body.ev_sales_multiple,
-        )
-
-    @app.post("/api/growth-valuation")
-    async def growth_valuation(body: SeededGrowthRequest):
-        return build_seeded_growth_projection(
-            launch_users=body.launch_users,
-            conversion_rate=body.conversion_rate,
-            retention_rate=body.retention_rate,
-            arpu=body.arpu,
-            ev_sales_multiple=body.ev_sales_multiple,
         )
 
     return app

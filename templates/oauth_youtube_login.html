@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Connect YouTube — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main auth-page auth-page--youtube-oauth">
+  <section class="auth-page-card">
+    <h1 class="auth-page-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h1>
+    <p class="auth-page-lede" data-ui-copy="youtube_connect" data-ui-field="tooltip">{{ uc.youtube_connect.tooltip }}</p>
+    <div class="oauth-youtube-actions">
+      <a
+        id="oauth-youtube-login-btn"
+        class="feed-cta oauth-youtube-connect-btn"
+        href="/api/oauth/youtube/login"
+        data-ui-copy="youtube_connect"
+      >{{ uc.youtube_connect.label }}</a>
+    </div>
+    <p class="auth-guest-note">
+      <a href="/creator/dashboard" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</a>
+      · <a href="/" data-ui-copy="nav_home">{{ uc.nav_home.label }}</a>
+    </p>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/oauth-youtube.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutYouTubeOAuth?.prepareLogin?.();
+  });
+</script>
+{% endblock %}

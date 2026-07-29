@@ -11,10 +11,18 @@ from pathlib import Path
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from app.config import VIDEOS_PATH, YOUTUBE_API_KEY
 from app.db import get_conn, row_to_dict, utc_now_iso
+from app.youtube_service import (
+    YouTubeAPIError,
+    build_youtube_channel_response,
+    build_youtube_feed_response,
+    build_youtube_search_response,
+    build_youtube_video_response,
+)
 
 router = APIRouter(prefix="/api/youtube", tags=["youtube"])
 
@@ -373,6 +381,71 @@ def resolve(
         return _resolve_manual(normalized, manual_id, ref_id)
     # Creator "Add Video" without manual_id still persists a new clip when persist=True
     return _resolve_auto(normalized, ref_id, persist=persist or bool(ref_id))
+
+
+@router.get("/feed")
+async def youtube_feed(
+    q: str | None = Query(default=None, description="Search query"),
+    query: str | None = Query(default=None, description="Alias for q"),
+    max_results: int = Query(default=12, ge=1, le=50),
+):
+    """JSON recovery feed — mirrors TikTok /api/tiktok/feed envelope."""
+    payload = build_youtube_feed_response(
+        query=q or query,
+        max_results=max_results,
+    )
+    return JSONResponse(payload)
+
+
+def _youtube_http_error(exc: YouTubeAPIError) -> HTTPException:
+    code = exc.status_code or 502
+    if code < 400:
+        code = 502
+    return HTTPException(
+        status_code=code,
+        detail={
+            "error": "youtube_api_error",
+            "message": str(exc),
+            "payload": exc.payload,
+        },
+    )
+
+
+@router.get("/search")
+async def youtube_search(
+    q: str | None = Query(default=None, description="Search query"),
+    query: str | None = Query(default=None, description="Alias for q"),
+    max_results: int = Query(default=12, ge=1, le=50),
+):
+    """Normalized YouTube search — TikTok-style envelope."""
+    term = (q or query or "").strip()
+    if not term:
+        raise HTTPException(status_code=400, detail="q is required")
+    try:
+        payload = build_youtube_search_response(term, max_results=max_results)
+    except YouTubeAPIError as exc:
+        raise _youtube_http_error(exc) from exc
+    return JSONResponse(payload)
+
+
+@router.get("/video/{video_id}")
+async def youtube_video_detail(video_id: str):
+    """Normalized video detail from videos.list."""
+    try:
+        payload = build_youtube_video_response(video_id)
+    except YouTubeAPIError as exc:
+        raise _youtube_http_error(exc) from exc
+    return JSONResponse(payload)
+
+
+@router.get("/channel/{channel_id}")
+async def youtube_channel_detail(channel_id: str):
+    """Normalized channel detail from channels.list."""
+    try:
+        payload = build_youtube_channel_response(channel_id)
+    except YouTubeAPIError as exc:
+        raise _youtube_http_error(exc) from exc
+    return JSONResponse(payload)
 
 
 @router.get("/resolve")

@@ -97,7 +97,7 @@ def test_migration_v4_creates_staff_audit_log(tmp_path):
     init_db(db_path)
     conn = open_connection(db_path)
     try:
-        assert get_user_version(conn) == 10
+        assert get_user_version(conn) == 15
         cols = {row[1] for row in conn.execute("PRAGMA table_info(staff_audit_log)")}
         assert {
             "id",

@@ -219,6 +219,11 @@ def open_connection(path: Path | None = None) -> sqlite3.Connection:
 # Phase F: MIGRATIONS[5] adds rate_limits + abuse_events.
 # Phase G: MIGRATIONS[6–9] stories media, premium ads, club promos, impressions.
 # Phase H: MIGRATIONS[10] TikTok / user_social_auth.
+# Phase I: MIGRATIONS[11] YouTube OAuth youtube_tokens.
+# Phase J: MIGRATIONS[12] Monetization ad_inventory / ad_clicks / creator_earnings.
+# Phase K: MIGRATIONS[13] Ranking user_history / user_preferences.
+# Phase L: MIGRATIONS[14] Recommendations topic_cache / user_similarity.
+# Phase M: MIGRATIONS[15] Growth governance — endpoint rate limits, fraud, flags.
 MIGRATIONS: dict[int, Callable[[sqlite3.Connection], None]] = {}
 
 CURATED_USER_VERSION = 1
@@ -231,6 +236,11 @@ PREMIUM_ADS_USER_VERSION = 7
 CLUB_PROMOS_USER_VERSION = 8
 AD_IMPRESSIONS_USER_VERSION = 9
 USER_SOCIAL_AUTH_USER_VERSION = 10
+YOUTUBE_TOKENS_USER_VERSION = 11
+MONETIZATION_USER_VERSION = 12
+RANKING_USER_VERSION = 13
+RECOMMENDATION_USER_VERSION = 14
+GROWTH_GOVERNANCE_USER_VERSION = 15
 
 COMPOSE_RECEIPTS_DDL = """
 CREATE TABLE IF NOT EXISTS compose_receipts (
@@ -351,6 +361,158 @@ CREATE TABLE IF NOT EXISTS user_social_auth (
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL,
     UNIQUE(user_id, provider),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+# YouTubeToken shape (SQLModel-equivalent fields) — stored via SQLite migration ladder.
+YOUTUBE_TOKENS_DDL = """
+CREATE TABLE IF NOT EXISTS youtube_tokens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL UNIQUE,
+    access_token TEXT NOT NULL,
+    refresh_token TEXT,
+    expires_at INTEGER,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+
+class YouTubeToken:
+    """SQLModel-shaped token row (id, user_id, access_token, refresh_token, expires_at)."""
+
+    __tablename__ = "youtube_tokens"
+
+    def __init__(
+        self,
+        *,
+        id: int | None = None,
+        user_id: int,
+        access_token: str,
+        refresh_token: str | None = None,
+        expires_at: int | None = None,
+    ) -> None:
+        self.id = id
+        self.user_id = user_id
+        self.access_token = access_token
+        self.refresh_token = refresh_token
+        self.expires_at = expires_at
+
+
+AD_INVENTORY_DDL = """
+CREATE TABLE IF NOT EXISTS ad_inventory (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    image_url TEXT,
+    cta_url TEXT,
+    payout_per_click REAL NOT NULL DEFAULT 0.01
+)
+"""
+
+AD_CLICKS_DDL = """
+CREATE TABLE IF NOT EXISTS ad_clicks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ad_id INTEGER NOT NULL,
+    creator_id INTEGER NOT NULL,
+    timestamp TEXT NOT NULL,
+    payout_amount REAL NOT NULL DEFAULT 0,
+    FOREIGN KEY (ad_id) REFERENCES ad_inventory(id) ON DELETE CASCADE
+)
+"""
+
+CREATOR_EARNINGS_DDL = """
+CREATE TABLE IF NOT EXISTS creator_earnings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    creator_id INTEGER NOT NULL UNIQUE,
+    total_earnings REAL NOT NULL DEFAULT 0,
+    last_payout TEXT,
+    FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+USER_HISTORY_DDL = """
+CREATE TABLE IF NOT EXISTS user_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    item_id TEXT NOT NULL,
+    platform TEXT NOT NULL,
+    timestamp TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+USER_PREFERENCES_DDL = """
+CREATE TABLE IF NOT EXISTS user_preferences (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL UNIQUE,
+    preferred_platforms TEXT NOT NULL DEFAULT '[]',
+    preferred_channels TEXT NOT NULL DEFAULT '[]',
+    last_seen_item TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+TOPIC_CACHE_DDL = """
+CREATE TABLE IF NOT EXISTS topic_cache (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id TEXT NOT NULL UNIQUE,
+    topics TEXT NOT NULL DEFAULT '[]'
+)
+"""
+
+USER_SIMILARITY_DDL = """
+CREATE TABLE IF NOT EXISTS user_similarity (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    similar_user_id INTEGER NOT NULL,
+    score REAL NOT NULL DEFAULT 0,
+    UNIQUE(user_id, similar_user_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (similar_user_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+# API endpoint RateLimits shape (v15) — separate from Phase F subject/limit_type windows.
+ENDPOINT_RATE_LIMITS_DDL = """
+CREATE TABLE IF NOT EXISTS endpoint_rate_limits (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    endpoint TEXT NOT NULL,
+    count INTEGER NOT NULL DEFAULT 0,
+    window_start INTEGER NOT NULL,
+    UNIQUE(user_id, endpoint, window_start)
+)
+"""
+
+FRAUD_SIGNALS_DDL = """
+CREATE TABLE IF NOT EXISTS fraud_signals (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    signal TEXT NOT NULL,
+    timestamp TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+)
+"""
+
+FLAGGED_ITEMS_DDL = """
+CREATE TABLE IF NOT EXISTS flagged_items (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id TEXT NOT NULL UNIQUE,
+    reason TEXT,
+    flagged_by INTEGER,
+    flagged_at TEXT NOT NULL,
+    active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
+    FOREIGN KEY (flagged_by) REFERENCES users(id) ON DELETE SET NULL
+)
+"""
+
+FRAUDULENT_USERS_DDL = """
+CREATE TABLE IF NOT EXISTS fraudulent_users (
+    user_id INTEGER PRIMARY KEY,
+    marked_at TEXT NOT NULL,
+    reason TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 )
 """
@@ -558,6 +720,121 @@ def _migrate_to_v10(conn: sqlite3.Connection) -> None:
     migrate_tiktok_user_social_auth(conn)
 
 
+def migrate_youtube_tokens(conn: sqlite3.Connection) -> None:
+    """YouTube OAuth token store (YouTubeToken shape)."""
+    conn.execute(YOUTUBE_TOKENS_DDL)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_youtube_tokens_user ON youtube_tokens(user_id)"
+    )
+
+
+def _migrate_to_v11(conn: sqlite3.Connection) -> None:
+    migrate_youtube_tokens(conn)
+
+
+def migrate_monetization(conn: sqlite3.Connection) -> None:
+    """Ad inventory, clicks, and creator earnings (monetization lanes)."""
+    conn.execute(AD_INVENTORY_DDL)
+    conn.execute(AD_CLICKS_DDL)
+    conn.execute(CREATOR_EARNINGS_DDL)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_ad_clicks_creator ON ad_clicks(creator_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_ad_clicks_ad ON ad_clicks(ad_id)"
+    )
+    # Seed starter inventory when empty (dev/demo safe).
+    row = conn.execute("SELECT COUNT(*) AS c FROM ad_inventory").fetchone()
+    count = int(row[0] if row else 0)
+    if count == 0:
+        seeds = (
+            (
+                "Recovery draft pad",
+                "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+                "https://crashoutrecovery.app/",
+                0.05,
+            ),
+            (
+                "Calm creator tools",
+                None,
+                "https://crashoutrecovery.app/ops",
+                0.03,
+            ),
+            (
+                "Safe share checklist",
+                None,
+                "https://crashoutrecovery.app/feed/all",
+                0.04,
+            ),
+        )
+        conn.executemany(
+            """
+            INSERT INTO ad_inventory (title, image_url, cta_url, payout_per_click)
+            VALUES (?, ?, ?, ?)
+            """,
+            seeds,
+        )
+
+
+def _migrate_to_v12(conn: sqlite3.Connection) -> None:
+    migrate_monetization(conn)
+
+
+def migrate_ranking(conn: sqlite3.Connection) -> None:
+    """User history + preferences for personalized ranking."""
+    conn.execute(USER_HISTORY_DDL)
+    conn.execute(USER_PREFERENCES_DDL)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_history_user ON user_history(user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_history_item ON user_history(item_id)"
+    )
+
+
+def _migrate_to_v13(conn: sqlite3.Connection) -> None:
+    migrate_ranking(conn)
+
+
+def migrate_recommendations(conn: sqlite3.Connection) -> None:
+    """Topic cache + user similarity for collaborative recommendations."""
+    conn.execute(TOPIC_CACHE_DDL)
+    conn.execute(USER_SIMILARITY_DDL)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_topic_cache_item ON topic_cache(item_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_user_similarity_user "
+        "ON user_similarity(user_id)"
+    )
+
+
+def _migrate_to_v14(conn: sqlite3.Connection) -> None:
+    migrate_recommendations(conn)
+
+
+def migrate_growth_governance(conn: sqlite3.Connection) -> None:
+    """Endpoint rate limits, fraud signals, flagged items (growth / oversight)."""
+    conn.execute(ENDPOINT_RATE_LIMITS_DDL)
+    conn.execute(FRAUD_SIGNALS_DDL)
+    conn.execute(FLAGGED_ITEMS_DDL)
+    conn.execute(FRAUDULENT_USERS_DDL)
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_endpoint_rl_user "
+        "ON endpoint_rate_limits(user_id, endpoint)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_fraud_signals_user ON fraud_signals(user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_flagged_items_active ON flagged_items(active)"
+    )
+
+
+def _migrate_to_v15(conn: sqlite3.Connection) -> None:
+    migrate_growth_governance(conn)
+
+
 MIGRATIONS[COMPOSE_RECEIPTS_USER_VERSION] = _migrate_to_v2
 MIGRATIONS[COMPOSE_RETENTION_USER_VERSION] = _migrate_to_v3
 MIGRATIONS[STAFF_AUDIT_USER_VERSION] = _migrate_to_v4
@@ -567,6 +844,11 @@ MIGRATIONS[PREMIUM_ADS_USER_VERSION] = _migrate_to_v7
 MIGRATIONS[CLUB_PROMOS_USER_VERSION] = _migrate_to_v8
 MIGRATIONS[AD_IMPRESSIONS_USER_VERSION] = _migrate_to_v9
 MIGRATIONS[USER_SOCIAL_AUTH_USER_VERSION] = migrate_tiktok_user_social_auth
+MIGRATIONS[YOUTUBE_TOKENS_USER_VERSION] = migrate_youtube_tokens
+MIGRATIONS[MONETIZATION_USER_VERSION] = migrate_monetization
+MIGRATIONS[RANKING_USER_VERSION] = migrate_ranking
+MIGRATIONS[RECOMMENDATION_USER_VERSION] = migrate_recommendations
+MIGRATIONS[GROWTH_GOVERNANCE_USER_VERSION] = migrate_growth_governance
 
 
 def migrate(conn: sqlite3.Connection) -> None:

@@ -24,7 +24,7 @@ def tiktok_db(tmp_path, monkeypatch):
 def test_schema_includes_user_social_auth(tiktok_db):
     conn = open_connection(tiktok_db)
     try:
-        assert get_user_version(conn) == 10
+        assert get_user_version(conn) == 15
         row = conn.execute(
             "SELECT name FROM sqlite_master WHERE type='table' AND name='user_social_auth'"
         ).fetchone()

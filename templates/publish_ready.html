@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Publish Ready — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="publish-page v16-shell" id="publish-ready-root">
+  <div class="publish-banner">
+    <p class="v16-kicker">CrashoutRecovery v16</p>
+    <h1 class="console-title" data-ui-copy="publish_banner">{{ uc.publish_banner.label }}</h1>
+    <p class="console-desc" data-ui-copy="publish_banner" data-ui-field="tooltip">{{ uc.publish_banner.tooltip }}</p>
+  </div>
+  <ul class="publish-checklist" id="publish-checklist">
+    <li data-check="routing">Routing stable</li>
+    <li data-check="api">API stable</li>
+    <li data-check="intelligence">Intelligence layers stable</li>
+    <li data-check="growth">Growth engine stable</li>
+    <li data-check="staff">Staff console stable</li>
+    <li data-check="multi">Multi-platform ingestion stable</li>
+  </ul>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/publish.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutPublish?.mount?.("#publish-ready-root");
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Recommended Feed — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main feed-page feed-page--recommended feed-page--v16" data-user-id="{{ user_id or '' }}">
+  <header class="unified-feed-header">
+    <p class="v16-kicker" data-ui-copy="recommended_feed">{{ uc.recommended_feed.label }}</p>
+    <h1 class="unified-feed-title" data-ui-copy="recommended_feed">{{ uc.recommended_feed.label }}</h1>
+    <p class="unified-feed-desc" data-ui-copy="recommended_feed" data-ui-field="tooltip">{{ uc.recommended_feed.tooltip }}</p>
+    <p class="unified-feed-actions">
+      <a class="feed-cta feed-cta--ghost" href="/recommendations" data-ui-copy="recommendations">{{ uc.recommendations.label }}</a>
+      <a class="feed-cta feed-cta--ghost" href="/feed/all" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</a>
+    </p>
+  </header>
+  <div id="recommended-feed-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="recommended-feed-sentinel" class="feed-scroll-sentinel" aria-hidden="true"></div>
+  <p id="recommended-feed-loading" class="feed-loading-more" hidden>Loading more…</p>
+  <p id="recommended-feed-empty" class="unified-feed-empty" hidden>No recommended clips yet.</p>
+  <p id="recommended-feed-error" class="unified-feed-error" hidden role="alert"></p>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/recommended-feed.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutRecommendedFeed?.mount?.("#recommended-feed-root");
+  });
+</script>
+{% endblock %}

@@ -43,8 +43,31 @@ APP_TAGLINE = "Friendly redirects for adults 18+"
 HOST = "127.0.0.1"
 PORT = 8777
 
-# YouTube Data API v3 — server only; never ship to the browser
-YOUTUBE_API_KEY = os.environ.get("CRASHOUT_YOUTUBE_API_KEY", "").strip()
+# YouTube Data API v3 — server only; never ship to the browser.
+# Prefer YOUTUBE_API_KEY; CRASHOUT_YOUTUBE_API_KEY kept for back-compat.
+YOUTUBE_API_KEY = (
+    os.environ.get("YOUTUBE_API_KEY", "").strip()
+    or os.environ.get("CRASHOUT_YOUTUBE_API_KEY", "").strip()
+)
+
+# TikTok API key alias (maps to client key / access token for unified feed meta).
+TIKTOK_API_KEY = (
+    os.environ.get("TIKTOK_API_KEY", "").strip()
+    or os.environ.get("TIKTOK_CLIENT_KEY", "").strip()
+    or os.environ.get("TIKTOK_ACCESS_TOKEN", "").strip()
+)
+
+# Google OAuth (YouTube Login foundation)
+OAUTH_CLIENT_ID = os.environ.get("OAUTH_CLIENT_ID", "").strip()
+OAUTH_CLIENT_SECRET = os.environ.get("OAUTH_CLIENT_SECRET", "").strip()
+OAUTH_REDIRECT_URI = os.environ.get(
+    "OAUTH_REDIRECT_URI",
+    "http://127.0.0.1:8777/oauth/youtube/callback",
+).strip()
+OAUTH_SCOPES = os.environ.get(
+    "OAUTH_SCOPES",
+    "https://www.googleapis.com/auth/youtube.readonly",
+).strip()
 
 # Local/dev marker. Non-development environments reject the default JWT secret.
 CRASHOUT_ENV = os.environ.get("CRASHOUT_ENV", "development").strip().lower()
@@ -90,6 +113,9 @@ ADMOB_BANNER_UNIT_ID = os.environ.get("CRASHOUT_ADMOB_BANNER_UNIT_ID", "").strip
 ADMOB_INTERSTITIAL_UNIT_ID = os.environ.get(
     "CRASHOUT_ADMOB_INTERSTITIAL_UNIT_ID", ""
 ).strip()
+
+# Feed ad injection interval (every N content items)
+ADS_INJECT_EVERY_N = int(os.environ.get("ADS_INJECT_EVERY_N", "3") or "3")
 
 # TikTok Open Platform (Login Kit / Content Posting / Display)
 TIKTOK_CLIENT_KEY = os.environ.get("TIKTOK_CLIENT_KEY", "").strip()

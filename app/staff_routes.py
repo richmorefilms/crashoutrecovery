@@ -38,6 +38,12 @@ from app.rate_limits import (
     subject_for_staff,
 )
 from app.retention import KNOWN_RETENTION_POLICIES
+from app.staff_service import (
+    flag_item,
+    get_flagged_items,
+    get_platform_overview,
+    unflag_item,
+)
 
 router = APIRouter(prefix="/api/staff", tags=["staff-oversight"])
 
@@ -466,3 +472,41 @@ async def staff_create_story(
         thumbnail_url=body.thumbnail_url,
         published=body.published,
     )
+
+
+@router.get("/overview")
+async def staff_overview(
+    staff_user: dict[str, Any] = Depends(require_staff),
+):
+    _ = staff_user
+    return get_platform_overview()
+
+
+@router.get("/flags")
+async def staff_flags(
+    staff_user: dict[str, Any] = Depends(require_staff),
+):
+    _ = staff_user
+    return get_flagged_items()
+
+
+@router.post("/flag/{item_id}")
+async def staff_flag_item(
+    item_id: str,
+    staff_user: dict[str, Any] = Depends(require_staff),
+    reason: str | None = Query(default=None),
+):
+    return flag_item(
+        item_id,
+        reason=reason,
+        flagged_by=int(staff_user["id"]) if staff_user.get("id") is not None else None,
+    )
+
+
+@router.post("/unflag/{item_id}")
+async def staff_unflag_item(
+    item_id: str,
+    staff_user: dict[str, Any] = Depends(require_staff),
+):
+    _ = staff_user
+    return unflag_item(item_id)

@@ -106,5 +106,205 @@
   "tiktok_publish": {
     "label": "Publish to TikTok",
     "tooltip": "Upload a video to TikTok from Creator tools."
+  },
+  "nav_home": {
+    "label": "Home",
+    "tooltip": "Back to the main recovery feed."
+  },
+  "unified_feed": {
+    "label": "Unified Feed",
+    "tooltip": "YouTube and TikTok recovery clips in one place."
+  },
+  "trending_feed": {
+    "label": "Trending",
+    "tooltip": "Clips sorted by engagement across platforms."
+  },
+  "youtube_search": {
+    "label": "YouTube Search",
+    "tooltip": "Search recovery-themed YouTube videos."
+  },
+  "youtube_video": {
+    "label": "YouTube Video",
+    "tooltip": "Video details from YouTube Data API."
+  },
+  "youtube_channel": {
+    "label": "YouTube Channel",
+    "tooltip": "Channel details from YouTube Data API."
+  },
+  "youtube_connect": {
+    "label": "Connect YouTube",
+    "tooltip": "Link your YouTube account with Google OAuth."
+  },
+  "youtube_linked": {
+    "label": "YouTube account linked",
+    "tooltip": "Your YouTube account is connected to Crashout Recovery."
+  },
+  "creator_hub": {
+    "label": "Creator Dashboard",
+    "tooltip": "Linked channels and analytics for your creator account."
+  },
+  "platform_youtube": {
+    "label": "YouTube",
+    "tooltip": "YouTube clip"
+  },
+  "platform_tiktok": {
+    "label": "TikTok",
+    "tooltip": "TikTok clip"
+  },
+  "monetization_lanes": {
+    "label": "Monetization",
+    "tooltip": "Ads, payouts, sponsorships, and premium feed lanes."
+  },
+  "monetization_ads": {
+    "label": "Ad inventory",
+    "tooltip": "Recovery-safe ad cards you can serve in the feed."
+  },
+  "creator_earnings": {
+    "label": "Earnings",
+    "tooltip": "Your ad clicks, RPM, and payout history."
+  },
+  "ranked_feed": {
+    "label": "Ranked Feed",
+    "tooltip": "Recovery clips sorted by engagement score."
+  },
+  "personalized_feed": {
+    "label": "Personalized Feed",
+    "tooltip": "Feed tuned to your watch history and preferences."
+  },
+  "recommended_feed": {
+    "label": "Recommended Feed",
+    "tooltip": "Topic clusters and similar-user picks in the unified feed lane."
+  },
+  "recommendations": {
+    "label": "Recommendations",
+    "tooltip": "Topic clusters plus similar-user picks for you."
+  },
+  "topic_clusters": {
+    "label": "Topic Clusters",
+    "tooltip": "Recovery clips grouped by shared topics."
+  },
+  "topic_graph": {
+    "label": "Topic Graph",
+    "tooltip": "How topics connect across the feed."
+  },
+  "growth_score": {
+    "label": "Growth Score",
+    "tooltip": "Creator growth score from engagement, earnings, and recommendations."
+  },
+  "growth_trends": {
+    "label": "Growth Trends",
+    "tooltip": "30-day views, likes, comments, earnings, and recommendations."
+  },
+  "growth_opportunities": {
+    "label": "Opportunities",
+    "tooltip": "Trending topics, clusters, posting times, and platform boosts."
+  },
+  "staff_overview": {
+    "label": "Staff Overview",
+    "tooltip": "Platform health for creators, ads, recommendations, and latency."
+  },
+  "staff_flags": {
+    "label": "Staff Flags",
+    "tooltip": "Flagged feed items awaiting staff review."
+  },
+  "public_home": {
+    "label": "Public Home",
+    "tooltip": "CrashoutRecovery public landing — creator intelligence platform."
+  },
+  "public_hero": {
+    "label": "Unified Creator Intelligence Platform",
+    "tooltip": "Feeds, monetization, recommendations, growth, and multi-platform ingestion in one calm console."
+  },
+  "cta_explore_feed": {
+    "label": "Explore Feed",
+    "tooltip": "Open the unified YouTube + TikTok recovery feed."
+  },
+  "cta_creator_dashboard": {
+    "label": "Creator Dashboard",
+    "tooltip": "Open linked channels, analytics, and growth widgets."
+  },
+  "cta_staff_console": {
+    "label": "Staff Console",
+    "tooltip": "Open platform health and moderation tools."
+  },
+  "showcase_unified_feed": {
+    "label": "Unified Feed",
+    "tooltip": "Cross-platform recovery clips in one ranked lane."
+  },
+  "showcase_monetization": {
+    "label": "Monetization",
+    "tooltip": "Ads, clicks, and creator payouts."
+  },
+  "showcase_recommendations": {
+    "label": "Recommendations",
+    "tooltip": "Topic clusters and similar-user picks."
+  },
+  "showcase_growth": {
+    "label": "Growth Engine",
+    "tooltip": "Scores, trends, and posting opportunities."
+  },
+  "showcase_multi": {
+    "label": "Multi-platform ingestion",
+    "tooltip": "Instagram, Facebook, Twitter, and Pinterest normalized feeds."
+  },
+  "multi_instagram": {
+    "label": "Instagram",
+    "tooltip": "Curated Instagram recovery cards."
+  },
+  "multi_facebook": {
+    "label": "Facebook",
+    "tooltip": "Curated Facebook recovery cards."
+  },
+  "multi_twitter": {
+    "label": "Twitter",
+    "tooltip": "Curated Twitter recovery cards."
+  },
+  "multi_pinterest": {
+    "label": "Pinterest",
+    "tooltip": "Curated Pinterest recovery cards."
+  },
+  "publish_ready": {
+    "label": "Publish Ready",
+    "tooltip": "Public release checklist for CrashoutRecovery v16."
+  },
+  "publish_banner": {
+    "label": "Ready for Public Release",
+    "tooltip": "CrashoutRecovery v16 — routing, APIs, and intelligence layers are launch-ready."
+  },
+  "nav_section_discover": {
+    "label": "Discover",
+    "tooltip": "Public landing and feeds."
+  },
+  "nav_section_creator": {
+    "label": "Creator",
+    "tooltip": "Dashboard, earnings, and growth."
+  },
+  "nav_section_intel": {
+    "label": "Intelligence",
+    "tooltip": "Recommendations and topic tools."
+  },
+  "nav_section_multi": {
+    "label": "Multi-platform",
+    "tooltip": "Instagram, Facebook, Twitter, Pinterest."
+  },
+  "nav_section_ops": {
+    "label": "Ops",
+    "tooltip": "Staff console and publish checklist."
+  },
+  "badge_engagement": {
+    "label": "Engagement",
+    "tooltip": "Engagement score for this clip."
+  },
+  "badge_recommended": {
+    "label": "Recommended",
+    "tooltip": "Recommended score for this clip."
+  },
+  "badge_ad": {
+    "label": "Sponsored",
+    "tooltip": "Ad injection marker."
+  },
+  "badge_normalized": {
+    "label": "Normalized",
+    "tooltip": "Unified envelope card."
   }
 }

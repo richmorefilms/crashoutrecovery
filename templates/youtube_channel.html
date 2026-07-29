@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}YouTube Channel — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main youtube-page youtube-page--channel">
+  <header class="youtube-page-header">
+    <h1 class="youtube-page-title" data-ui-copy="youtube_channel">{{ uc.youtube_channel.label }}</h1>
+    <p class="youtube-page-desc" data-ui-copy="youtube_channel" data-ui-field="tooltip">{{ uc.youtube_channel.tooltip }}</p>
+  </header>
+  <div id="youtube-channel-root" class="youtube-detail" aria-live="polite"
+       data-channel-id="{{ channel_id }}"></div>
+  <p id="youtube-channel-error" class="unified-feed-error" hidden role="alert"></p>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/youtube-channel.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutYouTubeChannel?.mount?.("#youtube-channel-root");
+  });
+</script>
+{% endblock %}

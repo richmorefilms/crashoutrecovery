@@ -1,8 +1,11 @@
 from app import create_app
 from app.config import HOST, PORT
 
-# App factory registers all routers (auth, youtube, stories, ads, TikTok, …).
-# TikTok routes live in app/tiktok_routes.py and are included inside create_app().
+# App factory registers all routers (auth, youtube, stories, ads, TikTok, feed, oauth, creator, …).
+# TikTok: app/tiktok_routes.py → /api/tiktok/*
+# YouTube: app/youtube_routes.py → /api/youtube/* (including GET /api/youtube/feed)
+# Unified feed: app/feed_routes.py → /api/feed/*
+# Router include lives in create_app() — do not double-register here with a second prefix.
 app = create_app()
 
 if __name__ == "__main__":

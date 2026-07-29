@@ -15,6 +15,10 @@ LIMIT_COMPOSE = "compose"
 LIMIT_STAFF_VIEW = "staff_view"
 LIMIT_STAFF_MODIFY = "staff_modify"
 
+# API endpoint governance (v15) — user_id + endpoint windows
+API_ENDPOINT_LIMIT = 120
+API_ENDPOINT_WINDOW_SECONDS = 60
+
 # Configurable policies
 USER_COMPOSE_LIMIT = 30
 USER_COMPOSE_WINDOW_SECONDS = 5 * 60
@@ -132,17 +136,28 @@ def _active_window(
 
 
 def check_rate_limit(
-    subject_id: str,
+    subject_id: str | int,
     limit_type: str,
     *,
     policy: RateLimitPolicy | None = None,
     path: Path | None = None,
     staff_id_for_audit: int | None = None,
-) -> RateLimitSnapshot:
+    max_count: int | None = None,
+    window_seconds: int | None = None,
+) -> RateLimitSnapshot | bool:
     """
-    Verify the subject is under the limit for this window.
-    Does not increment. Uses BEGIN IMMEDIATE for a consistent read.
+    Phase F: check_rate_limit(subject_id: str, limit_type) -> RateLimitSnapshot | raises.
+    v15 governance: check_rate_limit(user_id: int, endpoint) -> bool (True if allowed).
     """
+    if isinstance(subject_id, int):
+        return _check_user_endpoint_allowed(
+            subject_id,
+            limit_type,
+            path=path,
+            max_count=max_count or API_ENDPOINT_LIMIT,
+            window_seconds=window_seconds or API_ENDPOINT_WINDOW_SECONDS,
+        )
+
     resolved = policy or _default_policy(limit_type)
     now = int(time.time())
     conn = open_connection(path)
@@ -204,13 +219,27 @@ def check_rate_limit(
 
 
 def increment_rate_limit(
-    subject_id: str,
+    subject_id: str | int,
     limit_type: str,
     *,
     policy: RateLimitPolicy | None = None,
     path: Path | None = None,
-) -> RateLimitSnapshot:
-    """Increment the active window counter (or open a new window)."""
+    max_count: int | None = None,
+    window_seconds: int | None = None,
+) -> RateLimitSnapshot | int:
+    """
+    Phase F: increment_rate_limit(subject_id: str, limit_type) -> RateLimitSnapshot.
+    v15 governance: increment_rate_limit(user_id: int, endpoint) -> new count.
+    """
+    if isinstance(subject_id, int):
+        return _increment_user_endpoint(
+            subject_id,
+            limit_type,
+            path=path,
+            max_count=max_count or API_ENDPOINT_LIMIT,
+            window_seconds=window_seconds or API_ENDPOINT_WINDOW_SECONDS,
+        )
+
     resolved = policy or _default_policy(limit_type)
     now = int(time.time())
     conn = open_connection(path)
@@ -253,8 +282,83 @@ def increment_rate_limit(
         conn.close()
 
 
+def _endpoint_window_start(now: int, window_seconds: int) -> int:
+    return now - (now % window_seconds)
+
+
+def _check_user_endpoint_allowed(
+    user_id: int,
+    endpoint: str,
+    *,
+    path: Path | None = None,
+    max_count: int = API_ENDPOINT_LIMIT,
+    window_seconds: int = API_ENDPOINT_WINDOW_SECONDS,
+) -> bool:
+    now = int(time.time())
+    window_start = _endpoint_window_start(now, window_seconds)
+    conn = open_connection(path)
+    try:
+        row = conn.execute(
+            """
+            SELECT count FROM endpoint_rate_limits
+            WHERE user_id = ? AND endpoint = ? AND window_start = ?
+            """,
+            (user_id, endpoint, window_start),
+        ).fetchone()
+        if row is None:
+            return True
+        return int(row["count"]) < max_count
+    finally:
+        conn.close()
+
+
+def _increment_user_endpoint(
+    user_id: int,
+    endpoint: str,
+    *,
+    path: Path | None = None,
+    max_count: int = API_ENDPOINT_LIMIT,
+    window_seconds: int = API_ENDPOINT_WINDOW_SECONDS,
+) -> int:
+    _ = max_count
+    now = int(time.time())
+    window_start = _endpoint_window_start(now, window_seconds)
+    conn = open_connection(path)
+    try:
+        conn.execute("BEGIN IMMEDIATE")
+        row = conn.execute(
+            """
+            SELECT id, count FROM endpoint_rate_limits
+            WHERE user_id = ? AND endpoint = ? AND window_start = ?
+            """,
+            (user_id, endpoint, window_start),
+        ).fetchone()
+        if row is None:
+            conn.execute(
+                """
+                INSERT INTO endpoint_rate_limits (user_id, endpoint, count, window_start)
+                VALUES (?, ?, 1, ?)
+                """,
+                (user_id, endpoint, window_start),
+            )
+            count = 1
+        else:
+            count = int(row["count"]) + 1
+            conn.execute(
+                "UPDATE endpoint_rate_limits SET count = ? WHERE id = ?",
+                (count, int(row["id"])),
+            )
+        conn.commit()
+        return count
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+
 def reset_rate_limit_windows(*, path: Path | None = None) -> None:
-    """Clear rate-limit windows (test helper)."""
+    """Clear Phase F rate-limit windows (test helper)."""
     conn = open_connection(path)
     try:
         conn.execute("BEGIN IMMEDIATE")
@@ -265,6 +369,68 @@ def reset_rate_limit_windows(*, path: Path | None = None) -> None:
         raise
     finally:
         conn.close()
+
+
+def reset_rate_limits(*, path: Path | None = None) -> None:
+    """Clear Phase F windows and v15 endpoint counters."""
+    reset_rate_limit_windows(path=path)
+    conn = open_connection(path)
+    try:
+        conn.execute("BEGIN IMMEDIATE")
+        conn.execute("DELETE FROM endpoint_rate_limits")
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
+
+
+def enforce_endpoint_rate_limit(
+    user_id: int,
+    endpoint: str,
+    *,
+    path: Path | None = None,
+    max_count: int | None = None,
+    window_seconds: int | None = None,
+):
+    """
+    Check + increment endpoint limit. Returns JSONResponse when blocked, else None.
+    Envelope: { ok: false, reason: "rate_limit_exceeded" }
+    """
+    from fastapi.responses import JSONResponse
+
+    limit = max_count or API_ENDPOINT_LIMIT
+    window = window_seconds or API_ENDPOINT_WINDOW_SECONDS
+    allowed = check_rate_limit(
+        int(user_id),
+        endpoint,
+        path=path,
+        max_count=limit,
+        window_seconds=window,
+    )
+    if not allowed:
+        return JSONResponse(
+            {
+                "ok": False,
+                "reason": "rate_limit_exceeded",
+                "platform": "crashout",
+                "lane": "rate_limit",
+                "title": "Rate Limit Exceeded",
+                "items": [],
+                "count": 0,
+                "meta": {"endpoint": endpoint, "user_id": int(user_id)},
+            },
+            status_code=429,
+        )
+    increment_rate_limit(
+        int(user_id),
+        endpoint,
+        path=path,
+        max_count=limit,
+        window_seconds=window,
+    )
+    return None
 
 
 def log_abuse_event(

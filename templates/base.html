@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Crashout Recovery — friendly redirects when impulses run hot. Adults 18+.">
+  <meta name="description" content="Crashout Recovery — unified creator intelligence for adults 18+.">
   <title>{% block title %}{{ app_name }}{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/crashout-recovery.css">
   <script async src="https://www.tiktok.com/embed.js"></script>
   {% block head %}{% endblock %}
 </head>
-<body class="crashout-layout--full">
+<body class="crashout-layout--full v16-body">
   <div class="page-ambient" aria-hidden="true">
     <span class="ambient-orb ambient-orb--gold"></span>
     <span class="ambient-orb ambient-orb--blue"></span>
@@ -38,6 +38,7 @@
         <span class="app-nav-toggle-bars" aria-hidden="true"></span>
       </button>
       <div class="app-header-actions">
+        <a class="app-help-btn app-help-btn--link" href="/public" data-ui-copy="public_home">Public</a>
         <a class="app-help-btn app-help-btn--link" href="/ops" target="_blank" rel="noopener">Plain guide</a>
         <button type="button" class="app-help-btn" id="ops-help-open" aria-haspopup="dialog" aria-controls="ops-help-modal">
           Help / Ops
@@ -87,6 +88,68 @@
       <button type="button" class="app-nav-drawer-close" id="app-nav-drawer-close" aria-label="Close">×</button>
     </div>
     <ul class="app-nav-drawer-list">
+      <li class="app-nav-drawer-section" data-ui-copy="nav_section_discover">Discover</li>
+      <li>
+        <a class="app-nav-drawer-link" href="/public" data-ui-copy="public_home">Public Home</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/feed/all" data-ui-copy="unified_feed">Unified Feed</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/feed/trending" data-ui-copy="trending_feed">Trending</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/feed/recommended" data-ui-copy="recommended_feed">Recommended</a>
+      </li>
+      <li class="app-nav-drawer-section" data-ui-copy="nav_section_creator">Creator</li>
+      <li>
+        <a class="app-nav-drawer-link" href="/creator/dashboard" data-ui-copy="creator_hub">Creator Dashboard</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/earnings" data-ui-copy="creator_earnings">Earnings</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/growth/score" data-ui-copy="growth_score">Growth Score</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/growth/trends" data-ui-copy="growth_trends">Growth Trends</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/growth/opportunities" data-ui-copy="growth_opportunities">Opportunities</a>
+      </li>
+      <li class="app-nav-drawer-section" data-ui-copy="nav_section_intel">Intelligence</li>
+      <li>
+        <a class="app-nav-drawer-link" href="/recommendations" data-ui-copy="recommendations">Recommendations</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/topics" data-ui-copy="topic_clusters">Topic Clusters</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/topic-graph" data-ui-copy="topic_graph">Topic Graph</a>
+      </li>
+      <li class="app-nav-drawer-section" data-ui-copy="nav_section_multi">Multi-platform</li>
+      <li>
+        <a class="app-nav-drawer-link" href="/multi/instagram" data-ui-copy="multi_instagram">Instagram</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/multi/facebook" data-ui-copy="multi_facebook">Facebook</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/multi/twitter" data-ui-copy="multi_twitter">Twitter</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/multi/pinterest" data-ui-copy="multi_pinterest">Pinterest</a>
+      </li>
+      <li class="app-nav-drawer-section" data-ui-copy="nav_section_ops">Ops</li>
+      <li>
+        <a class="app-nav-drawer-link" href="/staff/overview" data-ui-copy="staff_overview">Staff Overview</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/publish" data-ui-copy="publish_ready">Publish Ready</a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/" data-ui-copy="nav_home">Recovery Home</a>
+      </li>
       <li>
         <a class="app-nav-drawer-link" href="/ops" target="_blank" rel="noopener">Plain guide</a>
       </li>
@@ -106,9 +169,6 @@
       </li>
       <li>
         <a class="app-nav-drawer-link" href="/profile" data-ui-copy="auth">Account</a>
-      </li>
-      <li>
-        <a class="app-nav-drawer-link" href="/feed" data-ui-copy="tiktok_recovery_feed">TikTok Recovery Feed</a>
       </li>
       <li>
         <span class="app-nav-drawer-badge app-badge">18+</span>
@@ -193,7 +253,6 @@
   </footer>
 
   {% block scripts %}{% endblock %}
-  {# Global scripts after page block so child templates do not drop them #}
   <script src="/static/auth.js"></script>
   <script src="/static/tiktok-auth.js"></script>
   <script src="/static/nav-drawer.js"></script>

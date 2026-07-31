@@ -5,7 +5,7 @@
 
 /* ── Design tokens ── */
 :root {
-  --font-display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Orbitron", "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, "Cascadia Code", "SF Mono", monospace;
 
@@ -39,22 +39,32 @@
   --feed-max: 48rem;
   --sidebar-max: 22rem;
 
-  /* Classic hip-hop shell — dark + gold */
-  --app-bg: #08080a;
-  --app-bg-elevated: #0e0e11;
-  --app-bg-pattern: #121214;
-  --app-surface: #131316;
-  --app-surface-raised: #1a1a1f;
-  --app-surface-glass: rgba(19, 19, 22, 0.92);
-  --app-text: #f4f4f5;
-  --app-text-muted: #9b9ba6;
-  --app-border: #2a2a30;
-  --app-border-subtle: #1f1f24;
-  --app-accent: #f5c518;
-  --app-accent-dim: #c9a227;
-  --app-accent-glow: rgba(245, 197, 24, 0.35);
-  --app-neon: #f5c518;
-  --app-neon-dim: #c9a227;
+  /* Retro-Arcade Creator Hub palette */
+  --crashout-bg: #0a0a0f;
+  --crashout-panel: #11111a;
+  --crashout-accent: #ff00ff;
+  --crashout-accent2: #00eaff;
+  --crashout-text: #e0e0ff;
+  --crashout-subtext: #9a9ab3;
+  --crashout-glow: 0 0 12px var(--crashout-accent), 0 0 24px var(--crashout-accent);
+  --crashout-glow2: 0 0 12px var(--crashout-accent2), 0 0 24px var(--crashout-accent2);
+
+  /* App shell — arcade dark + neon (gold kept as warn/legacy) */
+  --app-bg: var(--crashout-bg);
+  --app-bg-elevated: #0e0e14;
+  --app-bg-pattern: #12121a;
+  --app-surface: var(--crashout-panel);
+  --app-surface-raised: #161622;
+  --app-surface-glass: rgba(17, 17, 26, 0.92);
+  --app-text: var(--crashout-text);
+  --app-text-muted: var(--crashout-subtext);
+  --app-border: #2a2a3a;
+  --app-border-subtle: #1a1a28;
+  --app-accent: var(--crashout-accent2);
+  --app-accent-dim: #00b8cc;
+  --app-accent-glow: rgba(0, 234, 255, 0.35);
+  --app-neon: var(--crashout-accent);
+  --app-neon-dim: #cc00cc;
   --app-danger: #e85d4c;
   --app-warn: #f5c518;
 
@@ -83,14 +93,19 @@ body {
   font-family: var(--font-sans);
   font-size: 1rem;
   line-height: 1.65;
-  color: var(--app-text);
-  background-color: var(--app-bg);
+  color: var(--crashout-text);
+  background-color: var(--crashout-bg);
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 197, 24, 0.08), transparent),
-    radial-gradient(circle at 100% 0%, rgba(245, 197, 24, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 0% 100%, rgba(126, 184, 212, 0.03) 0%, transparent 35%);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 0, 255, 0.12), transparent),
+    radial-gradient(circle at 100% 0%, rgba(0, 234, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 0% 100%, rgba(255, 0, 255, 0.05) 0%, transparent 35%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
 }
 
 h1, h2, h3, h4, p, ul, ol {
@@ -7784,10 +7799,10 @@ body.auth-modal-open .compose-fab {
    ========================================================================== */
 
 :root {
-  --hg-blue: #3f8cff;
-  --hg-purple: #7a3fff;
-  --hg-glow: rgba(63, 140, 255, 0.35);
-  --hg-glow-strong: rgba(122, 63, 255, 0.45);
+  --hg-blue: #00eaff;
+  --hg-purple: #ff00ff;
+  --hg-glow: rgba(0, 234, 255, 0.35);
+  --hg-glow-strong: rgba(255, 0, 255, 0.45);
 }
 
 /* Topic Clusters — micro-motion + structured sample rows */
@@ -7996,9 +8011,37 @@ body.auth-modal-open .compose-fab {
 }
 
 /* ==========================================================================
-   Crashout Lab — collapsible ops drawer group (Hybrid Glow v2)
+   Retro-Arcade Creator Hub — nav icons, Lab, Creator Home, panels
    ========================================================================== */
 
+.neon-title,
+.console-title,
+.home-title,
+.app-nav-drawer-title {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+}
+
+.app-nav-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.nav-icon {
+  flex: 0 0 auto;
+  width: 1.35rem;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(0, 234, 255, 0.35));
+}
+
+.app-nav-drawer-link:hover .nav-icon {
+  filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.55));
+}
+
+/* Crashout Lab — neon magenta / cyan */
 .crashout-lab {
   list-style: none;
   margin: 0.35rem 0 0;
@@ -8009,60 +8052,61 @@ body.auth-modal-open .compose-fab {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.65rem;
-  padding: 0.7rem 0.85rem;
-  border: 1px solid rgba(122, 63, 255, 0.35);
-  border-radius: 10px;
-  background: linear-gradient(145deg, #15151a, #0f0f11 50%, #15151a);
-  color: #fff;
-  font-size: 0.95rem;
+  padding: 12px 16px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(255, 0, 255, 0.35);
+  border-radius: 8px;
+  background: var(--crashout-panel);
+  color: var(--crashout-text);
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition:
-    box-shadow 0.25s ease,
+    box-shadow 0.3s ease,
     transform 0.2s ease,
     border-color 0.2s ease;
 }
 
 .lab-toggle:hover,
 .lab-toggle:focus-visible {
-  border-color: rgba(63, 140, 255, 0.7);
-  box-shadow: 0 0 18px rgba(63, 140, 255, 0.35);
-  transform: translateY(-1px) scale(1.01);
+  border-color: rgba(255, 0, 255, 0.75);
+  box-shadow: var(--crashout-glow);
+  transform: scale(1.03);
   outline: none;
 }
 
-.lab-mark {
-  width: 0.65rem;
-  height: 0.65rem;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3f8cff, #7a3fff);
-  box-shadow: 0 0 10px rgba(122, 63, 255, 0.55);
+.lab-icon {
   flex: 0 0 auto;
+  font-size: 1.1rem;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.45));
 }
 
 .lab-title {
   flex: 1 1 auto;
   text-align: left;
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
 }
 
 .lab-arrow {
   display: inline-block;
-  color: #9ca3af;
+  color: var(--crashout-subtext);
   transition: transform 0.2s ease;
 }
 
 .lab-toggle.active .lab-arrow {
   transform: rotate(90deg);
-  color: #c7d2ff;
+  color: var(--crashout-accent2);
 }
 
 .lab-submenu {
   display: none;
   flex-direction: column;
-  gap: 0.35rem;
-  margin: 0.55rem 0 0.25rem;
-  padding: 0.15rem 0 0 0.35rem;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding-left: 12px;
 }
 
 .lab-submenu:not([hidden]) {
@@ -8072,11 +8116,11 @@ body.auth-modal-open .compose-fab {
 .lab-item {
   display: block;
   width: 100%;
-  padding: 0.55rem 0.75rem;
+  padding: 8px 12px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   background: transparent;
-  color: #c7c9d1;
+  color: var(--crashout-subtext);
   text-align: left;
   text-decoration: none;
   font: inherit;
@@ -8084,17 +8128,15 @@ body.auth-modal-open .compose-fab {
   cursor: pointer;
   transition:
     background 0.2s ease,
-    box-shadow 0.25s ease,
-    border-color 0.2s ease,
+    box-shadow 0.3s ease,
     color 0.2s ease;
 }
 
 .lab-item:hover,
 .lab-item:focus-visible {
-  color: #fff;
-  background: rgba(63, 140, 255, 0.1);
-  border-color: rgba(63, 140, 255, 0.35);
-  box-shadow: 0 0 12px rgba(63, 140, 255, 0.28);
+  color: var(--crashout-text);
+  background: #222;
+  box-shadow: var(--crashout-glow2);
   outline: none;
 }
 
@@ -8102,15 +8144,98 @@ body.auth-modal-open .compose-fab {
   appearance: none;
 }
 
+/* Creator Home — landing grid */
+.creator-home {
+  padding: 2rem 0 2.5rem;
+  text-align: center;
+}
+
+.home-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  margin: 0 0 0.5rem;
+}
+
+.home-subtitle {
+  font-size: 1.15rem;
+  color: var(--crashout-subtext);
+  margin: 0 0 2rem;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.home-card {
+  background: var(--crashout-panel);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  text-decoration: none;
+  color: var(--crashout-text);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease,
+    border-color 0.2s ease;
+}
+
+.home-card:hover {
+  transform: scale(1.05);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(0, 234, 255, 0.55);
+}
+
+.home-card .card-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.4));
+}
+
+.home-card .title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
+.home-card .muted {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.9rem;
+}
+
+/* Arcade dashboard panels */
+.creator-hub-page--arcade .console-panel,
+.creator-hub-page--arcade .creator-hub-section.unified-card {
+  background: var(--crashout-panel);
+  border: 1px solid rgba(255, 0, 255, 0.22);
+  box-shadow: 0 0 18px rgba(255, 0, 255, 0.08);
+}
+
+.creator-hub-page--arcade .console-panel:hover,
+.creator-hub-page--arcade .neon-card:hover {
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(0, 234, 255, 0.45);
+}
+
+.creator-hub-page--arcade .v16-dial {
+  box-shadow: inset 0 0 24px rgba(0, 234, 255, 0.12);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lab-toggle,
   .lab-arrow,
-  .lab-item {
+  .lab-item,
+  .home-card {
     transition: none;
   }
 
   .lab-toggle:hover,
-  .lab-toggle:focus-visible {
+  .lab-toggle:focus-visible,
+  .home-card:hover {
     transform: none;
   }
 }

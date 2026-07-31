@@ -143,6 +143,14 @@
     "label": "Creator Dashboard",
     "tooltip": "Linked channels and analytics for your creator account."
   },
+  "creator_home": {
+    "label": "Creator Home",
+    "tooltip": "Jump into your retro-arcade creator hub."
+  },
+  "creator_home_hero": {
+    "label": "Welcome to Crashout Recovery",
+    "tooltip": "Your retro-arcade creator hub"
+  },
   "platform_youtube": {
     "label": "YouTube",
     "tooltip": "YouTube clip"

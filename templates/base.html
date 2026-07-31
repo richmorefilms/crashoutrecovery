@@ -7,7 +7,7 @@
   <title>{% block title %}{{ app_name }}{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/crashout-recovery.css">
   <script async src="https://www.tiktok.com/embed.js"></script>
   {% block head %}{% endblock %}
@@ -89,58 +89,133 @@
     <ul class="app-nav-drawer-list">
       <li class="app-nav-drawer-section" data-ui-copy="nav_section_discover">Discover</li>
       <li>
-        <a class="app-nav-drawer-link" href="/public" data-ui-copy="public_home">Public Home</a>
+        <a class="app-nav-drawer-link" href="/creator/dashboard">
+          <span class="nav-icon" aria-hidden="true">🏠</span>
+          <span data-ui-copy="creator_home">Creator Home</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/feed/all" data-ui-copy="unified_feed">Unified Feed</a>
+        <a class="app-nav-drawer-link" href="/public">
+          <span class="nav-icon" aria-hidden="true">🌐</span>
+          <span data-ui-copy="public_home">Public Home</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/feed/trending" data-ui-copy="trending_feed">Trending</a>
+        <a class="app-nav-drawer-link" href="/feed/all">
+          <span class="nav-icon" aria-hidden="true">🔥</span>
+          <span data-ui-copy="unified_feed">Unified Feed</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/feed/recommended" data-ui-copy="recommended_feed">Recommended</a>
+        <a class="app-nav-drawer-link" href="/feed/trending">
+          <span class="nav-icon" aria-hidden="true">⚡</span>
+          <span data-ui-copy="trending_feed">Trending</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/feed/recommended">
+          <span class="nav-icon" aria-hidden="true">✨</span>
+          <span data-ui-copy="recommended_feed">Recommended</span>
+        </a>
       </li>
       <li class="app-nav-drawer-section" data-ui-copy="nav_section_creator">Creator</li>
       <li>
-        <a class="app-nav-drawer-link" href="/creator/dashboard" data-ui-copy="creator_hub">Creator Dashboard</a>
+        <a class="app-nav-drawer-link" href="/creator/dashboard">
+          <span class="nav-icon" aria-hidden="true">🎮</span>
+          <span data-ui-copy="creator_hub">Creator Dashboard</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/earnings" data-ui-copy="creator_earnings">Earnings</a>
+        <a class="app-nav-drawer-link" href="/earnings">
+          <span class="nav-icon" aria-hidden="true">💰</span>
+          <span data-ui-copy="creator_earnings">Earnings</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/growth/score" data-ui-copy="growth_score">Growth Score</a>
+        <a class="app-nav-drawer-link" href="/growth/score">
+          <span class="nav-icon" aria-hidden="true">📈</span>
+          <span data-ui-copy="growth_score">Growth Score</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/growth/trends" data-ui-copy="growth_trends">Growth Trends</a>
+        <a class="app-nav-drawer-link" href="/growth/trends">
+          <span class="nav-icon" aria-hidden="true">📊</span>
+          <span data-ui-copy="growth_trends">Growth Trends</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/growth/opportunities" data-ui-copy="growth_opportunities">Opportunities</a>
+        <a class="app-nav-drawer-link" href="/growth/opportunities">
+          <span class="nav-icon" aria-hidden="true">🎯</span>
+          <span data-ui-copy="growth_opportunities">Opportunities</span>
+        </a>
       </li>
       <li class="app-nav-drawer-section" data-ui-copy="nav_section_intel">Intelligence</li>
       <li>
-        <a class="app-nav-drawer-link" href="/recommendations" data-ui-copy="recommendations">Recommendations</a>
+        <a class="app-nav-drawer-link" href="/recommendations">
+          <span class="nav-icon" aria-hidden="true">💡</span>
+          <span data-ui-copy="recommendations">Recommendations</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/topics" data-ui-copy="topic_clusters">Topic Clusters</a>
+        <a class="app-nav-drawer-link" href="/topics">
+          <span class="nav-icon" aria-hidden="true">🧠</span>
+          <span data-ui-copy="topic_clusters">Topic Clusters</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/topic-graph" data-ui-copy="topic_graph">Topic Graph</a>
+        <a class="app-nav-drawer-link" href="/topic-graph">
+          <span class="nav-icon" aria-hidden="true">🕸️</span>
+          <span data-ui-copy="topic_graph">Topic Graph</span>
+        </a>
       </li>
       <li class="app-nav-drawer-section" data-ui-copy="nav_section_multi">Multi-platform</li>
       <li>
-        <a class="app-nav-drawer-link" href="/multi/instagram" data-ui-copy="multi_instagram">Instagram</a>
+        <a class="app-nav-drawer-link" href="/multi/instagram">
+          <span class="nav-icon" aria-hidden="true">📸</span>
+          <span data-ui-copy="multi_instagram">Instagram</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/multi/facebook" data-ui-copy="multi_facebook">Facebook</a>
+        <a class="app-nav-drawer-link" href="/multi/facebook">
+          <span class="nav-icon" aria-hidden="true">📘</span>
+          <span data-ui-copy="multi_facebook">Facebook</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/multi/twitter" data-ui-copy="multi_twitter">Twitter</a>
+        <a class="app-nav-drawer-link" href="/multi/twitter">
+          <span class="nav-icon" aria-hidden="true">🐦</span>
+          <span data-ui-copy="multi_twitter">Twitter</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/multi/pinterest" data-ui-copy="multi_pinterest">Pinterest</a>
+        <a class="app-nav-drawer-link" href="/multi/pinterest">
+          <span class="nav-icon" aria-hidden="true">📌</span>
+          <span data-ui-copy="multi_pinterest">Pinterest</span>
+        </a>
       </li>
       <li>
-        <a class="app-nav-drawer-link" href="/" data-ui-copy="nav_home">Recovery Home</a>
+        <a class="app-nav-drawer-link" href="/">
+          <span class="nav-icon" aria-hidden="true">🛡️</span>
+          <span data-ui-copy="nav_home">Recovery Home</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/oauth/youtube">
+          <span class="nav-icon" aria-hidden="true">📺</span>
+          <span data-ui-copy="youtube_connect">YouTube Tools</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/monetization">
+          <span class="nav-icon" aria-hidden="true">💎</span>
+          <span data-ui-copy="monetization_lanes">Monetization</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/publish">
+          <span class="nav-icon" aria-hidden="true">🚀</span>
+          <span data-ui-copy="publish_ready">Publish Ready</span>
+        </a>
       </li>
       <li class="sidebar-section crashout-lab">
         <button
@@ -149,10 +224,9 @@
           id="crashout-lab-toggle"
           aria-expanded="false"
           aria-controls="crashout-lab-submenu"
-          data-ui-copy="crashout_lab"
         >
-          <span class="lab-mark" aria-hidden="true"></span>
-          <span class="lab-title">Crashout Lab</span>
+          <span class="lab-icon" aria-hidden="true">⚗️</span>
+          <span class="lab-title" data-ui-copy="crashout_lab">Crashout Lab</span>
           <span class="lab-arrow" aria-hidden="true">▸</span>
         </button>
         <div class="lab-submenu" id="crashout-lab-submenu" hidden>

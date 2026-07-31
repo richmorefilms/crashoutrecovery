@@ -11,18 +11,19 @@
   }
 
   function renderCluster(item) {
-    const samples = Array.isArray(item.items)
+    const sampleRows = Array.isArray(item.items)
       ? item.items
           .slice(0, 3)
           .map((i) => i.title || i.id)
           .filter(Boolean)
-          .join(" · ")
+          .map((title) => `<div>${escapeHtml(title)}</div>`)
+          .join("")
       : "";
     return `
-      <article class="v16-showcase-card" data-id="${escapeHtml(item.id || item.topic)}">
-        <h3>${escapeHtml(item.topic || "topic")}</h3>
-        <p>${escapeHtml(String(item.count ?? 0))} clips</p>
-        <p>${escapeHtml(samples)}</p>
+      <article class="v16-showcase-card topic-card neon-card unified-card" data-id="${escapeHtml(item.id || item.topic)}">
+        <h3 class="neon-title title">${escapeHtml(item.topic || "topic")}</h3>
+        <p class="muted">${escapeHtml(String(item.count ?? 0))} clips</p>
+        <div class="content-block">${sampleRows}</div>
       </article>`;
   }
 

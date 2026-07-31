@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ctaCardEl.classList.remove("hidden");
     ctaCardEl.innerHTML = `
-      <article class="feed-post feed-post--momentum" data-tone="${tone}">
+      <article class="feed-post feed-post--momentum unified-card neon-card" data-tone="${tone}">
         <header class="feed-post-header">
           <div class="feed-post-avatar" aria-hidden="true">You</div>
           <div class="feed-post-identity">
@@ -421,7 +421,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderComposerError(message) {
     ctaCardEl.classList.remove("hidden");
     ctaCardEl.innerHTML = `
-      <article class="feed-post feed-post--momentum">
+      <article class="feed-post feed-post--momentum unified-card neon-card">
         <p class="crashout-cta-title">Could not load safer rewrites</p>
         <p class="crashout-cta-body">${escapeHtml(message)}</p>
         <p class="feed-post-micro">Your text has not been saved. Try again when you are ready.</p>

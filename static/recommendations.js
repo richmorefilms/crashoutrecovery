@@ -26,17 +26,17 @@
     const thumb = item.thumbnail ? escapeHtml(item.thumbnail) : "";
     const topics = Array.isArray(item.topics) ? item.topics.slice(0, 3).join(", ") : "";
     const media = thumb
-      ? `<img class="unified-card-thumb" src="${thumb}" alt="" loading="lazy">`
+      ? `<img class="unified-card-thumb thumbnail neon-border" src="${thumb}" alt="" loading="lazy">`
       : `<div class="unified-card-placeholder" aria-hidden="true"></div>`;
     return `
-      <article class="unified-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
+      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
         ${media}
         <div class="unified-card-body">
           <div class="unified-card-badges">
             <span class="platform-badge">${escapeHtml(item.platform || "rec")}</span>
             <span class="score-badge score-badge--recommended">${escapeHtml(uiLabel("badge_recommended", "Recommended"))}</span>
           </div>
-          <h3 class="unified-card-title">${title}</h3>
+          <h3 class="unified-card-title title neon-title">${title}</h3>
           ${channel ? `<p class="unified-card-channel">${channel}</p>` : ""}
           ${topics ? `<p class="unified-card-score">${escapeHtml(topics)}</p>` : ""}
         </div>

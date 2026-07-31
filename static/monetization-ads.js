@@ -49,19 +49,19 @@
     const cta = ad.cta ? escapeHtml(ad.cta) : "#";
     const payout = ad.payout_per_click != null ? Number(ad.payout_per_click).toFixed(2) : "0.00";
     const media = image
-      ? `<img class="unified-card-thumb" src="${image}" alt="" loading="lazy">`
+      ? `<img class="unified-card-thumb thumbnail neon-border" src="${image}" alt="" loading="lazy">`
       : `<div class="unified-card-placeholder" aria-hidden="true"></div>`;
     return `
-      <article class="unified-card" data-ad-id="${escapeHtml(String(ad.id))}">
+      <article class="unified-card neon-card" data-ad-id="${escapeHtml(String(ad.id))}">
         ${media}
         <div class="unified-card-body">
           <span class="platform-badge">Ad</span>
-          <h3 class="unified-card-title">${title}</h3>
+          <h3 class="unified-card-title title neon-title">${title}</h3>
           <p class="unified-card-score">$${payout} / click</p>
-          <button type="button" class="feed-cta" data-ad-click="${escapeHtml(String(ad.id))}">
+          <button type="button" class="feed-cta neon-btn" data-ad-click="${escapeHtml(String(ad.id))}">
             Open / earn
           </button>
-          ${ad.cta ? `<a class="feed-cta feed-cta--ghost" href="${cta}" target="_blank" rel="noopener">Visit</a>` : ""}
+          ${ad.cta ? `<a class="feed-cta feed-cta--ghost btn neon-btn" href="${cta}" target="_blank" rel="noopener">Visit</a>` : ""}
         </div>
       </article>`;
   }

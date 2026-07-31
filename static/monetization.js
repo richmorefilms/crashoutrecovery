@@ -132,7 +132,7 @@
 
   function renderSponsoredDrama(item, rank) {
     return `
-      <article class="feed-item feed-item--sponsored feed-item--headline" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--sponsored feed-item--headline unified-card neon-card" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           ${sponsoredBadge(item.label)}
           <p class="sponsored-by">by ${escapeHtml(item.sponsor)}</p>
@@ -149,7 +149,7 @@
 
   function renderSponsoredMoment(item, rank) {
     return `
-      <article class="feed-item feed-item--sponsored feed-item--video" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--sponsored feed-item--video unified-card neon-card" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-media" data-tone="${item.tone}">
           <span class="feed-item-duration">${escapeHtml(item.duration)}</span>
           <span class="feed-item-play" aria-hidden="true">▶</span>
@@ -172,7 +172,7 @@
 
   function renderSponsoredHeadline(item, rank) {
     return `
-      <article class="feed-item feed-item--sponsored feed-item--headline" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--sponsored feed-item--headline unified-card neon-card" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           ${sponsoredBadge(item.label)}
           <h4 class="feed-item-headline">${escapeHtml(item.headline)}</h4>
@@ -188,7 +188,7 @@
 
   function renderSponsoredPost(item, rank) {
     return `
-      <article class="feed-item feed-item--sponsored feed-item--post feed-item--sponsored-deep" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--sponsored feed-item--post feed-item--sponsored-deep unified-card neon-card" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           ${sponsoredBadge(item.label)}
           <p class="feed-community-author">${escapeHtml(item.author)}</p>
@@ -204,7 +204,7 @@
 
   function renderSponsoredSignal(item, rank) {
     return `
-      <article class="feed-item feed-item--sponsored feed-item--headline" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--sponsored feed-item--headline unified-card neon-card" data-sponsored="true" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           ${sponsoredBadge(item.label)}
           ${item.premium ? premiumBadge() : ""}

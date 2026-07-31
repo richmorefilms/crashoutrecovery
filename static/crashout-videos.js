@@ -288,7 +288,7 @@
          </div>`;
 
     return `
-      <article class="crashout-video-card${compact ? " crashout-video-card--compact" : ""}" data-video-id="${escapeHtml(clip.id)}">
+      <article class="crashout-video-card unified-card neon-card${compact ? " crashout-video-card--compact" : ""}" data-video-id="${escapeHtml(clip.id)}">
         ${media}
         <div class="crashout-video-meta">
           <p class="crashout-video-title">${escapeHtml(clip.title)}</p>
@@ -310,7 +310,7 @@
       ? `<button type="button" class="moments-thumb-set-id" data-video-manual="${escapeHtml(item.videoId || item.id)}">Set ID</button>`
       : "";
     return `
-      <div class="moments-thumb-card">
+      <div class="moments-thumb-card unified-card neon-card">
         <button type="button" class="moments-thumb-tile${item.youtubeId ? "" : " moments-thumb-tile--search"}" data-video-play="${escapeHtml(item.videoId || item.id)}" aria-label="Play ${escapeHtml(item.title)}">
           <span class="moments-thumb-media"${thumb}></span>
           <span class="moments-thumb-badge">${escapeHtml(badge)}</span>
@@ -334,7 +334,7 @@
             <p class="moments-video-grid-desc">Tap a thumbnail to watch. Creators can add videos with a search query or manual YouTube ID.</p>
           </div>
         </header>
-        <div class="moments-video-grid">
+        <div class="moments-video-grid grid">
           ${items.map(thumbTileHtml).join("")}
         </div>
       </section>`;
@@ -353,7 +353,7 @@
     const limit = options.limit || clips.length;
     container.innerHTML = `
       ${heading}
-      <div class="crashout-video-shelf-grid">
+      <div class="crashout-video-shelf-grid grid">
         ${clips.slice(0, limit).map((clip) => cardHtml(clip, { compact: true })).join("")}
       </div>`;
   }

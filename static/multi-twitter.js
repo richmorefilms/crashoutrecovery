@@ -16,14 +16,14 @@
     const title = escapeHtml(item.title || "Recovery clip");
     const channel = escapeHtml(item.channel || "");
     return `
-      <article class="unified-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
+      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
         <div class="unified-card-placeholder" aria-hidden="true"></div>
         <div class="unified-card-body">
           <div class="unified-card-badges">
             <span class="platform-badge platform-badge--twitter">twitter</span>
             <span class="norm-badge">${escapeHtml(uiLabel("badge_normalized", "Normalized"))}</span>
           </div>
-          <h3 class="unified-card-title">${title}</h3>
+          <h3 class="unified-card-title title neon-title">${title}</h3>
           ${channel ? `<p class="unified-card-channel">${channel}</p>` : ""}
         </div>
       </article>`;

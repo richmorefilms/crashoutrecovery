@@ -26,9 +26,9 @@
           .join(", ")
       : "";
     return `
-      <article class="v16-showcase-card" data-id="${escapeHtml(item.id)}">
-        <h3>${escapeHtml(item.title || item.kind || "Opportunity")}</h3>
-        <p>${escapeHtml(values)}</p>
+      <article class="v16-showcase-card neon-card unified-card" data-id="${escapeHtml(item.id)}">
+        <h3 class="neon-title title">${escapeHtml(item.title || item.kind || "Opportunity")}</h3>
+        <p class="muted">${escapeHtml(values)}</p>
       </article>`;
   }
 

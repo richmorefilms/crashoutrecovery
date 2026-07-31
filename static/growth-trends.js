@@ -20,9 +20,9 @@
 
   function renderDay(item) {
     return `
-      <article class="unified-card" data-id="${escapeHtml(item.id)}">
+      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}">
         <div class="unified-card-body">
-          <h3 class="unified-card-title">${escapeHtml(item.date || "")}</h3>
+          <h3 class="unified-card-title title neon-title">${escapeHtml(item.date || "")}</h3>
           <p class="unified-card-channel">Views ${escapeHtml(String(item.views ?? 0))} · Likes ${escapeHtml(String(item.likes ?? 0))}</p>
           <p class="unified-card-score">Earnings ${escapeHtml(String(item.earnings ?? 0))} · Recs ${escapeHtml(String(item.recommendations_served ?? 0))}</p>
         </div>

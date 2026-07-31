@@ -8,7 +8,7 @@
     const cards = root.querySelectorAll(".v16-showcase-card");
     cards.forEach((card, i) => {
       card.style.animationDelay = `${i * 60}ms`;
-      card.classList.add("unified-card");
+      card.classList.add("unified-card", "neon-card");
     });
   }
 

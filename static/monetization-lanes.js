@@ -26,9 +26,9 @@
       root.innerHTML = items
         .map(
           (lane) => `
-        <article class="creator-hub-card" data-lane-id="${escapeHtml(lane.id)}">
-          <h3>${escapeHtml(lane.title || lane.id)}</h3>
-          <p class="creator-hub-meta">${escapeHtml(lane.description || "")}</p>
+        <article class="creator-hub-card neon-card unified-card" data-lane-id="${escapeHtml(lane.id)}">
+          <h3 class="neon-title title">${escapeHtml(lane.title || lane.id)}</h3>
+          <p class="creator-hub-meta muted">${escapeHtml(lane.description || "")}</p>
         </article>`
         )
         .join("");

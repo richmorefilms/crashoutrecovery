@@ -53,7 +53,7 @@
     const wrap = document.createElement("section");
     wrap.className = "creator-block creator-tiktok-block";
     wrap.innerHTML = `
-      <h3 class="creator-block-title" data-ui-copy="tiktok_publish">${uiLabel(
+      <h3 class="creator-block-title title neon-title" data-ui-copy="tiktok_publish">${uiLabel(
         "tiktok_publish",
         "Publish to TikTok"
       )}</h3>
@@ -65,7 +65,7 @@
         <button type="button" class="creator-locked-btn" id="tiktok-upload-btn" data-ui-copy="tiktok_publish">
           ${uiLabel("tiktok_publish", "Publish to TikTok")}
         </button>
-        <a class="feed-cta feed-cta--ghost" href="/auth/tiktok/login">${uiLabel(
+        <a class="feed-cta feed-cta--ghost btn neon-btn" href="/auth/tiktok/login">${uiLabel(
           "tiktok_connect",
           "Connect TikTok"
         )}</a>

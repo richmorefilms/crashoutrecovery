@@ -49,18 +49,18 @@
       </div>`;
     } else if (cover) {
       media = `<a class="tiktok-cover-link" href="${share || "#"}" target="_blank" rel="noopener">
-        <img src="${cover}" alt="" class="tiktok-cover">
+        <img src="${cover}" alt="" class="tiktok-cover thumbnail neon-border">
       </a>`;
     } else {
       media = `<div class="tiktok-placeholder" aria-hidden="true"></div>`;
     }
 
     const openBtn = share
-      ? `<a class="feed-cta" href="${share}" target="_blank" rel="noopener">${openLabel}</a>`
+      ? `<a class="feed-cta btn neon-btn" href="${share}" target="_blank" rel="noopener">${openLabel}</a>`
       : "";
 
     return `
-      <article class="feed-item feed-item--tiktok tiktok-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
+      <article class="feed-item feed-item--tiktok tiktok-card unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
         <div class="feed-item-content">
           <header class="feed-post-card-header">
             <span class="feed-community-avatar" aria-hidden="true">T</span>
@@ -69,14 +69,14 @@
               <p class="feed-community-meta">${tag || escapeHtml(uiLabel("tiktok_profile", "TikTok"))}</p>
             </div>
           </header>
-          <h3 class="feed-item-title">${title}</h3>
+          <h3 class="feed-item-title title neon-title">${title}</h3>
           ${description ? `<p class="feed-item-post-text">${description}</p>` : ""}
           ${tag ? `<p class="tiktok-card-hashtag">${tag}</p>` : ""}
           <p class="tiktok-card-creator">${author}</p>
           ${media}
           <div class="tiktok-card-actions">
             ${openBtn}
-            <button type="button" class="feed-cta feed-cta--ghost" data-tiktok-share
+            <button type="button" class="feed-cta feed-cta--ghost neon-btn" data-tiktok-share
               data-caption="${escapeHtml(item.description || item.title || "")}"
               data-hashtags="${escapeHtml(hashtagRaw || "recovery")}"
               ${share ? `data-video-url="${share}"` : ""}>

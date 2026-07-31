@@ -16,16 +16,16 @@
     const thumb = item.thumbnail ? escapeHtml(item.thumbnail) : "";
     const href = item.id ? `/youtube/video/${encodeURIComponent(item.id)}` : "#";
     const media = thumb
-      ? `<img class="unified-card-thumb" src="${thumb}" alt="" loading="lazy">`
+      ? `<img class="unified-card-thumb thumbnail neon-border" src="${thumb}" alt="" loading="lazy">`
       : `<div class="unified-card-placeholder" aria-hidden="true"></div>`;
 
     return `
-      <article class="unified-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
+      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
         <a class="unified-card-link" href="${href}">
           ${media}
           <div class="unified-card-body">
             <span class="platform-badge platform-badge--youtube">YouTube</span>
-            <h3 class="unified-card-title">${title}</h3>
+            <h3 class="unified-card-title title neon-title">${title}</h3>
             ${channel ? `<p class="unified-card-channel">${channel}</p>` : ""}
           </div>
         </a>

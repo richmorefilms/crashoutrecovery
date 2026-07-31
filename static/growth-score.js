@@ -52,7 +52,7 @@
       const score = Number(item.growth_score ?? data.meta?.growth_score ?? 0);
       const comps = item.components || {};
       root.innerHTML = `
-        <section class="console-panel">
+        <section class="console-panel unified-card neon-card">
           <div class="v16-dial" style="--score:${Math.max(0, Math.min(100, score))}">
             <div class="v16-dial-inner">
               <span class="v16-dial-value">${escapeHtml(String(score))}</span>
@@ -60,8 +60,8 @@
             </div>
           </div>
         </section>
-        <section class="console-panel">
-          <h3>Components</h3>
+        <section class="console-panel unified-card neon-card">
+          <h3 class="title neon-title">Components</h3>
           <ul class="youtube-detail-stats">
             <li>History: ${escapeHtml(String(comps.history ?? "—"))}</li>
             <li>Earnings: ${escapeHtml(String(comps.earnings ?? "—"))}</li>

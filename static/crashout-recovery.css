@@ -7623,3 +7623,374 @@ body.auth-modal-open .compose-fab {
   .v16-hero-title { max-width: none; }
   .unified-feed-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   Hybrid Glow — subtle blue/violet energy over the dark v16 canvas
+   ========================================================================== */
+
+.page-container {
+  position: relative;
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.page-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  box-shadow: 0 0 40px rgba(63, 140, 255, 0.15);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+
+.neon-card,
+.hybrid-glow .unified-card,
+.hybrid-glow .console-panel,
+.hybrid-glow .creator-hub-card,
+.hybrid-glow .v16-showcase-card {
+  position: relative;
+  overflow: hidden;
+  padding: 1.25rem;
+  border: 1px solid rgba(122, 63, 255, 0.35);
+  border-radius: 14px;
+  background: linear-gradient(145deg, #15151a 0%, #101015 40%, #15151a 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.neon-card:hover,
+.hybrid-glow .unified-card:hover,
+.hybrid-glow .console-panel:hover,
+.hybrid-glow .creator-hub-card:hover,
+.hybrid-glow .v16-showcase-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  border-color: rgba(63, 140, 255, 0.6);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.6),
+    0 0 22px rgba(122, 63, 255, 0.35);
+}
+
+.neon-card::before,
+.hybrid-glow .unified-card::before,
+.hybrid-glow .console-panel::before,
+.hybrid-glow .creator-hub-card::before,
+.hybrid-glow .v16-showcase-card::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  opacity: 0.9;
+  background: radial-gradient(
+    circle at top left,
+    rgba(122, 63, 255, 0.18),
+    transparent 55%
+  );
+}
+
+.neon-card > *,
+.hybrid-glow .unified-card > *,
+.hybrid-glow .console-panel > *,
+.hybrid-glow .creator-hub-card > *,
+.hybrid-glow .v16-showcase-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.neon-title,
+.hybrid-glow .console-title,
+.hybrid-glow .unified-feed-title,
+.hybrid-glow .unified-card-title,
+.hybrid-glow .console-panel > h2,
+.hybrid-glow .v16-showcase-card > h3 {
+  margin-bottom: 0.35rem;
+  color: transparent;
+  background: linear-gradient(135deg, #fff 0%, #c7d2ff 40%, #7a3fff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hybrid-glow .muted,
+.hybrid-glow .console-desc,
+.hybrid-glow .unified-feed-desc,
+.hybrid-glow .creator-hub-note,
+.hybrid-glow .creator-hub-meta {
+  color: #9ca3af;
+}
+
+.neon-border,
+.hybrid-glow .unified-card-thumb {
+  border: 1px solid rgba(63, 140, 255, 0.55);
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.8);
+}
+
+.neon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, #3f8cff 0%, #7a3fff 100%);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.neon-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.95);
+  opacity: 0.92;
+}
+
+/* ==========================================================================
+   Hybrid Glow Premium Layer — denser pages: topics, ads, feed, earnings
+   ========================================================================== */
+
+:root {
+  --hg-blue: #3f8cff;
+  --hg-purple: #7a3fff;
+  --hg-glow: rgba(63, 140, 255, 0.35);
+  --hg-glow-strong: rgba(122, 63, 255, 0.45);
+}
+
+/* Topic Clusters — micro-motion + structured sample rows */
+.feed-page--topic-clusters .v16-showcase-card.neon-card:hover,
+.feed-page--topic-clusters .topic-card.neon-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(63, 140, 255, 0.75);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.55),
+    0 0 22px var(--hg-glow);
+}
+
+.feed-page--topic-clusters .topic-card .content-block > div,
+.feed-page--topic-clusters .v16-showcase-card .content-block > div {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.feed-page--topic-clusters .topic-card .content-block > div:last-child,
+.feed-page--topic-clusters .v16-showcase-card .content-block > div:last-child {
+  border-bottom: 0;
+}
+
+/* Ad Inventory + unified cards — payout emphasis + tappable hover */
+.hybrid-glow .unified-card-score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: transparent;
+  background: linear-gradient(135deg, var(--hg-blue), var(--hg-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hybrid-glow .unified-card.neon-card:hover,
+.monetization-page .unified-card.neon-card:hover,
+.feed-page--unified .unified-card.neon-card:hover,
+.feed-page--trending .unified-card.neon-card:hover,
+.feed-page--recommended .unified-card.neon-card:hover {
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.6),
+    0 0 22px var(--hg-glow);
+}
+
+/* Unified Feed — depth, thumbnail lift, CTA motion */
+.hybrid-glow .unified-card.neon-card {
+  background: linear-gradient(145deg, #15151a, #0f0f11 40%, #15151a);
+}
+
+.thumbnail.neon-border,
+.hybrid-glow .unified-card-thumb.thumbnail {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.thumbnail.neon-border:hover,
+.hybrid-glow .unified-card-thumb.thumbnail:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 18px rgba(63, 140, 255, 0.45);
+}
+
+.neon-btn,
+.feed-item-cta-btn.neon-btn,
+.moments-add-video-btn.neon-btn {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.neon-btn:hover,
+.feed-item-cta-btn.neon-btn:hover,
+.moments-add-video-btn.neon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 18px var(--hg-glow-strong);
+  opacity: 1;
+}
+
+/* YouTube detail — glow frame around media */
+.youtube-detail,
+.youtube-detail-card {
+  border-radius: 14px;
+  box-shadow: 0 0 22px rgba(63, 140, 255, 0.25);
+}
+
+.youtube-detail iframe,
+.youtube-detail-card iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+.youtube-detail-card .youtube-detail-thumb {
+  margin-bottom: 1rem;
+}
+
+/* Creator Earnings — accent rail + value emphasis */
+.creator-hub-list.grid .unified-card,
+.monetization-page--v16 .creator-hub-list .unified-card {
+  border-left: 3px solid var(--hg-purple);
+}
+
+.creator-earnings-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--hg-blue);
+}
+
+/* Staff Flags / Overview — moderation authority cue */
+.feed-page--staff-flags .console-panel.neon-card,
+.staff-console .staff-flag-card.neon-card {
+  border-left: 4px solid #ff4d4d;
+}
+
+/* Topic Graph — node hover presence */
+.topic-graph-node:hover,
+.topic-graph-node.unified-card:hover {
+  filter: drop-shadow(0 0 8px var(--hg-purple));
+}
+
+/* OAuth — safe / premium connect card */
+.auth-page--youtube-oauth .auth-page-card.neon-card,
+.oauth-card.neon-card {
+  border-left: 4px solid var(--hg-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-card:hover,
+  .hybrid-glow .unified-card:hover,
+  .hybrid-glow .console-panel:hover,
+  .hybrid-glow .creator-hub-card:hover,
+  .hybrid-glow .v16-showcase-card:hover,
+  .feed-page--topic-clusters .v16-showcase-card.neon-card:hover,
+  .feed-page--topic-clusters .topic-card.neon-card:hover,
+  .thumbnail.neon-border:hover,
+  .hybrid-glow .unified-card-thumb.thumbnail:hover,
+  .neon-btn:hover,
+  .feed-item-cta-btn.neon-btn:hover,
+  .moments-add-video-btn.neon-btn:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Premium Glow v2 — global frame + spotlight cards
+   ========================================================================== */
+
+.page-container {
+  position: relative;
+  background: rgba(10, 10, 15, 0.35);
+  border-radius: 18px;
+}
+
+.page-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  pointer-events: none;
+  box-shadow: 0 0 60px rgba(63, 140, 255, 0.25);
+}
+
+.neon-card,
+.hybrid-glow .unified-card,
+.hybrid-glow .console-panel,
+.hybrid-glow .creator-hub-card,
+.hybrid-glow .v16-showcase-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.neon-card:hover,
+.hybrid-glow .unified-card:hover,
+.hybrid-glow .console-panel:hover,
+.hybrid-glow .creator-hub-card:hover,
+.hybrid-glow .v16-showcase-card:hover,
+.feed-page--topic-clusters .v16-showcase-card.neon-card:hover,
+.feed-page--topic-clusters .topic-card.neon-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 0 28px rgba(122, 63, 255, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-card,
+  .hybrid-glow .unified-card,
+  .hybrid-glow .console-panel,
+  .hybrid-glow .creator-hub-card,
+  .hybrid-glow .v16-showcase-card {
+    transition: none;
+  }
+
+  .neon-card:hover,
+  .hybrid-glow .unified-card:hover,
+  .hybrid-glow .console-panel:hover,
+  .hybrid-glow .creator-hub-card:hover,
+  .hybrid-glow .v16-showcase-card:hover,
+  .feed-page--topic-clusters .v16-showcase-card.neon-card:hover,
+  .feed-page--topic-clusters .topic-card.neon-card:hover {
+    transform: none;
+    box-shadow: 0 0 18px rgba(122, 63, 255, 0.25);
+  }
+}

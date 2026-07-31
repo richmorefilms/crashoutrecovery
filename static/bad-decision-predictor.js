@@ -220,7 +220,7 @@
          <button type="button" class="predictor-action" data-predictor-action="copy-safe">Copy safe move</button>`;
 
     el.innerHTML = `
-      <article class="predictor-panel-inner" data-tone="${analysis.tone}" data-spike="${analysis.spikeLevel}">
+      <article class="predictor-panel-inner unified-card neon-card" data-tone="${analysis.tone}" data-spike="${analysis.spikeLevel}">
         <header class="predictor-header">
           <div class="predictor-header-text">
             <p class="predictor-kicker">${escapeHtml(uiLabel("bad_decision_predictor", "Risk check"))}</p>
@@ -374,7 +374,7 @@
       : truncate(lastAnalysis.safeMove, 48);
 
     return `
-      <article class="feed-item feed-item--predictor-summary" data-tone="${lastAnalysis.tone}">
+      <article class="feed-item feed-item--predictor-summary unified-card neon-card" data-tone="${lastAnalysis.tone}">
         <div class="feed-item-content">
           <span class="monetization-badge monetization-badge--premium">${escapeHtml(uiLabel("bad_decision_predictor", "Risk check"))}</span>
           <h4 class="feed-item-headline">Your spike: ${escapeHtml(spike)}</h4>

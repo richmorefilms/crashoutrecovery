@@ -190,7 +190,7 @@
     return `
       <footer class="feed-item-cta-footer" aria-label="Crashout CTA">
         <p class="feed-item-cta-text">${escapeHtml(text)}</p>
-        <button type="button" class="feed-item-cta-btn" data-cta-key="${item.cta}" data-item-id="${item.id}">
+        <button type="button" class="feed-item-cta-btn neon-btn" data-cta-key="${item.cta}" data-item-id="${item.id}">
           Take this move
         </button>
       </footer>`;
@@ -200,8 +200,7 @@
     const categoryLabel = VIDEO_CATEGORIES[item.category] || item.category;
     const boosted = activeTone && scoreItem(item, activeTone) >= 3;
     return `
-      <article
-        class="feed-item feed-item--video${boosted ? " feed-item--boosted" : ""}"
+      <article class="feed-item feed-item--video unified-card neon-card${boosted ? " feed-item--boosted" : ""}"
         data-id="${item.id}"
         data-tone="${item.tone}"
         data-lane="video"
@@ -227,8 +226,7 @@
     const categoryLabel = HEADLINE_CATEGORIES[item.category] || item.category;
     const boosted = activeTone && scoreItem(item, activeTone) >= 3;
     return `
-      <article
-        class="feed-item feed-item--headline${boosted ? " feed-item--boosted" : ""}"
+      <article class="feed-item feed-item--headline unified-card neon-card${boosted ? " feed-item--boosted" : ""}"
         data-id="${item.id}"
         data-tone="${item.tone}"
         data-lane="headline"

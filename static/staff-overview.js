@@ -64,9 +64,9 @@
       if (empty) empty.hidden = true;
       if (errEl) errEl.hidden = true;
       root.innerHTML = `
-        <article class="unified-card">
+        <article class="unified-card neon-card">
           <div class="unified-card-body">
-            <h3 class="unified-card-title">Platform health</h3>
+            <h3 class="unified-card-title neon-title title">Platform health</h3>
             <p class="unified-card-channel">Creators ${escapeHtml(String(item.total_creators ?? 0))} · Items ${escapeHtml(String(item.total_items ?? 0))}</p>
             <p class="unified-card-score">Ads ${escapeHtml(String(item.total_ads_served ?? 0))} · Recs ${escapeHtml(String(item.recommendation_volume ?? 0))} · Latency ${escapeHtml(String(item.ranking_latency_ms ?? "—"))}ms</p>
           </div>

@@ -9,7 +9,7 @@
     const items = root.querySelectorAll(".publish-checklist li");
     items.forEach((li, i) => {
       li.style.animationDelay = `${i * 50}ms`;
-      li.classList.add("unified-card");
+      li.classList.add("unified-card", "neon-card");
     });
   }
 

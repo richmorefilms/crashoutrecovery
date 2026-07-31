@@ -278,7 +278,7 @@
     feedCommunityList.innerHTML = items
       .map(
         (item) => `
-        <article class="feed-community-item feed-community-item--${item.type}" data-tone="${item.tone}">
+        <article class="feed-community-item feed-community-item--${item.type} unified-card neon-card" data-tone="${item.tone}">
           <header class="feed-community-item-header">
             <span class="feed-community-avatar" aria-hidden="true">${item.author.charAt(1).toUpperCase()}</span>
             <div>

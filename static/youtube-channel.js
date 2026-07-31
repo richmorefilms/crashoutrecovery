@@ -25,9 +25,9 @@
     const views = stats.view_count != null ? Number(stats.view_count) : "—";
 
     return `
-      <article class="youtube-detail-card">
-        ${thumb ? `<img class="youtube-detail-thumb youtube-detail-thumb--channel" src="${thumb}" alt="">` : ""}
-        <h2 class="youtube-detail-title">${title}</h2>
+      <article class="youtube-detail-card unified-card neon-card">
+        ${thumb ? `<img class="youtube-detail-thumb youtube-detail-thumb--channel thumbnail neon-border" src="${thumb}" alt="">` : ""}
+        <h2 class="youtube-detail-title neon-title">${title}</h2>
         <ul class="youtube-detail-stats">
           <li>Subscribers: ${escapeHtml(String(subs))}</li>
           <li>Videos: ${escapeHtml(String(videos))}</li>

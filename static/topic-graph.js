@@ -20,8 +20,8 @@
       )
       .join("");
     return `
-      <article class="topic-graph-node" data-id="${escapeHtml(item.id)}">
-        <h3>${escapeHtml(item.id)}</h3>
+      <article class="topic-graph-node unified-card neon-card" data-id="${escapeHtml(item.id)}">
+        <h3 class="title neon-title">${escapeHtml(item.id)}</h3>
         <div class="topic-graph-edges">${chips || "<span class='creator-hub-meta'>No edges</span>"}</div>
       </article>`;
   }

@@ -39,14 +39,14 @@
         : "";
     const platform = String(item.platform || "unknown").toLowerCase();
     const media = thumb
-      ? `<img class="unified-card-thumb" src="${thumb}" alt="" loading="lazy">`
+      ? `<img class="unified-card-thumb thumbnail neon-border" src="${thumb}" alt="" loading="lazy">`
       : `<div class="unified-card-placeholder" aria-hidden="true"></div>`;
     return `
-      <article class="unified-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
+      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
         ${media}
         <div class="unified-card-body">
           <span class="platform-badge platform-badge--${escapeHtml(platform)}">${escapeHtml(platform)}</span>
-          <h3 class="unified-card-title">${title}</h3>
+          <h3 class="unified-card-title title neon-title">${title}</h3>
           ${channel ? `<p class="unified-card-channel">${channel}</p>` : ""}
           <p class="unified-card-score">Score ${escapeHtml(String(score))}${escapeHtml(boost)}</p>
         </div>

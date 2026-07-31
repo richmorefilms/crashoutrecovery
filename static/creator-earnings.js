@@ -50,10 +50,11 @@
       const data = await load(creatorId);
       const item = (data.items && data.items[0]) || data.meta || {};
       root.innerHTML = `
-        <article class="creator-hub-card unified-card">
+        <article class="creator-hub-card unified-card neon-card">
           <div class="unified-card-body">
+            <p class="creator-earnings-value">$${escapeHtml(String(item.total_earnings ?? 0))}</p>
             <ul class="youtube-detail-stats">
-              <li>Total earnings: $${escapeHtml(String(item.total_earnings ?? 0))}</li>
+              <li>Total earnings</li>
               <li>Clicks: ${escapeHtml(String(item.clicks ?? 0))}</li>
               <li>RPM: ${escapeHtml(String(item.rpm ?? 0))}</li>
               <li>Last payout: ${escapeHtml(String(item.last_payout || "—"))}</li>

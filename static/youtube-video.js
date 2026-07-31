@@ -27,9 +27,9 @@
     const comments = stats.comment_count != null ? Number(stats.comment_count) : "—";
 
     return `
-      <article class="youtube-detail-card">
-        ${thumb ? `<img class="youtube-detail-thumb" src="${thumb}" alt="">` : ""}
-        <h2 class="youtube-detail-title">${title}</h2>
+      <article class="youtube-detail-card unified-card neon-card">
+        ${thumb ? `<img class="youtube-detail-thumb thumbnail neon-border" src="${thumb}" alt="">` : ""}
+        <h2 class="youtube-detail-title neon-title">${title}</h2>
         <p class="youtube-detail-channel">${channel}</p>
         ${published ? `<p class="youtube-detail-meta">${published}</p>` : ""}
         <ul class="youtube-detail-stats">

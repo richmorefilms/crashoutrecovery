@@ -51,10 +51,10 @@
         const title = escapeHtml(ch.title || "Channel");
         const id = escapeHtml(ch.id || "");
         const href = ch.id ? `/youtube/channel/${encodeURIComponent(ch.id)}` : "#";
-        return `<article class="creator-hub-card unified-card">
+        return `<article class="creator-hub-card unified-card neon-card">
           <div class="unified-card-body">
             <span class="platform-badge platform-badge--youtube">YouTube</span>
-            <h3 class="unified-card-title"><a href="${href}">${title}</a></h3>
+            <h3 class="unified-card-title title neon-title"><a href="${href}">${title}</a></h3>
             <p class="creator-hub-meta">${id}</p>
           </div>
         </article>`;
@@ -71,7 +71,7 @@
     }
     const item = (data.items && data.items[0]) || {};
     root.innerHTML = `
-      <article class="creator-hub-card">
+      <article class="creator-hub-card unified-card neon-card">
         <ul class="youtube-detail-stats">
           <li>Views: ${escapeHtml(String(item.views ?? 0))}</li>
           <li>Watch time (min): ${escapeHtml(String(item.watch_time_minutes ?? 0))}</li>
@@ -106,8 +106,8 @@
               .slice(0, 3)
               .join(", ")
           : "";
-        return `<article class="creator-hub-card">
-          <h3>${escapeHtml(item.title || item.kind || "Opportunity")}</h3>
+        return `<article class="creator-hub-card unified-card neon-card">
+          <h3 class="title neon-title">${escapeHtml(item.title || item.kind || "Opportunity")}</h3>
           <p class="creator-hub-meta">${escapeHtml(values)}</p>
         </article>`;
       })

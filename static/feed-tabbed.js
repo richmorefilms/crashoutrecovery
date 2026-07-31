@@ -401,7 +401,7 @@
     return `
       <footer class="feed-item-cta-footer" aria-label="Crashout CTA">
         <p class="feed-item-cta-text">${escapeHtml(text)}</p>
-        <button type="button" class="feed-item-cta-btn" data-cta-key="${item.cta}" data-item-id="${item.id}">
+        <button type="button" class="feed-item-cta-btn neon-btn" data-cta-key="${item.cta}" data-item-id="${item.id}">
           Take this move
         </button>
       </footer>`;
@@ -411,7 +411,7 @@
     const label = categoryLabel("signals", item.category);
     const boosted = activeTone && window.CrashoutWorldSignals?.scoreItem(item, activeTone) >= 3;
     return `
-      <article class="feed-item feed-item--signal feed-item--pulse-${item.pulse}${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--signal feed-item--pulse-${item.pulse} unified-card neon-card${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           <header class="world-signal-card-header">
             <span class="world-signal-pulse world-signal-pulse--${item.pulse}" aria-label="Pulse ${item.pulse}"></span>
@@ -438,7 +438,7 @@
       ? ` data-video-play="${escapeHtml(item.videoId)}" role="button" tabindex="0" aria-label="Play clip"`
       : "";
     return `
-      <article class="feed-item feed-item--video${item.videoId ? " feed-item--video-live" : ""}${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--video unified-card neon-card${item.videoId ? " feed-item--video-live" : ""}${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-media${thumb ? " feed-item-media--thumb" : ""}" data-tone="${item.tone}"${mediaStyle}${playAttr}>
           <span class="feed-item-duration">${escapeHtml(item.duration)}</span>
           <span class="feed-item-play" aria-hidden="true">▶</span>
@@ -453,7 +453,7 @@
           ${
             item.videoId
               ? `<div class="feed-item-video-actions">
-                   <button type="button" class="feed-item-cta-btn feed-item-cta-btn--play" data-video-play="${escapeHtml(item.videoId)}">Play clip</button>
+                   <button type="button" class="feed-item-cta-btn feed-item-cta-btn--play neon-btn" data-video-play="${escapeHtml(item.videoId)}">Play clip</button>
                  </div>`
               : ""
           }
@@ -466,7 +466,7 @@
     const label = categoryLabel(lane, item.category);
     const boosted = activeTone && scoreItem(item, activeTone) >= 3;
     return `
-      <article class="feed-item feed-item--headline${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--headline unified-card neon-card${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           <span class="feed-item-category feed-item-category--headline">${escapeHtml(label)}</span>
           <h4 class="feed-item-headline">${escapeHtml(item.headline)}</h4>
@@ -481,7 +481,7 @@
     const label = categoryLabel("posts", item.category);
     const boosted = activeTone && scoreItem(item, activeTone) >= 3;
     return `
-      <article class="feed-item feed-item--post${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
+      <article class="feed-item feed-item--post unified-card neon-card${boosted ? " feed-item--boosted" : ""}" data-id="${item.id}" data-tone="${item.tone}" style="animation-delay:${rank * 50}ms">
         <div class="feed-item-content">
           <header class="feed-post-card-header">
             <span class="feed-community-avatar" aria-hidden="true">${item.author.charAt(1).toUpperCase()}</span>
@@ -655,13 +655,13 @@
     if (actions) {
       if (lane === "moments") {
         actions.hidden = false;
-        actions.innerHTML = `<button type="button" class="moments-add-video-btn" data-video-manual-open>Add Video</button>`;
+        actions.innerHTML = `<button type="button" class="moments-add-video-btn neon-btn" data-video-manual-open>Add Video</button>`;
       } else if (lane === "tiktok") {
         actions.hidden = false;
         // Keep feed link; append mode badge for curated vs live
         actions.innerHTML = `
           <span class="tiktok-feed-mode-badge" id="tiktok-feed-mode-badge-main" hidden></span>
-          <a class="moments-add-video-btn" href="/feed">${uiLabel(
+          <a class="moments-add-video-btn btn neon-btn" href="/feed">${uiLabel(
             "tiktok_recovery_feed",
             "TikTok Recovery Feed"
           )}</a>`;

@@ -2,16 +2,16 @@
 {% block title %}Monetization — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main monetization-page">
-  <header class="youtube-page-header">
-    <h1 class="youtube-page-title" data-ui-copy="monetization_lanes">{{ uc.monetization_lanes.label }}</h1>
+<main class="app-main monetization-page page-container hybrid-glow">
+  <header class="youtube-page-header console-header">
+    <h1 class="youtube-page-title neon-title" data-ui-copy="monetization_lanes">{{ uc.monetization_lanes.label }}</h1>
     <p class="youtube-page-desc" data-ui-copy="monetization_lanes" data-ui-field="tooltip">{{ uc.monetization_lanes.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta" href="/monetization/ads" data-ui-copy="monetization_ads">{{ uc.monetization_ads.label }}</a>
-      <a class="feed-cta feed-cta--ghost" href="/earnings" data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</a>
+      <a class="feed-cta neon-btn btn" href="/monetization/ads" data-ui-copy="monetization_ads">{{ uc.monetization_ads.label }}</a>
+      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/earnings" data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</a>
     </p>
   </header>
-  <div id="monetization-lanes-root" class="creator-hub-list" aria-live="polite"></div>
+  <div id="monetization-lanes-root" class="creator-hub-list grid" aria-live="polite"></div>
   <p id="monetization-lanes-error" class="unified-feed-error" hidden role="alert"></p>
 </main>
 {% endblock %}

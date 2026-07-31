@@ -2,16 +2,16 @@
 {% block title %}Trending — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--trending feed-page--v16">
+<main class="app-main feed-page feed-page--trending feed-page--v16 page-container hybrid-glow">
   <header class="unified-feed-header">
     <p class="v16-kicker" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</p>
-    <h1 class="unified-feed-title" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</h1>
+    <h1 class="unified-feed-title neon-title" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</h1>
     <p class="unified-feed-desc" data-ui-copy="trending_feed" data-ui-field="tooltip">{{ uc.trending_feed.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta feed-cta--ghost" href="/feed/all" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</a>
+      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/feed/all" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</a>
     </p>
   </header>
-  <div id="feed-trending-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="feed-trending-root" class="unified-feed-grid grid" aria-live="polite"></div>
   <div id="feed-trending-sentinel" class="feed-scroll-sentinel" aria-hidden="true"></div>
   <p id="feed-trending-loading" class="feed-loading-more" hidden>Loading more…</p>
   <p id="feed-trending-empty" class="unified-feed-empty" hidden>No trending clips yet.</p>

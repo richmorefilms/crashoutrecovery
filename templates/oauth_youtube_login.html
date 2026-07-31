@@ -2,14 +2,14 @@
 {% block title %}Connect YouTube — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main auth-page auth-page--youtube-oauth">
-  <section class="auth-page-card">
+<main class="app-main auth-page auth-page--youtube-oauth page-container hybrid-glow">
+  <section class="auth-page-card oauth-card unified-card neon-card">
     <h1 class="auth-page-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h1>
     <p class="auth-page-lede" data-ui-copy="youtube_connect" data-ui-field="tooltip">{{ uc.youtube_connect.tooltip }}</p>
     <div class="oauth-youtube-actions">
       <a
         id="oauth-youtube-login-btn"
-        class="feed-cta oauth-youtube-connect-btn"
+        class="feed-cta oauth-youtube-connect-btn neon-btn"
         href="/api/oauth/youtube/login"
         data-ui-copy="youtube_connect"
       >{{ uc.youtube_connect.label }}</a>

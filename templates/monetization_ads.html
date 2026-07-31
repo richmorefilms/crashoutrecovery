@@ -2,12 +2,12 @@
 {% block title %}Ad inventory — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main monetization-page" data-creator-id="">
-  <header class="youtube-page-header">
-    <h1 class="youtube-page-title" data-ui-copy="monetization_ads">{{ uc.monetization_ads.label }}</h1>
+<main class="app-main monetization-page page-container hybrid-glow" data-creator-id="">
+  <header class="youtube-page-header console-header">
+    <h1 class="youtube-page-title neon-title" data-ui-copy="monetization_ads">{{ uc.monetization_ads.label }}</h1>
     <p class="youtube-page-desc" data-ui-copy="monetization_ads" data-ui-field="tooltip">{{ uc.monetization_ads.tooltip }}</p>
   </header>
-  <div id="monetization-ads-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="monetization-ads-root" class="unified-feed-grid grid" aria-live="polite"></div>
   <p id="monetization-ads-status" class="creator-hub-note" role="status" hidden></p>
   <p id="monetization-ads-error" class="unified-feed-error" hidden role="alert"></p>
 </main>

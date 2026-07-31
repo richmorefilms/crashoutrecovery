@@ -2,9 +2,9 @@
 {% block title %}YouTube Video — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main youtube-page youtube-page--video">
+<main class="app-main youtube-page youtube-page--video page-container hybrid-glow">
   <header class="youtube-page-header">
-    <h1 class="youtube-page-title" data-ui-copy="youtube_video">{{ uc.youtube_video.label }}</h1>
+    <h1 class="youtube-page-title title neon-title" data-ui-copy="youtube_video">{{ uc.youtube_video.label }}</h1>
     <p class="youtube-page-desc" data-ui-copy="youtube_video" data-ui-field="tooltip">{{ uc.youtube_video.tooltip }}</p>
   </header>
   <div id="youtube-video-root" class="youtube-detail" aria-live="polite"

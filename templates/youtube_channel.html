@@ -2,9 +2,9 @@
 {% block title %}YouTube Channel — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main youtube-page youtube-page--channel">
+<main class="app-main youtube-page youtube-page--channel page-container hybrid-glow">
   <header class="youtube-page-header">
-    <h1 class="youtube-page-title" data-ui-copy="youtube_channel">{{ uc.youtube_channel.label }}</h1>
+    <h1 class="youtube-page-title title neon-title" data-ui-copy="youtube_channel">{{ uc.youtube_channel.label }}</h1>
     <p class="youtube-page-desc" data-ui-copy="youtube_channel" data-ui-field="tooltip">{{ uc.youtube_channel.tooltip }}</p>
   </header>
   <div id="youtube-channel-root" class="youtube-detail" aria-live="polite"

@@ -2,13 +2,13 @@
 {% block title %}Growth Score — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--growth-score growth-console" data-creator-id="{{ creator_id or '' }}">
+<main class="app-main feed-page feed-page--growth-score growth-console page-container hybrid-glow" data-creator-id="{{ creator_id or '' }}">
   <header class="console-header">
     <p class="v16-kicker" data-ui-copy="growth_score">{{ uc.growth_score.label }}</p>
-    <h1 class="console-title" data-ui-copy="growth_score">{{ uc.growth_score.label }}</h1>
+    <h1 class="console-title neon-title" data-ui-copy="growth_score">{{ uc.growth_score.label }}</h1>
     <p class="console-desc" data-ui-copy="growth_score" data-ui-field="tooltip">{{ uc.growth_score.tooltip }}</p>
   </header>
-  <div id="growth-score-root" class="console-grid" aria-live="polite"></div>
+  <div id="growth-score-root" class="console-grid grid" aria-live="polite"></div>
   <p id="growth-score-empty" class="unified-feed-empty" hidden>No growth score yet.</p>
   <p id="growth-score-error" class="unified-feed-error" hidden role="alert"></p>
 </main>

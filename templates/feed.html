@@ -6,13 +6,13 @@
 {% block content %}
 {% set uc = ui_copy or {} %}
 {# Alias of feed_tiktok.html for /feed #}
-<main class="app-main feed-page feed-page--tiktok">
+<main class="app-main feed-page feed-page--tiktok page-container hybrid-glow">
   <header class="tiktok-feed-header">
-    <h1 class="tiktok-feed-title" data-ui-copy="tiktok_recovery_feed">{{ uc.tiktok_recovery_feed.label }}</h1>
+    <h1 class="tiktok-feed-title title neon-title" data-ui-copy="tiktok_recovery_feed">{{ uc.tiktok_recovery_feed.label }}</h1>
     <p class="tiktok-feed-desc" data-ui-copy="tiktok_recovery_feed" data-ui-field="tooltip">{{ uc.tiktok_recovery_feed.tooltip }}</p>
     <p><a href="/?lane=tiktok">Open in main feed tab</a></p>
   </header>
-  <div id="tiktok-feed-root" class="tiktok-feed-root" aria-live="polite"></div>
+  <div id="tiktok-feed-root" class="tiktok-feed-root grid" aria-live="polite"></div>
 </main>
 {% endblock %}
 {% block scripts %}

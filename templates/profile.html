@@ -2,8 +2,8 @@
 {% block title %}Profile — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main profile-page">
-  <section class="profile-card">
+<main class="app-main profile-page page-container hybrid-glow">
+  <section class="profile-card unified-card neon-card">
     <h1 class="profile-title" data-ui-copy="auth">{{ uc.auth.label }}</h1>
     <div id="profile-crashout" class="profile-block">
       <p class="profile-label">Crashout</p>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="profile-actions">
-      <a class="tiktok-login-btn" href="/auth/tiktok/login" data-tiktok-oauth data-ui-copy="tiktok_connect" id="profile-tiktok-connect">
+      <a class="tiktok-login-btn btn neon-btn" href="/auth/tiktok/login" data-tiktok-oauth data-ui-copy="tiktok_connect" id="profile-tiktok-connect">
         {{ uc.tiktok_connect.label }}
       </a>
       <a class="auth-submit auth-submit--ghost" href="/">Back to feed</a>

@@ -2,17 +2,17 @@
 {% block title %}Unified Feed — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--unified feed-page--v16">
+<main class="app-main feed-page feed-page--unified feed-page--v16 page-container hybrid-glow">
   <header class="unified-feed-header">
     <p class="v16-kicker" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</p>
-    <h1 class="unified-feed-title" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h1>
+    <h1 class="unified-feed-title neon-title" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h1>
     <p class="unified-feed-desc" data-ui-copy="unified_feed" data-ui-field="tooltip">{{ uc.unified_feed.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta" href="/feed/trending" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</a>
-      <a class="feed-cta feed-cta--ghost" href="/feed/recommended" data-ui-copy="recommended_feed">{{ uc.recommended_feed.label }}</a>
+      <a class="feed-cta neon-btn btn" href="/feed/trending" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</a>
+      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/feed/recommended" data-ui-copy="recommended_feed">{{ uc.recommended_feed.label }}</a>
     </p>
   </header>
-  <div id="feed-all-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="feed-all-root" class="unified-feed-grid grid" aria-live="polite"></div>
   <div id="feed-all-sentinel" class="feed-scroll-sentinel" aria-hidden="true"></div>
   <p id="feed-all-loading" class="feed-loading-more" hidden>Loading more…</p>
   <p id="feed-all-empty" class="unified-feed-empty" hidden>No clips yet — check back soon.</p>

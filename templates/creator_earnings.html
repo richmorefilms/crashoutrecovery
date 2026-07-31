@@ -2,19 +2,19 @@
 {% block title %}Earnings — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main monetization-page monetization-page--v16" data-creator-id="{{ creator_id or '' }}">
+<main class="app-main monetization-page monetization-page--v16 page-container hybrid-glow" data-creator-id="{{ creator_id or '' }}">
   <header class="console-header">
     <p class="v16-kicker" data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</p>
-    <h1 class="console-title" data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</h1>
+    <h1 class="console-title neon-title" data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</h1>
     <p class="console-desc" data-ui-copy="creator_earnings" data-ui-field="tooltip">{{ uc.creator_earnings.tooltip }}</p>
   </header>
-  <div class="console-grid">
-    <section class="console-panel">
-      <h2 data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</h2>
-      <div id="creator-earnings-root" class="creator-hub-list" aria-live="polite"></div>
+  <div class="console-grid grid">
+    <section class="console-panel neon-card unified-card">
+      <h2 class="neon-title" data-ui-copy="creator_earnings">{{ uc.creator_earnings.label }}</h2>
+      <div id="creator-earnings-root" class="creator-hub-list grid" aria-live="polite"></div>
     </section>
-    <section class="console-panel">
-      <h2>Earnings chart</h2>
+    <section class="console-panel neon-card unified-card">
+      <h2 class="neon-title">Earnings chart</h2>
       <div id="creator-earnings-chart" class="v16-chart" aria-hidden="true"></div>
     </section>
   </div>

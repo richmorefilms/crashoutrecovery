@@ -2,8 +2,8 @@
 {% block title %}YouTube Linked — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main auth-page auth-page--youtube-oauth">
-  <section class="auth-page-card">
+<main class="app-main auth-page auth-page--youtube-oauth page-container hybrid-glow">
+  <section class="auth-page-card unified-card neon-card">
     <h1 class="auth-page-title" data-ui-copy="youtube_linked">{{ uc.youtube_linked.label }}</h1>
     <p id="oauth-youtube-status" class="auth-page-lede" role="status">Connecting…</p>
     <p id="oauth-youtube-error" class="unified-feed-error" hidden role="alert"></p>

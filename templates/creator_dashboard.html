@@ -2,16 +2,16 @@
 {% block title %}Creator Dashboard — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main creator-hub-page creator-hub-page--v16" data-creator-id="{{ creator_id or '' }}">
+<main class="app-main creator-hub-page creator-hub-page--v16 page-container hybrid-glow" data-creator-id="{{ creator_id or '' }}">
   <header class="console-header">
     <p class="v16-kicker" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</p>
-    <h1 class="console-title" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</h1>
+    <h1 class="console-title title neon-title" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</h1>
     <p class="console-desc" data-ui-copy="creator_hub" data-ui-field="tooltip">{{ uc.creator_hub.tooltip }}</p>
   </header>
 
-  <div class="console-grid">
-    <section class="console-panel" id="creator-growth-widget">
-      <h2 data-ui-copy="growth_score">{{ uc.growth_score.label }}</h2>
+  <div class="console-grid grid">
+    <section class="console-panel unified-card neon-card" id="creator-growth-widget">
+      <h2 class="title neon-title" data-ui-copy="growth_score">{{ uc.growth_score.label }}</h2>
       <div id="creator-growth-dial" class="v16-dial" style="--score: 0">
         <div class="v16-dial-inner">
           <span class="v16-dial-value" id="creator-growth-value">—</span>
@@ -19,26 +19,26 @@
         </div>
       </div>
     </section>
-    <section class="console-panel" id="creator-hub-opportunities">
-      <h2 data-ui-copy="growth_opportunities">{{ uc.growth_opportunities.label }}</h2>
-      <div id="creator-opportunities-root" class="creator-hub-list"></div>
+    <section class="console-panel unified-card neon-card" id="creator-hub-opportunities">
+      <h2 class="title neon-title" data-ui-copy="growth_opportunities">{{ uc.growth_opportunities.label }}</h2>
+      <div id="creator-opportunities-root" class="creator-hub-list grid"></div>
     </section>
   </div>
 
-  <section id="creator-hub-connect" class="creator-hub-section console-panel" hidden>
-    <h2 data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h2>
+  <section id="creator-hub-connect" class="creator-hub-section console-panel unified-card neon-card" hidden>
+    <h2 class="title neon-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h2>
     <p class="creator-hub-note">Link YouTube to see channels and analytics.</p>
-    <a class="feed-cta" href="/oauth/youtube" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</a>
+    <a class="feed-cta btn neon-btn" href="/oauth/youtube" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</a>
   </section>
 
   <section id="creator-hub-channels" class="creator-hub-section">
-    <h2>Linked channels</h2>
-    <div id="creator-channels-root" class="creator-hub-list unified-feed-grid" aria-live="polite"></div>
+    <h2 class="title neon-title">Linked channels</h2>
+    <div id="creator-channels-root" class="creator-hub-list unified-feed-grid grid" aria-live="polite"></div>
   </section>
 
-  <section id="creator-hub-analytics" class="creator-hub-section console-panel">
-    <h2>Analytics summary</h2>
-    <div id="creator-analytics-root" class="creator-hub-list" aria-live="polite"></div>
+  <section id="creator-hub-analytics" class="creator-hub-section console-panel unified-card neon-card">
+    <h2 class="title neon-title">Analytics summary</h2>
+    <div id="creator-analytics-root" class="creator-hub-list grid" aria-live="polite"></div>
   </section>
 
   <p id="creator-hub-error" class="unified-feed-error" hidden role="alert"></p>

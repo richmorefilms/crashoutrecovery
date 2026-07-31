@@ -2,17 +2,17 @@
 {% block title %}Staff Flags — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--staff-flags staff-console">
+<main class="app-main feed-page feed-page--staff-flags staff-console page-container hybrid-glow">
   <header class="console-header">
     <p class="v16-kicker" data-ui-copy="staff_flags">{{ uc.staff_flags.label }}</p>
-    <h1 class="console-title" data-ui-copy="staff_flags">{{ uc.staff_flags.label }}</h1>
+    <h1 class="console-title title neon-title" data-ui-copy="staff_flags">{{ uc.staff_flags.label }}</h1>
     <p class="console-desc" data-ui-copy="staff_flags" data-ui-field="tooltip">{{ uc.staff_flags.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta feed-cta--ghost" href="/staff/overview" data-ui-copy="staff_overview">{{ uc.staff_overview.label }}</a>
+      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/staff/overview" data-ui-copy="staff_overview">{{ uc.staff_overview.label }}</a>
     </p>
   </header>
-  <section class="console-panel">
-    <h2>Flagged items</h2>
+  <section class="console-panel unified-card neon-card">
+    <h2 class="title neon-title">Flagged items</h2>
     <div id="staff-flags-root" aria-live="polite"></div>
   </section>
   <p id="staff-flags-empty" class="unified-feed-empty" hidden>No flagged items.</p>

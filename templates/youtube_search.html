@@ -2,9 +2,9 @@
 {% block title %}YouTube Search — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main youtube-page youtube-page--search">
+<main class="app-main youtube-page youtube-page--search page-container hybrid-glow">
   <header class="youtube-page-header">
-    <h1 class="youtube-page-title" data-ui-copy="youtube_search">{{ uc.youtube_search.label }}</h1>
+    <h1 class="youtube-page-title title neon-title" data-ui-copy="youtube_search">{{ uc.youtube_search.label }}</h1>
     <p class="youtube-page-desc" data-ui-copy="youtube_search" data-ui-field="tooltip">{{ uc.youtube_search.tooltip }}</p>
   </header>
   <form id="youtube-search-form" class="youtube-search-form" action="/youtube/search" method="get">
@@ -12,9 +12,9 @@
     <input id="youtube-search-q" name="q" type="search" maxlength="200"
            value="{{ query or '' }}" placeholder="recovery motivation"
            required>
-    <button type="submit" class="feed-cta" data-ui-copy="youtube_search">{{ uc.youtube_search.label }}</button>
+    <button type="submit" class="feed-cta btn neon-btn" data-ui-copy="youtube_search">{{ uc.youtube_search.label }}</button>
   </form>
-  <div id="youtube-search-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="youtube-search-root" class="unified-feed-grid grid" aria-live="polite"></div>
   <p id="youtube-search-empty" class="unified-feed-empty" hidden>No results.</p>
   <p id="youtube-search-error" class="unified-feed-error" hidden role="alert"></p>
 </main>

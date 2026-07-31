@@ -8,7 +8,7 @@
   {% endif %}
 {% endblock %}
 {% block content %}
-<article class="story-page">
+<article class="story-page unified-card neon-card">
   {# top_banner_slot #}
   <aside class="ad-slot ad-slot--top" data-slot="top_banner_slot" aria-label="Sponsored">
     {% if ads.top_banner %}
@@ -93,7 +93,7 @@
         {% if ads.sidebar.video_url %}
         <video class="club-promo-video" controls playsinline preload="metadata" src="{{ ads.sidebar.video_url }}"></video>
         {% endif %}
-        <h2 class="club-promo-title">{{ ads.sidebar.title }}</h2>
+        <h2 class="club-promo-title neon-title">{{ ads.sidebar.title }}</h2>
         <p class="club-promo-desc">{{ ads.sidebar.description }}</p>
       </div>
       {% endif %}

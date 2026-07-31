@@ -2,15 +2,15 @@
 {% block title %}Ranked Feed — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--ranked">
+<main class="app-main feed-page feed-page--ranked page-container hybrid-glow">
   <header class="unified-feed-header">
-    <h1 class="unified-feed-title" data-ui-copy="ranked_feed">{{ uc.ranked_feed.label }}</h1>
+    <h1 class="unified-feed-title title neon-title" data-ui-copy="ranked_feed">{{ uc.ranked_feed.label }}</h1>
     <p class="unified-feed-desc" data-ui-copy="ranked_feed" data-ui-field="tooltip">{{ uc.ranked_feed.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta feed-cta--ghost" href="/personalized" data-ui-copy="personalized_feed">{{ uc.personalized_feed.label }}</a>
+      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/personalized" data-ui-copy="personalized_feed">{{ uc.personalized_feed.label }}</a>
     </p>
   </header>
-  <div id="ranked-feed-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="ranked-feed-root" class="unified-feed-grid grid" aria-live="polite"></div>
   <p id="ranked-feed-empty" class="unified-feed-empty" hidden>No ranked clips yet.</p>
   <p id="ranked-feed-error" class="unified-feed-error" hidden role="alert"></p>
 </main>

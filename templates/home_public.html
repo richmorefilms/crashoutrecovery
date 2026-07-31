@@ -2,41 +2,41 @@
 {% block title %}Public — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="public-home v16-shell" id="public-home-root">
+<main class="public-home v16-shell app-main page-container hybrid-glow" id="public-home-root">
   <section class="v16-hero">
     <p class="v16-kicker" data-ui-copy="public_home">{{ uc.public_home.label }}</p>
     <h1 class="v16-hero-title" data-ui-copy="public_hero">{{ uc.public_hero.label }}</h1>
     <p class="v16-hero-sub" data-ui-copy="public_hero" data-ui-field="tooltip">{{ uc.public_hero.tooltip }}</p>
     <div class="v16-cta-row">
-      <a class="v16-btn v16-btn--primary" href="/feed/all" data-ui-copy="cta_explore_feed">{{ uc.cta_explore_feed.label }}</a>
-      <a class="v16-btn v16-btn--ghost" href="/creator/dashboard" data-ui-copy="cta_creator_dashboard">{{ uc.cta_creator_dashboard.label }}</a>
-      <a class="v16-btn v16-btn--neon" href="/staff/overview" data-ui-copy="cta_staff_console">{{ uc.cta_staff_console.label }}</a>
+      <a class="v16-btn v16-btn--primary btn neon-btn" href="/feed/all" data-ui-copy="cta_explore_feed">{{ uc.cta_explore_feed.label }}</a>
+      <a class="v16-btn v16-btn--ghost btn neon-btn" href="/creator/dashboard" data-ui-copy="cta_creator_dashboard">{{ uc.cta_creator_dashboard.label }}</a>
+      <a class="v16-btn v16-btn--neon btn neon-btn" href="/staff/overview" data-ui-copy="cta_staff_console">{{ uc.cta_staff_console.label }}</a>
     </div>
   </section>
 
-  <section class="v16-showcase" aria-label="Platform showcase" id="public-showcase">
-    <article class="v16-showcase-card" data-showcase="feed">
-      <h3 data-ui-copy="showcase_unified_feed">{{ uc.showcase_unified_feed.label }}</h3>
+  <section class="v16-showcase grid" aria-label="Platform showcase" id="public-showcase">
+    <article class="v16-showcase-card unified-card neon-card" data-showcase="feed">
+      <h3 class="title neon-title" data-ui-copy="showcase_unified_feed">{{ uc.showcase_unified_feed.label }}</h3>
       <p data-ui-copy="showcase_unified_feed" data-ui-field="tooltip">{{ uc.showcase_unified_feed.tooltip }}</p>
       <p><a href="/feed/all" data-ui-copy="cta_explore_feed">{{ uc.cta_explore_feed.label }}</a></p>
     </article>
-    <article class="v16-showcase-card" data-showcase="monetization">
-      <h3 data-ui-copy="showcase_monetization">{{ uc.showcase_monetization.label }}</h3>
+    <article class="v16-showcase-card unified-card neon-card" data-showcase="monetization">
+      <h3 class="title neon-title" data-ui-copy="showcase_monetization">{{ uc.showcase_monetization.label }}</h3>
       <p data-ui-copy="showcase_monetization" data-ui-field="tooltip">{{ uc.showcase_monetization.tooltip }}</p>
       <p><a href="/monetization" data-ui-copy="monetization_lanes">{{ uc.monetization_lanes.label }}</a></p>
     </article>
-    <article class="v16-showcase-card" data-showcase="recommendations">
-      <h3 data-ui-copy="showcase_recommendations">{{ uc.showcase_recommendations.label }}</h3>
+    <article class="v16-showcase-card unified-card neon-card" data-showcase="recommendations">
+      <h3 class="title neon-title" data-ui-copy="showcase_recommendations">{{ uc.showcase_recommendations.label }}</h3>
       <p data-ui-copy="showcase_recommendations" data-ui-field="tooltip">{{ uc.showcase_recommendations.tooltip }}</p>
       <p><a href="/recommendations" data-ui-copy="recommendations">{{ uc.recommendations.label }}</a></p>
     </article>
-    <article class="v16-showcase-card" data-showcase="growth">
-      <h3 data-ui-copy="showcase_growth">{{ uc.showcase_growth.label }}</h3>
+    <article class="v16-showcase-card unified-card neon-card" data-showcase="growth">
+      <h3 class="title neon-title" data-ui-copy="showcase_growth">{{ uc.showcase_growth.label }}</h3>
       <p data-ui-copy="showcase_growth" data-ui-field="tooltip">{{ uc.showcase_growth.tooltip }}</p>
       <p><a href="/growth/score" data-ui-copy="growth_score">{{ uc.growth_score.label }}</a></p>
     </article>
-    <article class="v16-showcase-card" data-showcase="multi">
-      <h3 data-ui-copy="showcase_multi">{{ uc.showcase_multi.label }}</h3>
+    <article class="v16-showcase-card unified-card neon-card" data-showcase="multi">
+      <h3 class="title neon-title" data-ui-copy="showcase_multi">{{ uc.showcase_multi.label }}</h3>
       <p data-ui-copy="showcase_multi" data-ui-field="tooltip">{{ uc.showcase_multi.tooltip }}</p>
       <p><a href="/multi/instagram" data-ui-copy="multi_instagram">{{ uc.multi_instagram.label }}</a></p>
     </article>

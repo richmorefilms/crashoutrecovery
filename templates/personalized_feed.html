@@ -2,15 +2,15 @@
 {% block title %}Personalized Feed — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--personalized" data-user-id="{{ user_id or '' }}">
+<main class="app-main feed-page feed-page--personalized page-container hybrid-glow" data-user-id="{{ user_id or '' }}">
   <header class="unified-feed-header">
-    <h1 class="unified-feed-title" data-ui-copy="personalized_feed">{{ uc.personalized_feed.label }}</h1>
+    <h1 class="unified-feed-title title neon-title" data-ui-copy="personalized_feed">{{ uc.personalized_feed.label }}</h1>
     <p class="unified-feed-desc" data-ui-copy="personalized_feed" data-ui-field="tooltip">{{ uc.personalized_feed.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta feed-cta--ghost" href="/ranked" data-ui-copy="ranked_feed">{{ uc.ranked_feed.label }}</a>
+      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/ranked" data-ui-copy="ranked_feed">{{ uc.ranked_feed.label }}</a>
     </p>
   </header>
-  <div id="personalized-feed-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div id="personalized-feed-root" class="unified-feed-grid grid" aria-live="polite"></div>
   <p id="personalized-feed-empty" class="unified-feed-empty" hidden>No personalized clips yet.</p>
   <p id="personalized-feed-error" class="unified-feed-error" hidden role="alert"></p>
 </main>

@@ -2,14 +2,13 @@
 {% block title %}Sign in with TikTok — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main auth-page auth-page--tiktok">
-  <section class="auth-page-card">
+<main class="app-main auth-page auth-page--tiktok page-container hybrid-glow">
+  <section class="auth-page-card unified-card neon-card">
     <h1 class="auth-page-title" data-ui-copy="tiktok_login">{{ uc.tiktok_login.label }}</h1>
     <p class="auth-page-lede" data-ui-copy="tiktok_login" data-ui-field="tooltip">{{ uc.tiktok_login.tooltip }}</p>
 
     <div class="tiktok-auth-actions">
-      <a
-        class="tiktok-login-btn"
+      <a class="tiktok-login-btn btn neon-btn"
         href="/auth/tiktok/login"
         data-tiktok-oauth
         data-ui-copy="tiktok_login"

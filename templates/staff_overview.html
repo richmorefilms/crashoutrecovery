@@ -2,27 +2,27 @@
 {% block title %}Staff Overview — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--staff-overview staff-console">
+<main class="app-main feed-page feed-page--staff-overview staff-console page-container hybrid-glow">
   <header class="console-header">
     <p class="v16-kicker" data-ui-copy="staff_overview">{{ uc.staff_overview.label }}</p>
-    <h1 class="console-title" data-ui-copy="staff_overview">{{ uc.staff_overview.label }}</h1>
+    <h1 class="console-title neon-title" data-ui-copy="staff_overview">{{ uc.staff_overview.label }}</h1>
     <p class="console-desc" data-ui-copy="staff_overview" data-ui-field="tooltip">{{ uc.staff_overview.tooltip }}</p>
     <p class="unified-feed-actions">
-      <a class="feed-cta feed-cta--ghost" href="/staff/flags" data-ui-copy="staff_flags">{{ uc.staff_flags.label }}</a>
+      <a class="feed-cta feed-cta--ghost neon-btn btn" href="/staff/flags" data-ui-copy="staff_flags">{{ uc.staff_flags.label }}</a>
     </p>
   </header>
-  <div class="console-grid">
-    <section class="console-panel">
-      <h2>Platform health</h2>
-      <div id="staff-overview-root" class="unified-feed-grid" aria-live="polite"></div>
+  <div class="console-grid grid">
+    <section class="console-panel neon-card unified-card">
+      <h2 class="neon-title">Platform health</h2>
+      <div id="staff-overview-root" class="unified-feed-grid grid" aria-live="polite"></div>
       <div id="staff-health-chart" class="v16-chart" aria-hidden="true"></div>
     </section>
-    <section class="console-panel">
-      <h2>Fraud signals</h2>
+    <section class="console-panel neon-card unified-card">
+      <h2 class="neon-title">Fraud signals</h2>
       <div id="staff-fraud-panel"><p class="creator-hub-note">Sign in as staff to load live signals.</p></div>
     </section>
-    <section class="console-panel">
-      <h2>Rate-limit monitor</h2>
+    <section class="console-panel neon-card unified-card">
+      <h2 class="neon-title">Rate-limit monitor</h2>
       <div id="staff-rate-panel"><p class="creator-hub-note">Endpoint governance windows active (v15).</p></div>
     </section>
   </div>

@@ -2,10 +2,10 @@
 {% block title %}Publish Ready — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="publish-page v16-shell" id="publish-ready-root">
+<main class="publish-page v16-shell app-main page-container hybrid-glow" id="publish-ready-root">
   <div class="publish-banner">
     <p class="v16-kicker">CrashoutRecovery v16</p>
-    <h1 class="console-title" data-ui-copy="publish_banner">{{ uc.publish_banner.label }}</h1>
+    <h1 class="console-title title neon-title" data-ui-copy="publish_banner">{{ uc.publish_banner.label }}</h1>
     <p class="console-desc" data-ui-copy="publish_banner" data-ui-field="tooltip">{{ uc.publish_banner.tooltip }}</p>
   </div>
   <ul class="publish-checklist" id="publish-checklist">

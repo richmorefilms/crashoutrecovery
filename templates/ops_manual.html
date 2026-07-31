@@ -202,7 +202,7 @@
     </div>
   </div>
 
-  <article class="manual">
+  <article class="manual unified-card neon-card">
     <header>
       <h1>{{ app_name }} — Plain-Language Operations Guide</h1>
       <p class="subtitle">Pause before you post. Build calmer habits. Adults 18+ only.</p>
@@ -232,7 +232,7 @@
     </nav>
 
     <section id="what">
-      <h2>1. What this app does</h2>
+      <h2 class="neon-title">1. What this app does</h2>
       <p>
         Crashout Recovery helps you pause before posting something you might regret.
         You type your thought, the app reads the vibe, suggests a calmer draft, and lets you save it as a
@@ -246,7 +246,7 @@
     </section>
 
     <section id="tabs">
-      <h2>2. The feed tabs</h2>
+      <h2 class="neon-title">2. The feed tabs</h2>
       <p>At the top you’ll see tabs. Each one is a lane with its own focus:</p>
       <table>
         <thead>
@@ -264,7 +264,7 @@
     </section>
 
     <section id="pulse">
-      <h2>3. The {{ uc.pulse_strip.label | lower }}</h2>
+      <h2 class="neon-title">3. The {{ uc.pulse_strip.label | lower }}</h2>
       <p>Always visible at the top. {{ uc.pulse_strip.tooltip }}</p>
       <ul>
         <li><strong>Tap a chip</strong> → jumps to Signals tab and highlights that item</li>
@@ -274,7 +274,7 @@
     </section>
 
     <section id="compose">
-      <h2>4. Drafting ({{ uc.composer.label | lower }})</h2>
+      <h2 class="neon-title">4. Drafting ({{ uc.composer.label | lower }})</h2>
       <p>Tap the <strong>+ Draft</strong> button to start. {{ uc.composer.tooltip }}</p>
       <p><strong>Steps:</strong></p>
       <ol>
@@ -291,11 +291,11 @@
     </section>
 
     <section id="streak">
-      <h2>5. {{ uc.recovery_streak.label }} &amp; {{ uc.momentum_score.label | lower }}</h2>
+      <h2 class="neon-title">5. {{ uc.recovery_streak.label }} &amp; {{ uc.momentum_score.label | lower }}</h2>
       <p><strong>{{ uc.recovery_streak.label }}</strong> = {{ uc.recovery_streak.tooltip }}</p>
       <p><strong>{{ uc.momentum_score.label }}</strong> = {{ uc.momentum_score.tooltip }}</p>
 
-      <h3>Scoring</h3>
+      <h3 class="title neon-title">Scoring</h3>
       <table>
         <thead>
           <tr><th>Signal</th><th>Points</th></tr>
@@ -310,7 +310,7 @@
         </tbody>
       </table>
 
-      <h3>Levels</h3>
+      <h3 class="title neon-title">Levels</h3>
       <ul>
         <li><strong>Low (0–39)</strong> — rebuild with one safe move or {{ uc.seed.label | lower }}</li>
         <li><strong>Medium (40–69)</strong> — building momentum, stay consistent</li>
@@ -319,7 +319,7 @@
     </section>
 
     <section id="risk">
-      <h2>6. {{ uc.bad_decision_predictor.label }}</h2>
+      <h2 class="neon-title">6. {{ uc.bad_decision_predictor.label }}</h2>
       <p>{{ uc.bad_decision_predictor.tooltip }}</p>
       <table>
         <thead>
@@ -334,7 +334,7 @@
     </section>
 
     <section id="signals">
-      <h2>7. {{ uc.signals_pro.label }}</h2>
+      <h2 class="neon-title">7. {{ uc.signals_pro.label }}</h2>
       <p>{{ uc.signals_pro.tooltip }}</p>
       <table>
         <thead>
@@ -349,7 +349,7 @@
     </section>
 
     <section id="curated">
-      <h2>8. Smart rewrites</h2>
+      <h2 class="neon-title">8. Smart rewrites</h2>
       <p>The Composer checks staff-curated crashout episodes, commentary, rewrites, and recovery actions first.</p>
       <ol>
         <li>Choose a calm, clear, or stable rewrite.</li>
@@ -360,7 +360,7 @@
     </section>
 
     <section id="premium">
-      <h2>9. {{ uc.premium_tiers.label }}</h2>
+      <h2 class="neon-title">9. {{ uc.premium_tiers.label }}</h2>
       <p>{{ uc.premium_tiers.tooltip }}</p>
       <table>
         <thead>
@@ -377,7 +377,7 @@
     </section>
 
     <section id="alert">
-      <h2>10. {{ uc.global_spike_alert.label }}</h2>
+      <h2 class="neon-title">10. {{ uc.global_spike_alert.label }}</h2>
       <p>{{ uc.global_spike_alert.tooltip }}</p>
       <ul>
         <li>Chips + {{ uc.pulse_strip.label | lower }} flash red for <strong>1.5s</strong></li>
@@ -387,7 +387,7 @@
     </section>
 
     <section id="recipes">
-      <h2>11. Everyday recipes</h2>
+      <h2 class="neon-title">11. Everyday recipes</h2>
       <table>
         <thead>
           <tr><th>Situation</th><th>What to do</th></tr>
@@ -421,7 +421,7 @@
     </section>
 
     <section id="console">
-      <h2>12. Console shortcuts (for testing)</h2>
+      <h2 class="neon-title">12. Console shortcuts (for testing)</h2>
       <p>Open browser DevTools → Console while the app is running:</p>
       <pre>CrashoutAuth.openModal('login')           // sign in first
 CrashoutMonetization.setTier('creator')  // preview Creator features

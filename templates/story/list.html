@@ -15,8 +15,7 @@
     <li class="story-card">
       <a class="story-card-link" href="/stories/{{ story.id }}">
         {% if story.thumbnail_url or story.image_url %}
-        <img
-          class="story-card-thumb"
+        <img class="story-card-thumb thumbnail neon-border"
           src="{{ story.thumbnail_url or story.image_url }}"
           alt=""
           loading="lazy"
@@ -24,7 +23,7 @@
         {% else %}
         <div class="story-card-thumb story-card-thumb--empty" aria-hidden="true"></div>
         {% endif %}
-        <h3 class="story-card-title">{{ story.title }}</h3>
+        <h3 class="story-card-title title neon-title">{{ story.title }}</h3>
       </a>
     </li>
     {% else %}

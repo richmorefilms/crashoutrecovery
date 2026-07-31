@@ -139,21 +139,31 @@
       <li>
         <a class="app-nav-drawer-link" href="/multi/pinterest" data-ui-copy="multi_pinterest">Pinterest</a>
       </li>
-      <li class="app-nav-drawer-section" data-ui-copy="nav_section_ops">Ops</li>
-      <li>
-        <a class="app-nav-drawer-link" href="/staff/overview" data-ui-copy="staff_overview">Staff Overview</a>
-      </li>
-      <li>
-        <a class="app-nav-drawer-link" href="/publish" data-ui-copy="publish_ready">Publish Ready</a>
-      </li>
       <li>
         <a class="app-nav-drawer-link" href="/" data-ui-copy="nav_home">Recovery Home</a>
       </li>
-      <li>
-        <a class="app-nav-drawer-link" href="/ops" target="_blank" rel="noopener">Plain guide</a>
-      </li>
-      <li>
-        <button type="button" class="app-nav-drawer-link" data-nav-open-ops>Help / Ops</button>
+      <li class="sidebar-section crashout-lab">
+        <button
+          type="button"
+          class="lab-toggle"
+          id="crashout-lab-toggle"
+          aria-expanded="false"
+          aria-controls="crashout-lab-submenu"
+          data-ui-copy="crashout_lab"
+        >
+          <span class="lab-mark" aria-hidden="true"></span>
+          <span class="lab-title">Crashout Lab</span>
+          <span class="lab-arrow" aria-hidden="true">▸</span>
+        </button>
+        <div class="lab-submenu" id="crashout-lab-submenu" hidden>
+          <a href="/staff/overview" class="lab-item" data-ui-copy="staff_overview">Staff Overview</a>
+          <a href="/staff/flags" class="lab-item" data-ui-copy="staff_flags">Staff Flags</a>
+          <a href="/publish" class="lab-item" data-ui-copy="publish_ready">Publish Ready</a>
+          <a href="/ops" class="lab-item" target="_blank" rel="noopener" data-ui-copy="lab_ops_manual">Ops Manual</a>
+          <a href="/ops-full.md" class="lab-item" download data-ui-copy="lab_ops_technical">Technical Guide</a>
+          <a href="/oauth/youtube" class="lab-item" data-ui-copy="youtube_connect">YouTube OAuth</a>
+          <button type="button" class="lab-item lab-item--button" data-nav-open-ops data-ui-copy="lab_help_ops">Help / Ops</button>
+        </div>
       </li>
       <li>
         <a class="app-nav-drawer-link tiktok-nav-btn btn neon-btn"

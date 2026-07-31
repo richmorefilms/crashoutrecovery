@@ -7994,3 +7994,123 @@ body.auth-modal-open .compose-fab {
     box-shadow: 0 0 18px rgba(122, 63, 255, 0.25);
   }
 }
+
+/* ==========================================================================
+   Crashout Lab — collapsible ops drawer group (Hybrid Glow v2)
+   ========================================================================== */
+
+.crashout-lab {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0 0.75rem 0.5rem;
+}
+
+.lab-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(122, 63, 255, 0.35);
+  border-radius: 10px;
+  background: linear-gradient(145deg, #15151a, #0f0f11 50%, #15151a);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.lab-toggle:hover,
+.lab-toggle:focus-visible {
+  border-color: rgba(63, 140, 255, 0.7);
+  box-shadow: 0 0 18px rgba(63, 140, 255, 0.35);
+  transform: translateY(-1px) scale(1.01);
+  outline: none;
+}
+
+.lab-mark {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3f8cff, #7a3fff);
+  box-shadow: 0 0 10px rgba(122, 63, 255, 0.55);
+  flex: 0 0 auto;
+}
+
+.lab-title {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.lab-arrow {
+  display: inline-block;
+  color: #9ca3af;
+  transition: transform 0.2s ease;
+}
+
+.lab-toggle.active .lab-arrow {
+  transform: rotate(90deg);
+  color: #c7d2ff;
+}
+
+.lab-submenu {
+  display: none;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0.55rem 0 0.25rem;
+  padding: 0.15rem 0 0 0.35rem;
+}
+
+.lab-submenu:not([hidden]) {
+  display: flex;
+}
+
+.lab-item {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #c7c9d1;
+  text-align: left;
+  text-decoration: none;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.25s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.lab-item:hover,
+.lab-item:focus-visible {
+  color: #fff;
+  background: rgba(63, 140, 255, 0.1);
+  border-color: rgba(63, 140, 255, 0.35);
+  box-shadow: 0 0 12px rgba(63, 140, 255, 0.28);
+  outline: none;
+}
+
+.lab-item--button {
+  appearance: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-toggle,
+  .lab-arrow,
+  .lab-item {
+    transition: none;
+  }
+
+  .lab-toggle:hover,
+  .lab-toggle:focus-visible {
+    transform: none;
+  }
+}

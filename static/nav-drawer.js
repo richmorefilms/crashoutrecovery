@@ -75,6 +75,20 @@
     }
   }
 
+  function initCrashoutLab() {
+    const labToggle = document.getElementById("crashout-lab-toggle");
+    const submenu = document.getElementById("crashout-lab-submenu");
+    if (!labToggle || !submenu) return;
+
+    labToggle.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const isOpen = !submenu.hidden;
+      submenu.hidden = isOpen;
+      labToggle.classList.toggle("active", !isOpen);
+      labToggle.setAttribute("aria-expanded", isOpen ? "false" : "true");
+    });
+  }
+
   function init() {
     const { drawer, toggle, backdrop, closeBtn } = els();
     if (!drawer || !toggle) return;
@@ -86,6 +100,7 @@
       if (ev.key === "Escape" && open) closeDrawer();
     });
     document.addEventListener("click", onDocClick);
+    initCrashoutLab();
     // Initial bind for any data-tiktok-oauth already in drawer
     rebindTikTokOAuth();
   }

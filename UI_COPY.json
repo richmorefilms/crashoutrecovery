@@ -291,6 +291,22 @@
     "label": "Ops",
     "tooltip": "Staff console and publish checklist."
   },
+  "crashout_lab": {
+    "label": "Crashout Lab",
+    "tooltip": "Technical tools for staff, ops, and OAuth — tucked away from the creator path."
+  },
+  "lab_ops_manual": {
+    "label": "Ops Manual",
+    "tooltip": "Plain-language ops guide."
+  },
+  "lab_ops_technical": {
+    "label": "Technical Guide",
+    "tooltip": "Full technical operations markdown."
+  },
+  "lab_help_ops": {
+    "label": "Help / Ops",
+    "tooltip": "Open the in-app Help / Ops panel."
+  },
   "badge_engagement": {
     "label": "Engagement",
     "tooltip": "Engagement score for this clip."

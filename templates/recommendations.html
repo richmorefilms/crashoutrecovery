@@ -2,22 +2,35 @@
 {% block title %}Recommendations — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--recommendations recs-explorer page-container hybrid-glow" data-user-id="{{ user_id or '' }}">
-  <header class="console-header">
-    <p class="v16-kicker" data-ui-copy="recommendations">{{ uc.recommendations.label }}</p>
-    <h1 class="console-title title neon-title" data-ui-copy="recommendations">{{ uc.recommendations.label }}</h1>
-    <p class="console-desc" data-ui-copy="recommendations" data-ui-field="tooltip">{{ uc.recommendations.tooltip }}</p>
-    <p class="unified-feed-actions">
-      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/topics" data-ui-copy="topic_clusters">{{ uc.topic_clusters.label }}</a>
-      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/topic-graph" data-ui-copy="topic_graph">{{ uc.topic_graph.label }}</a>
-    </p>
-  </header>
-  <section class="console-panel unified-card neon-card">
-    <h2 class="title neon-title">Similar-user recommendations</h2>
-    <div id="recommendations-root" class="unified-feed-grid grid" aria-live="polite"></div>
-  </section>
-  <p id="recommendations-empty" class="unified-feed-empty" hidden>No recommendations yet.</p>
-  <p id="recommendations-error" class="unified-feed-error" hidden role="alert"></p>
+<main class="app-main feed-page feed-page--recommendations feed-page--holo recs-explorer page-container hybrid-glow" data-user-id="{{ user_id or '' }}">
+  <div class="reco-wrapper">
+    <header class="reco-header console-header">
+      <p class="v16-kicker" data-ui-copy="recommendations">{{ uc.recommendations.label }}</p>
+      <h1 class="console-title title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">✨</span>
+        <span data-ui-copy="recommendations">{{ uc.recommendations.label }}</span>
+      </h1>
+      <p class="console-desc" data-ui-copy="recommendations_holo" data-ui-field="tooltip">{{ uc.recommendations_holo.tooltip }}</p>
+      <p class="unified-feed-actions">
+        <a class="feed-cta feed-cta--ghost btn neon-btn" href="/topics" data-ui-copy="topic_clusters">{{ uc.topic_clusters.label }}</a>
+        <a class="feed-cta feed-cta--ghost btn neon-btn" href="/topic-graph" data-ui-copy="topic_graph">{{ uc.topic_graph.label }}</a>
+      </p>
+    </header>
+
+    <div class="feed-filters reco-filters" role="toolbar" aria-label="Recommendation filters">
+      <button type="button" class="filter-btn reco-filter-btn active" data-filter="all" data-ui-copy="feed_filter_all">{{ uc.feed_filter_all.label }}</button>
+      <button type="button" class="filter-btn reco-filter-btn" data-filter="youtube" data-ui-copy="feed_filter_youtube">{{ uc.feed_filter_youtube.label }}</button>
+      <button type="button" class="filter-btn reco-filter-btn" data-filter="tiktok" data-ui-copy="feed_filter_tiktok">{{ uc.feed_filter_tiktok.label }}</button>
+    </div>
+
+    <section class="reco-panel">
+      <h2 class="title neon-title" data-ui-copy="recommendations_similar">{{ uc.recommendations_similar.label }}</h2>
+      <div id="recommendations-root" class="reco-grid unified-feed-grid grid" aria-live="polite"></div>
+    </section>
+
+    <p id="recommendations-empty" class="unified-feed-empty" hidden>No recommendations yet.</p>
+    <p id="recommendations-error" class="unified-feed-error" hidden role="alert"></p>
+  </div>
 </main>
 {% endblock %}
 {% block scripts %}

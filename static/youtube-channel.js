@@ -25,15 +25,16 @@
     const views = stats.view_count != null ? Number(stats.view_count) : "—";
 
     return `
-      <article class="youtube-detail-card unified-card neon-card">
+      <article class="youtube-detail-card unified-card neon-card holo-card yt-insight-card">
+        <div class="yt-insight-ring" aria-hidden="true"></div>
         ${thumb ? `<img class="youtube-detail-thumb youtube-detail-thumb--channel thumbnail neon-border" src="${thumb}" alt="">` : ""}
-        <h2 class="youtube-detail-title neon-title">${title}</h2>
-        <ul class="youtube-detail-stats">
-          <li>Subscribers: ${escapeHtml(String(subs))}</li>
-          <li>Videos: ${escapeHtml(String(videos))}</li>
-          <li>Views: ${escapeHtml(String(views))}</li>
+        <h2 class="youtube-detail-title neon-title holo-title">${title}</h2>
+        <ul class="youtube-detail-stats yt-insight-stats">
+          <li class="yt-stat-chip"><span class="yt-stat-label">Subscribers</span><span class="yt-stat-value">${escapeHtml(String(subs))}</span></li>
+          <li class="yt-stat-chip"><span class="yt-stat-label">Videos</span><span class="yt-stat-value">${escapeHtml(String(videos))}</span></li>
+          <li class="yt-stat-chip"><span class="yt-stat-label">Views</span><span class="yt-stat-value">${escapeHtml(String(views))}</span></li>
         </ul>
-        ${desc ? `<p class="youtube-detail-desc">${desc}</p>` : ""}
+        ${desc ? `<p class="youtube-detail-desc holo-desc">${desc}</p>` : ""}
       </article>`;
   }
 

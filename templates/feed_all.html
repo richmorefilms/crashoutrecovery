@@ -2,21 +2,34 @@
 {% block title %}Unified Feed — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main feed-page feed-page--unified feed-page--v16 page-container hybrid-glow">
-  <header class="unified-feed-header">
-    <p class="v16-kicker" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</p>
-    <h1 class="unified-feed-title neon-title" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h1>
-    <p class="unified-feed-desc" data-ui-copy="unified_feed" data-ui-field="tooltip">{{ uc.unified_feed.tooltip }}</p>
-    <p class="unified-feed-actions">
-      <a class="feed-cta neon-btn btn" href="/feed/trending" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</a>
-      <a class="feed-cta feed-cta--ghost btn neon-btn" href="/feed/recommended" data-ui-copy="recommended_feed">{{ uc.recommended_feed.label }}</a>
-    </p>
-  </header>
-  <div id="feed-all-root" class="unified-feed-grid grid" aria-live="polite"></div>
-  <div id="feed-all-sentinel" class="feed-scroll-sentinel" aria-hidden="true"></div>
-  <p id="feed-all-loading" class="feed-loading-more" hidden>Loading more…</p>
-  <p id="feed-all-empty" class="unified-feed-empty" hidden>No clips yet — check back soon.</p>
-  <p id="feed-all-error" class="unified-feed-error" hidden role="alert"></p>
+<main class="app-main feed-page feed-page--unified feed-page--v16 feed-page--holo page-container hybrid-glow">
+  <div class="feed-wrapper">
+    <header class="feed-header unified-feed-header">
+      <p class="v16-kicker" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</p>
+      <h1 class="unified-feed-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🔥</span>
+        <span data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</span>
+      </h1>
+      <p class="unified-feed-desc" data-ui-copy="unified_feed_holo" data-ui-field="tooltip">{{ uc.unified_feed_holo.tooltip }}</p>
+      <p class="unified-feed-actions">
+        <a class="feed-cta neon-btn btn" href="/feed/trending" data-ui-copy="trending_feed">{{ uc.trending_feed.label }}</a>
+        <a class="feed-cta feed-cta--ghost btn neon-btn" href="/feed/recommended" data-ui-copy="recommended_feed">{{ uc.recommended_feed.label }}</a>
+      </p>
+    </header>
+
+    <div class="feed-filters" role="toolbar" aria-label="Feed filters">
+      <button type="button" class="filter-btn active" data-filter="all" data-ui-copy="feed_filter_all">{{ uc.feed_filter_all.label }}</button>
+      <button type="button" class="filter-btn" data-filter="trending" data-ui-copy="feed_filter_trending">{{ uc.feed_filter_trending.label }}</button>
+      <button type="button" class="filter-btn" data-filter="tiktok" data-ui-copy="feed_filter_tiktok">{{ uc.feed_filter_tiktok.label }}</button>
+      <button type="button" class="filter-btn" data-filter="youtube" data-ui-copy="feed_filter_youtube">{{ uc.feed_filter_youtube.label }}</button>
+    </div>
+
+    <div id="feed-all-root" class="feed-grid unified-feed-grid grid" aria-live="polite"></div>
+    <div id="feed-all-sentinel" class="feed-scroll-sentinel" aria-hidden="true"></div>
+    <p id="feed-all-loading" class="feed-loading-more" hidden>Loading more…</p>
+    <p id="feed-all-empty" class="unified-feed-empty" hidden>No clips yet — check back soon.</p>
+    <p id="feed-all-error" class="unified-feed-error" hidden role="alert"></p>
+  </div>
 </main>
 {% endblock %}
 {% block scripts %}

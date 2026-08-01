@@ -114,7 +114,19 @@
       .join("");
   }
 
+  function bindQuickActions() {
+    document.querySelectorAll(".qa-btn").forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        btn.style.boxShadow = "0 0 20px #ff00ff, 0 0 40px #ff00ff";
+      });
+      btn.addEventListener("mouseleave", () => {
+        btn.style.boxShadow = "";
+      });
+    });
+  }
+
   async function mount() {
+    bindQuickActions();
     const errEl = document.getElementById("creator-hub-error");
     const creatorId = resolveCreatorId();
     if (!creatorId) {

@@ -2,89 +2,103 @@
 {% block title %}Creator Dashboard — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main creator-hub-page creator-hub-page--v16 creator-hub-page--arcade page-container hybrid-glow" data-creator-id="{{ creator_id or '' }}">
-  <section class="creator-home" aria-labelledby="creator-home-title">
-    <h1 class="home-title" id="creator-home-title" data-ui-copy="creator_home_hero">{{ uc.creator_home_hero.label }}</h1>
-    <p class="home-subtitle" data-ui-copy="creator_home_hero" data-ui-field="tooltip">{{ uc.creator_home_hero.tooltip }}</p>
+<main class="app-main creator-hub-page creator-hub-page--v16 creator-hub-page--arcade feed-page--holo page-container hybrid-glow" data-creator-id="{{ creator_id or '' }}">
+  <div class="dashboard-wrapper">
+    <header class="dashboard-hero" aria-labelledby="creator-home-title">
+      <p class="v16-kicker" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</p>
+      <h1 class="dashboard-title" id="creator-home-title">
+        <span class="feed-header-icon" aria-hidden="true">🎮</span>
+        <span data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</span>
+      </h1>
+      <p class="dashboard-subtitle" data-ui-copy="creator_dashboard_holo" data-ui-field="tooltip">{{ uc.creator_dashboard_holo.tooltip }}</p>
+    </header>
 
-    <div class="home-grid">
-      <a href="/feed/all" class="home-card neon-card">
-        <span class="card-icon" aria-hidden="true">🔥</span>
-        <h2 class="title neon-title" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h2>
-        <p class="muted" data-ui-copy="unified_feed" data-ui-field="tooltip">{{ uc.unified_feed.tooltip }}</p>
-      </a>
-
-      <a href="/topics" class="home-card neon-card">
-        <span class="card-icon" aria-hidden="true">🧠</span>
-        <h2 class="title neon-title" data-ui-copy="topic_clusters">{{ uc.topic_clusters.label }}</h2>
-        <p class="muted" data-ui-copy="topic_clusters" data-ui-field="tooltip">{{ uc.topic_clusters.tooltip }}</p>
-      </a>
-
-      <a href="/growth/score" class="home-card neon-card">
-        <span class="card-icon" aria-hidden="true">📈</span>
-        <h2 class="title neon-title" data-ui-copy="growth_score">{{ uc.growth_score.label }}</h2>
-        <p class="muted" data-ui-copy="growth_score" data-ui-field="tooltip">{{ uc.growth_score.tooltip }}</p>
-      </a>
-
-      <a href="/publish" class="home-card neon-card">
-        <span class="card-icon" aria-hidden="true">🚀</span>
-        <h2 class="title neon-title" data-ui-copy="publish_ready">{{ uc.publish_ready.label }}</h2>
-        <p class="muted" data-ui-copy="publish_ready" data-ui-field="tooltip">{{ uc.publish_ready.tooltip }}</p>
-      </a>
-
-      <a href="/monetization" class="home-card neon-card">
-        <span class="card-icon" aria-hidden="true">💰</span>
-        <h2 class="title neon-title" data-ui-copy="monetization_lanes">{{ uc.monetization_lanes.label }}</h2>
-        <p class="muted" data-ui-copy="monetization_lanes" data-ui-field="tooltip">{{ uc.monetization_lanes.tooltip }}</p>
-      </a>
-
-      <a href="/oauth/youtube" class="home-card neon-card">
-        <span class="card-icon" aria-hidden="true">📺</span>
-        <h2 class="title neon-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h2>
-        <p class="muted" data-ui-copy="youtube_connect" data-ui-field="tooltip">{{ uc.youtube_connect.tooltip }}</p>
-      </a>
-    </div>
-  </section>
-
-  <header class="console-header">
-    <p class="v16-kicker" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</p>
-    <h2 class="console-title title neon-title" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</h2>
-    <p class="console-desc" data-ui-copy="creator_hub" data-ui-field="tooltip">{{ uc.creator_hub.tooltip }}</p>
-  </header>
-
-  <div class="console-grid grid">
-    <section class="console-panel unified-card neon-card" id="creator-growth-widget">
-      <h2 class="title neon-title" data-ui-copy="growth_score">{{ uc.growth_score.label }}</h2>
-      <div id="creator-growth-dial" class="v16-dial" style="--score: 0">
-        <div class="v16-dial-inner">
+    <section class="momentum-dial" id="creator-growth-widget" aria-labelledby="momentum-dial-label">
+      <div class="dial-ring" aria-hidden="true"></div>
+      <div id="creator-growth-dial" class="v16-dial dial-core-meter" style="--score: 0">
+        <div class="v16-dial-inner dial-core">
           <span class="v16-dial-value" id="creator-growth-value">—</span>
           <span class="v16-dial-label" data-ui-copy="growth_score">{{ uc.growth_score.label }}</span>
         </div>
       </div>
+      <p class="dial-label" id="momentum-dial-label" data-ui-copy="growth_score_holo">{{ uc.growth_score_holo.label }}</p>
     </section>
-    <section class="console-panel unified-card neon-card" id="creator-hub-opportunities">
+
+    <section class="quick-actions" aria-label="Quick actions">
+      <a class="qa-btn" href="/youtube/search" data-ui-copy="youtube_btn_scan">{{ uc.youtube_btn_scan.label }}</a>
+      <a class="qa-btn" href="/growth/score" data-ui-copy="youtube_btn_boost">{{ uc.youtube_btn_boost.label }}</a>
+      <a class="qa-btn" href="/publish" data-ui-copy="publish_btn_launch">{{ uc.publish_btn_launch.label }}</a>
+      <a class="qa-btn" href="/oauth/youtube" data-ui-copy="youtube_btn_analyze">{{ uc.youtube_btn_analyze.label }}</a>
+      <a class="qa-btn" href="/" data-ui-copy="dashboard_btn_recover">{{ uc.dashboard_btn_recover.label }}</a>
+    </section>
+
+    <section class="dashboard-grid" aria-label="Creator command center">
+      <a href="/feed/all" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">🔥</span>
+        <h2 data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h2>
+        <p data-ui-copy="dash_card_feed" data-ui-field="tooltip">{{ uc.dash_card_feed.tooltip }}</p>
+      </a>
+
+      <a href="/recommendations" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">✨</span>
+        <h2 data-ui-copy="recommendations">{{ uc.recommendations.label }}</h2>
+        <p data-ui-copy="dash_card_recs" data-ui-field="tooltip">{{ uc.dash_card_recs.tooltip }}</p>
+      </a>
+
+      <a href="/topics" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">🌌</span>
+        <h2 data-ui-copy="topic_clusters">{{ uc.topic_clusters.label }}</h2>
+        <p data-ui-copy="dash_card_topics" data-ui-field="tooltip">{{ uc.dash_card_topics.tooltip }}</p>
+      </a>
+
+      <a href="/growth/score" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">📈</span>
+        <h2 data-ui-copy="growth_score">{{ uc.growth_score.label }}</h2>
+        <p data-ui-copy="dash_card_growth" data-ui-field="tooltip">{{ uc.dash_card_growth.tooltip }}</p>
+      </a>
+
+      <a href="/publish" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">🚀</span>
+        <h2 data-ui-copy="publish_launchpad">{{ uc.publish_launchpad.label }}</h2>
+        <p data-ui-copy="dash_card_publish" data-ui-field="tooltip">{{ uc.dash_card_publish.tooltip }}</p>
+      </a>
+
+      <a href="/oauth/youtube" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">📺</span>
+        <h2 data-ui-copy="youtube_tools">{{ uc.youtube_tools.label }}</h2>
+        <p data-ui-copy="dash_card_youtube" data-ui-field="tooltip">{{ uc.dash_card_youtube.tooltip }}</p>
+      </a>
+
+      <a href="/monetization" class="dash-card holo-card neon-card">
+        <span class="card-icon" aria-hidden="true">💰</span>
+        <h2 data-ui-copy="monetization_lanes">{{ uc.monetization_lanes.label }}</h2>
+        <p data-ui-copy="dash_card_monetization" data-ui-field="tooltip">{{ uc.dash_card_monetization.tooltip }}</p>
+      </a>
+    </section>
+
+    <section class="console-panel unified-card neon-card dash-live-panel" id="creator-hub-opportunities">
       <h2 class="title neon-title" data-ui-copy="growth_opportunities">{{ uc.growth_opportunities.label }}</h2>
       <div id="creator-opportunities-root" class="creator-hub-list grid"></div>
     </section>
+
+    <section id="creator-hub-connect" class="creator-hub-section console-panel unified-card neon-card holo-card" hidden>
+      <h2 class="title neon-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h2>
+      <p class="creator-hub-note">Link YouTube to see channels and analytics.</p>
+      <a class="feed-cta btn neon-btn" href="/oauth/youtube" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</a>
+    </section>
+
+    <section id="creator-hub-channels" class="creator-hub-section">
+      <h2 class="title neon-title" data-ui-copy="dash_linked_channels">{{ uc.dash_linked_channels.label }}</h2>
+      <div id="creator-channels-root" class="creator-hub-list unified-feed-grid grid" aria-live="polite"></div>
+    </section>
+
+    <section id="creator-hub-analytics" class="creator-hub-section console-panel unified-card neon-card holo-card">
+      <h2 class="title neon-title" data-ui-copy="dash_analytics">{{ uc.dash_analytics.label }}</h2>
+      <div id="creator-analytics-root" class="creator-hub-list grid" aria-live="polite"></div>
+    </section>
+
+    <p id="creator-hub-error" class="unified-feed-error" hidden role="alert"></p>
   </div>
-
-  <section id="creator-hub-connect" class="creator-hub-section console-panel unified-card neon-card" hidden>
-    <h2 class="title neon-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h2>
-    <p class="creator-hub-note">Link YouTube to see channels and analytics.</p>
-    <a class="feed-cta btn neon-btn" href="/oauth/youtube" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</a>
-  </section>
-
-  <section id="creator-hub-channels" class="creator-hub-section">
-    <h2 class="title neon-title">Linked channels</h2>
-    <div id="creator-channels-root" class="creator-hub-list unified-feed-grid grid" aria-live="polite"></div>
-  </section>
-
-  <section id="creator-hub-analytics" class="creator-hub-section console-panel unified-card neon-card">
-    <h2 class="title neon-title">Analytics summary</h2>
-    <div id="creator-analytics-root" class="creator-hub-list grid" aria-live="polite"></div>
-  </section>
-
-  <p id="creator-hub-error" class="unified-feed-error" hidden role="alert"></p>
 </main>
 {% endblock %}
 {% block scripts %}

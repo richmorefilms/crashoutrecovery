@@ -8239,3 +8239,1420 @@ body.auth-modal-open .compose-fab {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   Unified Feed — Retro-Arcade Hologram Edition
+   ========================================================================== */
+
+.feed-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: var(--feed-max, 48rem);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .feed-wrapper {
+    padding: 2.5rem 0 3rem;
+    max-width: min(72rem, 100%);
+  }
+}
+
+.feed-page--holo .feed-header h1,
+.feed-page--holo .unified-feed-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.feed-header-icon {
+  filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.55));
+}
+
+.feed-page--holo .feed-header p,
+.feed-page--holo .unified-feed-desc {
+  color: var(--crashout-subtext);
+  margin-bottom: 1.25rem;
+}
+
+.feed-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 2px solid var(--crashout-accent2);
+  color: var(--crashout-text);
+  padding: 0.65rem 1.1rem;
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn:focus-visible {
+  box-shadow: var(--crashout-glow2);
+  transform: scale(1.05);
+  outline: none;
+}
+
+.filter-btn.active {
+  background: var(--crashout-accent2);
+  color: #000;
+  box-shadow: var(--crashout-glow2);
+}
+
+.feed-page--holo .feed-grid,
+.feed-page--holo #feed-all-root.feed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.holo-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.25s ease;
+  cursor: pointer;
+}
+
+.holo-card:hover,
+.feed-page--holo .holo-card.neon-card:hover {
+  transform: scale(1.06);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(0, 234, 255, 0.75);
+}
+
+.holo-inner {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.holo-title,
+.feed-page--holo .holo-card .unified-card-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.35rem;
+  color: var(--crashout-accent2);
+}
+
+.holo-desc,
+.feed-page--holo .holo-card .unified-card-channel {
+  color: var(--crashout-text);
+  margin-bottom: 0.65rem;
+}
+
+.holo-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--crashout-subtext);
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.feed-page--holo .holo-card .unified-card-body {
+  padding: 1rem 1.15rem 1.15rem;
+}
+
+.feed-page--holo .holo-card .unified-card-thumb,
+.feed-page--holo .holo-card .unified-card-placeholder {
+  border-radius: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-btn,
+  .holo-card {
+    transition: none;
+  }
+
+  .filter-btn:hover,
+  .filter-btn:focus-visible,
+  .holo-card:hover,
+  .feed-page--holo .holo-card.neon-card:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Recommendations — Hologram Edition (Arcade Style)
+   ========================================================================== */
+
+.reco-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .reco-wrapper {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.feed-page--recommendations.feed-page--holo .reco-header h1,
+.feed-page--recommendations.feed-page--holo .console-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.feed-page--recommendations.feed-page--holo .reco-header p,
+.feed-page--recommendations.feed-page--holo .console-desc {
+  color: var(--crashout-subtext);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.reco-filters {
+  margin-bottom: 1.75rem;
+}
+
+.reco-panel > .title {
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+  text-shadow: 0 0 12px rgba(0, 234, 255, 0.35);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.reco-grid,
+.feed-page--recommendations #recommendations-root.reco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.feed-page--recommendations .holo-card .holo-inner {
+  height: 100%;
+}
+
+.feed-page--recommendations .holo-card .unified-card-body {
+  padding: 1rem 1.15rem 1.15rem;
+}
+
+.feed-page--recommendations .holo-card .unified-card-thumb,
+.feed-page--recommendations .holo-card .unified-card-placeholder {
+  border-radius: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Topic Clusters — Neon Hologram Creator Galaxy (planet cards)
+   ========================================================================== */
+
+.clusters-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .clusters-wrapper {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.feed-page--topic-clusters.feed-page--holo .clusters-header h1,
+.feed-page--topic-clusters.feed-page--holo .console-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.feed-page--topic-clusters.feed-page--holo .clusters-header p,
+.feed-page--topic-clusters.feed-page--holo .console-desc {
+  color: var(--crashout-subtext);
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.clusters-grid,
+.feed-page--topic-clusters #topic-clusters-root.clusters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+}
+
+.planet-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.25s ease;
+}
+
+.planet-card:hover,
+.feed-page--topic-clusters .planet-card.neon-card:hover {
+  transform: scale(1.06);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(0, 234, 255, 0.75);
+}
+
+.planet-core {
+  width: 70px;
+  height: 70px;
+  margin: 0.35rem auto 0.75rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--crashout-accent2) 45%, transparent 70%);
+  box-shadow: var(--crashout-glow2);
+  position: relative;
+  z-index: 1;
+}
+
+.planet-ring {
+  position: absolute;
+  top: 2.35rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-18deg);
+  width: 110px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 255, 0.45);
+  box-shadow: var(--crashout-glow);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.planet-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  color: var(--crashout-accent2);
+  margin: 0.35rem 0 0.4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.planet-desc {
+  color: var(--crashout-text);
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.planet-count {
+  color: var(--crashout-subtext);
+  font-size: 0.8rem;
+  margin: 0 0 0.65rem;
+}
+
+.planet-samples.content-block {
+  text-align: left;
+  color: var(--crashout-subtext);
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.planet-samples.content-block > div {
+  padding: 0.2rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.planet-samples.content-block > div:last-child {
+  border-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planet-card {
+    transition: none;
+  }
+
+  .planet-card:hover,
+  .feed-page--topic-clusters .planet-card.neon-card:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Growth Score — Neon Hologram Stat Console
+   ========================================================================== */
+
+.score-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .score-wrapper {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.feed-page--growth-score.feed-page--holo .score-header h1,
+.feed-page--growth-score.feed-page--holo .console-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.feed-page--growth-score.feed-page--holo .score-header p,
+.feed-page--growth-score.feed-page--holo .console-desc {
+  color: var(--crashout-subtext);
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.score-console {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.score-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+}
+
+.score-hero:hover {
+  transform: scale(1.02);
+  box-shadow: var(--crashout-glow2);
+}
+
+.score-dial-ring {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 255, 0.4);
+  box-shadow: var(--crashout-glow);
+  pointer-events: none;
+  animation: score-ring-pulse 2.8s ease-in-out infinite;
+}
+
+.feed-page--growth-score .score-dial.v16-dial {
+  width: 10rem;
+  height: 10rem;
+  background: conic-gradient(
+    var(--crashout-accent2) calc(var(--score) * 1%),
+    rgba(255, 255, 255, 0.08) 0
+  );
+  box-shadow: var(--crashout-glow2);
+  position: relative;
+  z-index: 1;
+}
+
+.feed-page--growth-score .v16-dial-inner {
+  background: var(--crashout-panel);
+}
+
+.feed-page--growth-score .v16-dial-value {
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+}
+
+.score-hero-meta {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.stat-panel {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1.25rem 1.1rem 1.15rem;
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.25s ease;
+}
+
+.stat-panel:hover {
+  transform: scale(1.05);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(255, 0, 255, 0.55);
+}
+
+.stat-ring {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 255, 0.35);
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.35);
+  pointer-events: none;
+}
+
+.stat-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: var(--crashout-accent2);
+  margin: 0 0 0.85rem;
+}
+
+.stat-meter {
+  --stat: 0;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  margin-bottom: 0.65rem;
+}
+
+.stat-meter-fill {
+  height: 100%;
+  width: calc(var(--stat) * 1%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--crashout-accent), var(--crashout-accent2));
+  box-shadow: 0 0 12px rgba(0, 234, 255, 0.55);
+  transition: width 0.45s var(--ease-out, ease);
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--crashout-text);
+  margin: 0 0 0.35rem;
+}
+
+.stat-max {
+  font-size: 0.75rem;
+  color: var(--crashout-subtext);
+  font-weight: 400;
+}
+
+.stat-desc {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+@keyframes score-ring-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-hero,
+  .stat-panel,
+  .stat-meter-fill {
+    transition: none;
+  }
+
+  .score-dial-ring {
+    animation: none;
+  }
+
+  .score-hero:hover,
+  .stat-panel:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Publish Ready — Neon Launchpad Edition
+   ========================================================================== */
+
+.launchpad-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .launchpad-wrapper {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.publish-page--launchpad .launchpad-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.publish-page--launchpad .launchpad-header h1,
+.publish-page--launchpad .console-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.publish-page--launchpad .console-desc,
+.publish-page--launchpad .launchpad-sub {
+  color: var(--crashout-subtext);
+  margin: 0.5rem 0 0;
+}
+
+.launchpad-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: center;
+  margin-bottom: 2.25rem;
+}
+
+.launch-btn {
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 10px;
+  border: 2px solid var(--crashout-accent2);
+  background: transparent;
+  color: var(--crashout-text);
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.launch-btn:hover,
+.launch-btn.is-glowing,
+.launch-btn:focus-visible {
+  transform: scale(1.06);
+  box-shadow: var(--crashout-glow2);
+  outline: none;
+}
+
+.launch-btn--ready:hover,
+.launch-btn--ready.is-glowing {
+  border-color: var(--crashout-accent2);
+  background: rgba(0, 234, 255, 0.15);
+}
+
+.launch-btn--launch {
+  border-color: var(--crashout-accent);
+  background: rgba(255, 0, 255, 0.12);
+}
+
+.launch-btn--launch:hover,
+.launch-btn--launch.is-glowing {
+  background: var(--crashout-accent);
+  color: #0a0a0f;
+  box-shadow: var(--crashout-glow);
+}
+
+.launch-btn--boost:hover,
+.launch-btn--boost.is-glowing {
+  background: var(--crashout-accent2);
+  color: #0a0a0f;
+  box-shadow: var(--crashout-glow2);
+}
+
+.launchpad-section-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--crashout-accent2);
+  text-align: center;
+  margin: 0 0 1.15rem;
+  letter-spacing: 1px;
+}
+
+.launchpad-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.35rem;
+  margin-bottom: 2.5rem;
+}
+
+.idea-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.35rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--crashout-text);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.25s ease;
+}
+
+.idea-card:hover,
+.idea-card.is-glowing {
+  transform: scale(1.05);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(255, 0, 255, 0.55);
+}
+
+.idea-icon {
+  font-size: 1.75rem;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.45));
+}
+
+.idea-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--crashout-accent2);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.idea-desc {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.88rem;
+  flex: 1 1 auto;
+}
+
+.idea-cta {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  color: var(--crashout-accent);
+  text-shadow: 0 0 8px rgba(255, 0, 255, 0.45);
+}
+
+.publish-page--launchpad .publish-checklist {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+  padding: 0;
+  margin: 0;
+}
+
+.publish-page--launchpad .publish-checklist li,
+.publish-page--launchpad .checklist-chip {
+  position: relative;
+  padding: 0.95rem 1rem 0.95rem 2.4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.35);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  color: var(--crashout-text);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.publish-page--launchpad .publish-checklist li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--crashout-glow2);
+}
+
+.publish-page--launchpad .publish-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--crashout-accent2);
+  text-shadow: 0 0 10px rgba(0, 234, 255, 0.65);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-btn,
+  .idea-card,
+  .publish-page--launchpad .publish-checklist li {
+    transition: none;
+  }
+
+  .launch-btn:hover,
+  .launch-btn.is-glowing,
+  .idea-card:hover,
+  .idea-card.is-glowing,
+  .publish-page--launchpad .publish-checklist li:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   YouTube Tools — Neon Video Console Edition
+   ========================================================================== */
+
+.yt-console-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .yt-console-wrapper {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.youtube-console .yt-console-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.youtube-console .yt-console-header h1,
+.youtube-console .youtube-page-title,
+.youtube-console .auth-page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.youtube-console .auth-page-lede,
+.youtube-console .youtube-page-desc {
+  color: var(--crashout-subtext);
+  text-align: center;
+}
+
+.yt-console-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.yt-panel {
+  min-height: 100%;
+}
+
+.youtube-console .oauth-card.yt-panel {
+  padding: 1.35rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+}
+
+.yt-scan-form.youtube-search-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  padding: 1.15rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+}
+
+.yt-scan-form .youtube-search-label {
+  font-family: var(--font-display);
+  letter-spacing: 1px;
+  color: var(--crashout-accent2);
+  font-size: 0.85rem;
+}
+
+.yt-scan-form input[type="search"] {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 234, 255, 0.35);
+  background: rgba(10, 10, 15, 0.75);
+  color: var(--crashout-text);
+  font: inherit;
+}
+
+.yt-scan-form input[type="search"]:focus {
+  outline: none;
+  box-shadow: var(--crashout-glow2);
+  border-color: var(--crashout-accent2);
+}
+
+.yt-video-grid,
+.youtube-page--search #youtube-search-root.yt-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.35rem;
+}
+
+.yt-video-card {
+  overflow: hidden;
+  padding: 0;
+}
+
+.yt-video-card .unified-card-body {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.yt-video-card:hover {
+  transform: scale(1.05);
+  box-shadow: var(--crashout-glow2);
+}
+
+.yt-insight-card {
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.yt-insight-ring {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 0, 255, 0.45);
+  box-shadow: var(--crashout-glow);
+  pointer-events: none;
+}
+
+.yt-insight-stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.yt-stat-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem;
+  border-radius: 10px;
+  background: rgba(0, 234, 255, 0.06);
+  border: 1px solid rgba(0, 234, 255, 0.28);
+}
+
+.yt-stat-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--crashout-accent2);
+  text-transform: uppercase;
+}
+
+.yt-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--crashout-text);
+}
+
+.youtube-console .auth-guest-note {
+  text-align: center;
+  color: var(--crashout-subtext);
+}
+
+.youtube-console .auth-guest-note a {
+  color: var(--crashout-accent2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yt-video-card:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Creator Dashboard — Neon Arcade Command Center
+   ========================================================================== */
+
+.dashboard-wrapper {
+  position: relative;
+  padding: 1.5rem 0 2.75rem;
+  max-width: min(76rem, 100%);
+  margin: 0 auto;
+  isolation: isolate;
+}
+
+.dashboard-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -1rem;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 234, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 75%);
+  animation: dash-grid-pulse 6s ease-in-out infinite;
+}
+
+@keyframes dash-grid-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.dashboard-hero {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.dashboard-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.dashboard-subtitle {
+  color: var(--crashout-subtext);
+  margin: 0.65rem 0 0;
+  font-size: 1.1rem;
+}
+
+.momentum-dial {
+  position: relative;
+  text-align: center;
+  margin: 0 auto 2rem;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.dial-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11.25rem;
+  height: 11.25rem;
+  margin-top: -1.1rem;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 0, 255, 0.4);
+  box-shadow: var(--crashout-glow);
+  transform: translate(-50%, -50%);
+  animation: dash-dial-pulse 3s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes dash-dial-pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+.creator-hub-page--arcade .dial-core-meter.v16-dial {
+  width: 7.5rem;
+  height: 7.5rem;
+  background: conic-gradient(
+    var(--crashout-accent2) calc(var(--score) * 1%),
+    rgba(255, 255, 255, 0.08) 0
+  );
+  box-shadow: var(--crashout-glow2);
+  position: relative;
+  z-index: 1;
+}
+
+.creator-hub-page--arcade .dial-core {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.35), transparent 40%),
+    var(--crashout-panel);
+}
+
+.creator-hub-page--arcade .v16-dial-value {
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+}
+
+.dial-label {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.qa-btn {
+  background: transparent;
+  border: 2px solid var(--crashout-accent);
+  color: var(--crashout-text);
+  padding: 0.75rem 1.15rem;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.qa-btn:hover,
+.qa-btn:focus-visible {
+  box-shadow: var(--crashout-glow);
+  transform: scale(1.08);
+  background: rgba(255, 0, 255, 0.12);
+  outline: none;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dash-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--crashout-text);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.25s ease;
+}
+
+.dash-card:hover {
+  transform: scale(1.06);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(255, 0, 255, 0.5);
+}
+
+.dash-card .card-icon {
+  display: block;
+  font-size: 1.75rem;
+  margin-bottom: 0.55rem;
+  filter: drop-shadow(0 0 8px rgba(255, 0, 255, 0.4));
+}
+
+.dash-card h2 {
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+  margin: 0 0 0.55rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.dash-card p {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.9rem;
+}
+
+.dash-live-panel {
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 234, 255, 0.3);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.creator-hub-page--arcade #creator-hub-channels,
+.creator-hub-page--arcade #creator-hub-analytics {
+  margin-top: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboard-wrapper::before,
+  .dial-ring {
+    animation: none;
+  }
+
+  .qa-btn,
+  .dash-card {
+    transition: none;
+  }
+
+  .qa-btn:hover,
+  .qa-btn:focus-visible,
+  .dash-card:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Monetization — Neon Earnings Dashboard
+   ========================================================================== */
+
+.monetization-wrapper {
+  padding: 1.5rem 0 2.5rem;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .monetization-wrapper {
+    padding: 2.5rem 0 3rem;
+  }
+}
+
+.monetization-page--neon .monetization-hero {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.monetization-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  color: var(--crashout-accent);
+  text-shadow: var(--crashout-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.monetization-subtitle {
+  color: var(--crashout-subtext);
+  margin: 0.65rem 0 1rem;
+}
+
+.monetization-actions {
+  margin-bottom: 2rem;
+}
+
+.earnings-grid,
+.monetization-page--neon #monetization-lanes-root.earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.25rem;
+}
+
+.earn-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 234, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1.5rem;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.25s ease;
+}
+
+.earn-card:hover {
+  transform: scale(1.06);
+  box-shadow: var(--crashout-glow2);
+  border-color: rgba(255, 0, 255, 0.5);
+}
+
+.earn-title {
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.earn-amount {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--crashout-text);
+  margin: 0 0 0.4rem;
+  text-shadow: 0 0 12px rgba(0, 234, 255, 0.35);
+}
+
+.earn-desc {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.9rem;
+}
+
+.monetization-meters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.meter-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+}
+
+.meter-card:hover {
+  transform: scale(1.04);
+  box-shadow: var(--crashout-glow);
+}
+
+.meter-title {
+  font-family: var(--font-display);
+  color: var(--crashout-accent2);
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.meter-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #111;
+  overflow: hidden;
+  margin-bottom: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--crashout-accent2), var(--crashout-accent));
+  box-shadow: 0 0 12px rgba(255, 0, 255, 0.45);
+  transition: width 0.45s ease;
+}
+
+.meter-meta {
+  margin: 0;
+  color: var(--crashout-subtext);
+  font-size: 0.82rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .earn-card,
+  .meter-card,
+  .meter-fill {
+    transition: none;
+  }
+
+  .earn-card:hover,
+  .meter-card:hover {
+    transform: none;
+  }
+}

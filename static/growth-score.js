@@ -1,7 +1,11 @@
 /**
  * Growth score dial — GET /api/growth/{creator_id}/score
+ * Neon Hologram Stat Console
  */
 (function () {
+  const uiLabel = (key, fallback) => window.CrashoutUICopy?.label?.(key) || fallback;
+  const uiTip = (key, fallback) => window.CrashoutUICopy?.tooltip?.(key) || fallback;
+
   function escapeHtml(str) {
     return String(str ?? "")
       .replace(/&/g, "&amp;")
@@ -16,6 +20,26 @@
     if (fromData) return fromData;
     const params = new URLSearchParams(window.location.search);
     return params.get("id") || params.get("creator_id") || "";
+  }
+
+  function clampPct(value, max) {
+    const n = Number(value);
+    if (!Number.isFinite(n) || max <= 0) return 0;
+    return Math.max(0, Math.min(100, Math.round((n / max) * 100)));
+  }
+
+  function statPanel(opts) {
+    const pct = clampPct(opts.value, opts.max);
+    return `
+      <article class="stat-panel holo-card neon-card unified-card" data-stat="${escapeHtml(opts.key)}">
+        <div class="stat-ring" aria-hidden="true"></div>
+        <h3 class="stat-title">${escapeHtml(opts.label)}</h3>
+        <div class="stat-meter" style="--stat:${pct}">
+          <div class="stat-meter-fill"></div>
+        </div>
+        <p class="stat-value">${escapeHtml(String(opts.value ?? "—"))}<span class="stat-max"> / ${escapeHtml(String(opts.max))}</span></p>
+        <p class="stat-desc">${escapeHtml(opts.desc)}</p>
+      </article>`;
   }
 
   async function load(creatorId) {
@@ -49,26 +73,59 @@
       }
       if (empty) empty.hidden = true;
       if (errEl) errEl.hidden = true;
+
       const score = Number(item.growth_score ?? data.meta?.growth_score ?? 0);
       const comps = item.components || {};
+      const scoreClamped = Math.max(0, Math.min(100, score));
+
       root.innerHTML = `
-        <section class="console-panel unified-card neon-card">
-          <div class="v16-dial" style="--score:${Math.max(0, Math.min(100, score))}">
+        <section class="score-hero console-panel unified-card neon-card holo-card">
+          <div class="score-dial-ring" aria-hidden="true"></div>
+          <div class="v16-dial score-dial" style="--score:${scoreClamped}">
             <div class="v16-dial-inner">
               <span class="v16-dial-value">${escapeHtml(String(score))}</span>
-              <span class="v16-dial-label">Score</span>
+              <span class="v16-dial-label">${escapeHtml(uiLabel("growth_score", "Score"))}</span>
             </div>
           </div>
+          <p class="score-hero-meta">Creator ${escapeHtml(String(item.creator_id || creatorId))}</p>
         </section>
-        <section class="console-panel unified-card neon-card">
-          <h3 class="title neon-title">Components</h3>
-          <ul class="youtube-detail-stats">
-            <li>History: ${escapeHtml(String(comps.history ?? "—"))}</li>
-            <li>Earnings: ${escapeHtml(String(comps.earnings ?? "—"))}</li>
-            <li>Engagement: ${escapeHtml(String(comps.engagement ?? "—"))}</li>
-            <li>Recommendations: ${escapeHtml(String(comps.recommendations ?? "—"))}</li>
-          </ul>
-          <p class="creator-hub-meta">Creator ${escapeHtml(String(item.creator_id || creatorId))}</p>
+
+        <section class="stat-grid" aria-label="Growth components">
+          ${statPanel({
+            key: "engagement",
+            label: uiLabel("growth_stat_engagement", "Engagement"),
+            value: comps.engagement,
+            max: 30,
+            desc: uiTip("growth_stat_engagement", "Views, likes, comments, and ad signals."),
+          })}
+          ${statPanel({
+            key: "consistency",
+            label: uiLabel("growth_stat_consistency", "Consistency"),
+            value: comps.history,
+            max: 30,
+            desc: uiTip("growth_stat_consistency", "History and publishing rhythm."),
+          })}
+          ${statPanel({
+            key: "topic_strength",
+            label: uiLabel("growth_stat_topic_strength", "Topic Strength"),
+            value: comps.recommendations,
+            max: 15,
+            desc: uiTip("growth_stat_topic_strength", "Recommendation coverage across topics."),
+          })}
+          ${statPanel({
+            key: "audience_growth",
+            label: uiLabel("growth_stat_audience", "Audience Growth"),
+            value: comps.earnings,
+            max: 25,
+            desc: uiTip("growth_stat_audience", "Earnings proxy for audience value."),
+          })}
+          ${statPanel({
+            key: "momentum",
+            label: uiLabel("growth_stat_momentum", "Momentum"),
+            value: score,
+            max: 100,
+            desc: uiTip("growth_stat_momentum", "Overall creator health meter."),
+          })}
         </section>`;
     } catch (err) {
       if (errEl) {

@@ -1,24 +1,65 @@
 {% extends "base.html" %}
-{% block title %}Connect YouTube — {{ app_name }}{% endblock %}
+{% block title %}YouTube Tools — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="app-main auth-page auth-page--youtube-oauth page-container hybrid-glow">
-  <section class="auth-page-card oauth-card unified-card neon-card">
-    <h1 class="auth-page-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h1>
-    <p class="auth-page-lede" data-ui-copy="youtube_connect" data-ui-field="tooltip">{{ uc.youtube_connect.tooltip }}</p>
-    <div class="oauth-youtube-actions">
-      <a
-        id="oauth-youtube-login-btn"
-        class="feed-cta oauth-youtube-connect-btn neon-btn"
-        href="/api/oauth/youtube/login"
-        data-ui-copy="youtube_connect"
-      >{{ uc.youtube_connect.label }}</a>
+<main class="app-main auth-page auth-page--youtube-oauth youtube-console feed-page--holo page-container hybrid-glow">
+  <div class="yt-console-wrapper">
+    <header class="yt-console-header">
+      <p class="v16-kicker" data-ui-copy="youtube_tools">{{ uc.youtube_tools.label }}</p>
+      <h1 class="auth-page-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">📺</span>
+        <span data-ui-copy="youtube_tools">{{ uc.youtube_tools.label }}</span>
+      </h1>
+      <p class="auth-page-lede" data-ui-copy="youtube_tools" data-ui-field="tooltip">{{ uc.youtube_tools.tooltip }}</p>
+    </header>
+
+    <div class="yt-console-actions launchpad-actions" role="group" aria-label="YouTube console controls">
+      <a class="launch-btn launch-btn--ready neon-btn btn" href="/youtube/search" data-ui-copy="youtube_btn_scan">{{ uc.youtube_btn_scan.label }}</a>
+      <a class="launch-btn launch-btn--boost neon-btn btn" href="/growth/score" data-ui-copy="youtube_btn_boost">{{ uc.youtube_btn_boost.label }}</a>
+      <a class="launch-btn launch-btn--launch neon-btn btn" href="/creator/dashboard" data-ui-copy="youtube_btn_analyze">{{ uc.youtube_btn_analyze.label }}</a>
     </div>
+
+    <div class="yt-console-grid">
+      <section class="auth-page-card oauth-card unified-card neon-card holo-card yt-panel">
+        <h2 class="neon-title title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h2>
+        <p class="auth-page-lede" data-ui-copy="youtube_connect" data-ui-field="tooltip">{{ uc.youtube_connect.tooltip }}</p>
+        <div class="oauth-youtube-actions">
+          <a
+            id="oauth-youtube-login-btn"
+            class="feed-cta oauth-youtube-connect-btn neon-btn launch-btn launch-btn--launch"
+            href="/api/oauth/youtube/login"
+            data-ui-copy="youtube_connect"
+          >{{ uc.youtube_connect.label }}</a>
+        </div>
+      </section>
+
+      <a class="idea-card holo-card neon-card unified-card yt-panel" href="/youtube/search">
+        <span class="idea-icon" aria-hidden="true">🔍</span>
+        <h3 class="idea-title" data-ui-copy="youtube_search">{{ uc.youtube_search.label }}</h3>
+        <p class="idea-desc" data-ui-copy="youtube_search" data-ui-field="tooltip">{{ uc.youtube_search.tooltip }}</p>
+        <span class="idea-cta" data-ui-copy="youtube_btn_scan">{{ uc.youtube_btn_scan.label }}</span>
+      </a>
+
+      <a class="idea-card holo-card neon-card unified-card yt-panel" href="/feed/all">
+        <span class="idea-icon" aria-hidden="true">🔥</span>
+        <h3 class="idea-title" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h3>
+        <p class="idea-desc" data-ui-copy="youtube_panel_feed" data-ui-field="tooltip">{{ uc.youtube_panel_feed.tooltip }}</p>
+        <span class="idea-cta" data-ui-copy="youtube_btn_boost">{{ uc.youtube_btn_boost.label }}</span>
+      </a>
+
+      <a class="idea-card holo-card neon-card unified-card yt-panel" href="/creator/dashboard">
+        <span class="idea-icon" aria-hidden="true">🎮</span>
+        <h3 class="idea-title" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</h3>
+        <p class="idea-desc" data-ui-copy="youtube_panel_insights" data-ui-field="tooltip">{{ uc.youtube_panel_insights.tooltip }}</p>
+        <span class="idea-cta" data-ui-copy="youtube_btn_analyze">{{ uc.youtube_btn_analyze.label }}</span>
+      </a>
+    </div>
+
     <p class="auth-guest-note">
       <a href="/creator/dashboard" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</a>
       · <a href="/" data-ui-copy="nav_home">{{ uc.nav_home.label }}</a>
     </p>
-  </section>
+  </div>
 </main>
 {% endblock %}
 {% block scripts %}

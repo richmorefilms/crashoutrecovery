@@ -115,6 +115,26 @@
     "label": "Unified Feed",
     "tooltip": "YouTube and TikTok recovery clips in one place."
   },
+  "unified_feed_holo": {
+    "label": "Unified Feed",
+    "tooltip": "Your creator universe, all in one hologram hub"
+  },
+  "feed_filter_all": {
+    "label": "ALL",
+    "tooltip": "Show every clip in the unified feed."
+  },
+  "feed_filter_trending": {
+    "label": "TRENDING",
+    "tooltip": "Show clips with stronger engagement signals."
+  },
+  "feed_filter_tiktok": {
+    "label": "TIKTOK",
+    "tooltip": "Show TikTok clips only."
+  },
+  "feed_filter_youtube": {
+    "label": "YOUTUBE",
+    "tooltip": "Show YouTube clips only."
+  },
   "trending_feed": {
     "label": "Trending",
     "tooltip": "Clips sorted by engagement across platforms."
@@ -123,6 +143,10 @@
     "label": "YouTube Search",
     "tooltip": "Search recovery-themed YouTube videos."
   },
+  "youtube_search_holo": {
+    "label": "YouTube Search",
+    "tooltip": "Glow scan results — hologram video console edition."
+  },
   "youtube_video": {
     "label": "YouTube Video",
     "tooltip": "Video details from YouTube Data API."
@@ -130,6 +154,34 @@
   "youtube_channel": {
     "label": "YouTube Channel",
     "tooltip": "Channel details from YouTube Data API."
+  },
+  "youtube_channel_holo": {
+    "label": "YouTube Channel",
+    "tooltip": "Hologram channel insights for your arcade video console."
+  },
+  "youtube_tools": {
+    "label": "YouTube Tools",
+    "tooltip": "Neon video console — connect, scan, boost, and analyze."
+  },
+  "youtube_btn_scan": {
+    "label": "SCAN",
+    "tooltip": "Search YouTube for recovery-ready clips."
+  },
+  "youtube_btn_boost": {
+    "label": "BOOST",
+    "tooltip": "Open growth score to push creator momentum."
+  },
+  "youtube_btn_analyze": {
+    "label": "ANALYZE",
+    "tooltip": "Open creator tools and linked channel insights."
+  },
+  "youtube_panel_feed": {
+    "label": "Unified Feed",
+    "tooltip": "See YouTube clips inside the hologram unified feed."
+  },
+  "youtube_panel_insights": {
+    "label": "Channel insights",
+    "tooltip": "Jump to the creator dashboard for linked channel analytics."
   },
   "youtube_connect": {
     "label": "Connect YouTube",
@@ -151,6 +203,50 @@
     "label": "Welcome to Crashout Recovery",
     "tooltip": "Your retro-arcade creator hub"
   },
+  "creator_dashboard_holo": {
+    "label": "Creator Dashboard",
+    "tooltip": "Your neon arcade command center"
+  },
+  "dashboard_btn_recover": {
+    "label": "RECOVER",
+    "tooltip": "Return to Recovery Home for one safe next move."
+  },
+  "dash_card_feed": {
+    "label": "Unified Feed",
+    "tooltip": "Everything happening across your creator universe."
+  },
+  "dash_card_recs": {
+    "label": "Recommendations",
+    "tooltip": "Personalized hologram insights."
+  },
+  "dash_card_topics": {
+    "label": "Topic Clusters",
+    "tooltip": "Your creator galaxy — momentum themes."
+  },
+  "dash_card_growth": {
+    "label": "Growth Score",
+    "tooltip": "Neon hologram creator health meter."
+  },
+  "dash_card_publish": {
+    "label": "Launchpad",
+    "tooltip": "Ready → Launch → Boost."
+  },
+  "dash_card_youtube": {
+    "label": "YouTube Console",
+    "tooltip": "Scan, boost, analyze your channel."
+  },
+  "dash_card_monetization": {
+    "label": "Monetization",
+    "tooltip": "Neon earnings dashboard."
+  },
+  "dash_linked_channels": {
+    "label": "Linked channels",
+    "tooltip": "YouTube channels connected to this creator account."
+  },
+  "dash_analytics": {
+    "label": "Analytics summary",
+    "tooltip": "Views, watch time, and subscriber signals."
+  },
   "platform_youtube": {
     "label": "YouTube",
     "tooltip": "YouTube clip"
@@ -162,6 +258,30 @@
   "monetization_lanes": {
     "label": "Monetization",
     "tooltip": "Ads, payouts, sponsorships, and premium feed lanes."
+  },
+  "monetization_holo": {
+    "label": "Monetization",
+    "tooltip": "Your neon earnings scoreboard"
+  },
+  "monetization_lanes_heading": {
+    "label": "Revenue lanes",
+    "tooltip": "Hologram panels for each monetization lane."
+  },
+  "monetization_meters_heading": {
+    "label": "Earnings meters",
+    "tooltip": "Arcade-style readiness meters across your lanes."
+  },
+  "monetization_btn_earn": {
+    "label": "EARN",
+    "tooltip": "Open your creator earnings scoreboard."
+  },
+  "monetization_btn_boost": {
+    "label": "BOOST",
+    "tooltip": "Open growth score to push monetization momentum."
+  },
+  "monetization_btn_track": {
+    "label": "TRACK",
+    "tooltip": "Review ad inventory and payout signals."
   },
   "monetization_ads": {
     "label": "Ad inventory",
@@ -187,9 +307,21 @@
     "label": "Recommendations",
     "tooltip": "Topic clusters plus similar-user picks for you."
   },
+  "recommendations_holo": {
+    "label": "Recommendations",
+    "tooltip": "Your personalized hologram insights"
+  },
+  "recommendations_similar": {
+    "label": "Similar-user recommendations",
+    "tooltip": "Clips suggested from creators and viewers like you."
+  },
   "topic_clusters": {
     "label": "Topic Clusters",
-    "tooltip": "Recovery clips grouped by shared topics."
+    "tooltip": "Creator momentum themes grouped into a neon hologram galaxy."
+  },
+  "topic_clusters_holo": {
+    "label": "Topic Clusters",
+    "tooltip": "Explore your creator galaxy — neon hologram edition"
   },
   "topic_graph": {
     "label": "Topic Graph",
@@ -198,6 +330,30 @@
   "growth_score": {
     "label": "Growth Score",
     "tooltip": "Creator growth score from engagement, earnings, and recommendations."
+  },
+  "growth_score_holo": {
+    "label": "Creator Momentum Index",
+    "tooltip": "Your neon hologram creator health meter — engagement, consistency, and forward momentum."
+  },
+  "growth_stat_engagement": {
+    "label": "Engagement",
+    "tooltip": "Views, likes, comments, and ad signals."
+  },
+  "growth_stat_consistency": {
+    "label": "Consistency",
+    "tooltip": "History and publishing rhythm."
+  },
+  "growth_stat_topic_strength": {
+    "label": "Topic Strength",
+    "tooltip": "Recommendation coverage across topics."
+  },
+  "growth_stat_audience": {
+    "label": "Audience Growth",
+    "tooltip": "Earnings proxy for audience value."
+  },
+  "growth_stat_momentum": {
+    "label": "Momentum",
+    "tooltip": "Overall creator health meter."
   },
   "growth_trends": {
     "label": "Growth Trends",
@@ -278,6 +434,54 @@
   "publish_banner": {
     "label": "Ready for Public Release",
     "tooltip": "CrashoutRecovery v16 — routing, APIs, and intelligence layers are launch-ready."
+  },
+  "publish_launchpad": {
+    "label": "Launchpad",
+    "tooltip": "Your neon arcade launch console — checklist, idea cards, and glow launch controls."
+  },
+  "publish_ideas": {
+    "label": "Launch ideas",
+    "tooltip": "Arcade-style content jumps ready to fire."
+  },
+  "publish_checklist_title": {
+    "label": "Systems checklist",
+    "tooltip": "Confirm the stack is launch-ready before you go public."
+  },
+  "publish_btn_ready": {
+    "label": "READY",
+    "tooltip": "Review the systems checklist."
+  },
+  "publish_btn_launch": {
+    "label": "LAUNCH",
+    "tooltip": "Jump into the unified feed."
+  },
+  "publish_btn_boost": {
+    "label": "BOOST",
+    "tooltip": "Open growth tools for a momentum push."
+  },
+  "publish_idea_recovery": {
+    "label": "Recovery Home",
+    "tooltip": "Start with one safe redirect before you ship."
+  },
+  "publish_idea_feed": {
+    "label": "Unified Feed",
+    "tooltip": "Scan the hologram feed for your next clip angle."
+  },
+  "publish_idea_topics": {
+    "label": "Topic Clusters",
+    "tooltip": "Pick a creator-galaxy lane and lean into it."
+  },
+  "publish_idea_recs": {
+    "label": "Recommendations",
+    "tooltip": "Use hologram insights as your next publish prompt."
+  },
+  "publish_idea_growth": {
+    "label": "Growth Score",
+    "tooltip": "Check the health meter, then launch with intent."
+  },
+  "publish_idea_youtube": {
+    "label": "YouTube Tools",
+    "tooltip": "Connect YouTube so launch ideas can go live."
   },
   "nav_section_discover": {
     "label": "Discover",

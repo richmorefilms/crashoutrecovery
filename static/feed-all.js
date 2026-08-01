@@ -1,5 +1,5 @@
 /**
- * Unified feed — GET /api/feed/all (infinite scroll via max_results)
+ * Unified feed — GET /api/feed/all (infinite scroll + hologram filters)
  */
 (function () {
   const uiLabel = (key, fallback) => window.CrashoutUICopy?.label?.(key) || fallback;
@@ -7,6 +7,7 @@
   let loading = false;
   let exhausted = false;
   let seen = new Set();
+  let activeFilter = "all";
 
   function escapeHtml(str) {
     return String(str ?? "")
@@ -51,11 +52,18 @@
     return bits.length ? `<div class="unified-card-badges">${bits.join("")}</div>` : "";
   }
 
+  function isTrending(item) {
+    if (item.engagement_score != null && Number(item.engagement_score) >= 5) return true;
+    if (item.recommended_score != null && Number(item.recommended_score) >= 5) return true;
+    return false;
+  }
+
   function renderCard(item, rank) {
     const title = escapeHtml(item.title || "Recovery clip");
     const channel = escapeHtml(item.channel || "");
     const thumb = item.thumbnail ? escapeHtml(item.thumbnail) : "";
     const platform = String(item.platform || "unknown").toLowerCase();
+    const trending = isTrending(item) ? "1" : "0";
     let href = "#";
     if (platform === "youtube" && item.id) {
       href = `/youtube/video/${encodeURIComponent(item.id)}`;
@@ -67,17 +75,55 @@
       : `<div class="unified-card-placeholder" aria-hidden="true"></div>`;
 
     return `
-      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
-        <a class="unified-card-link" href="${href}">
+      <article
+        class="holo-card unified-card neon-card"
+        data-id="${escapeHtml(item.id)}"
+        data-type="${escapeHtml(platform)}"
+        data-trending="${trending}"
+        style="animation-delay:${rank * 40}ms"
+      >
+        <a class="unified-card-link holo-inner" href="${href}">
           ${media}
           <div class="unified-card-body">
             ${platformBadge(platform)}
             ${scoreBadges(item)}
-            <h3 class="unified-card-title title neon-title">${title}</h3>
-            ${channel ? `<p class="unified-card-channel">${channel}</p>` : ""}
+            <h3 class="unified-card-title holo-title title neon-title">${title}</h3>
+            ${channel ? `<p class="unified-card-channel holo-desc">${channel}</p>` : ""}
+            <div class="holo-meta">
+              <span>${escapeHtml(platform.toUpperCase())}</span>
+              <span></span>
+            </div>
           </div>
         </a>
       </article>`;
+  }
+
+  function applyFilter(root) {
+    if (!root) return;
+    const cards = root.querySelectorAll(".holo-card");
+    cards.forEach((card) => {
+      const type = (card.dataset.type || "").toLowerCase();
+      const trending = card.dataset.trending === "1";
+      let show = true;
+      if (activeFilter === "trending") show = trending;
+      else if (activeFilter !== "all") show = type === activeFilter;
+      card.hidden = !show;
+      card.style.display = show ? "" : "none";
+    });
+  }
+
+  function initFilters(root) {
+    const buttons = document.querySelectorAll(".feed-filters .filter-btn");
+    if (!buttons.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter || "all";
+        applyFilter(root);
+      });
+    });
   }
 
   async function load(maxResults) {
@@ -111,6 +157,7 @@
         "beforeend",
         fresh.map((item, i) => renderCard(item, start + i)).join("")
       );
+      applyFilter(root);
       if (items.length < pageSize) exhausted = true;
       else pageSize = Math.min(50, pageSize + 12);
     } finally {
@@ -129,7 +176,9 @@
     seen = new Set();
     pageSize = 12;
     exhausted = false;
+    activeFilter = "all";
     root.innerHTML = "";
+    initFilters(root);
     try {
       await appendPage(root);
       if (!root.children.length) {

@@ -59,7 +59,168 @@ TOPIC_HINTS = (
     "safe",
     "spike",
     "account",
+    "growth",
+    "engagement",
+    "audience",
+    "viral",
+    "community",
+    "uplift",
+    "breakthrough",
 )
+
+# Stigmatizing / negative free-token topics — never surface as cluster keys
+BLOCKED_TOPIC_TOKENS = frozenset(
+    {
+        "addiction",
+        "addict",
+        "addicted",
+        "sobriety",
+        "relapse",
+        "sad",
+        "sadness",
+        "depress",
+        "depression",
+        "depressed",
+        "suicide",
+        "suicidal",
+        "trauma",
+        "shame",
+        "stigma",
+        "drunk",
+        "overdose",
+        "withdraw",
+        "withdrawal",
+    }
+)
+
+# Creator Momentum Clusters — positive display galaxy (slug → copy + keyword map)
+CREATOR_MOMENTUM_CLUSTERS: dict[str, dict[str, Any]] = {
+    "growth_boosters": {
+        "display_name": "Growth Boosters",
+        "description": "Moves that compound reach, consistency, and forward momentum.",
+        "keywords": ("growth", "boost", "scale", "expand", "momentum", "spike"),
+    },
+    "engagement_drivers": {
+        "display_name": "Engagement Drivers",
+        "description": "Hooks, replies, and prompts that spark real interaction.",
+        "keywords": ("engagement", "comment", "reply", "interact", "hook"),
+    },
+    "audience_builders": {
+        "display_name": "Audience Builders",
+        "description": "Ideas that welcome new viewers and deepen loyalty.",
+        "keywords": ("audience", "subscriber", "follow", "community", "fan"),
+    },
+    "trend_accelerators": {
+        "display_name": "Trend Accelerators",
+        "description": "Formats and moments riding what's rising right now.",
+        "keywords": ("trend", "trending", "timely", "now", "wave"),
+    },
+    "high_impact_topics": {
+        "display_name": "High-Impact Topics",
+        "description": "High-signal themes that punch above their length.",
+        "keywords": ("impact", "power", "bold", "strong", "clarity"),
+    },
+    "evergreen_creators": {
+        "display_name": "Evergreen Creators",
+        "description": "Timeless clips that keep working long after publish.",
+        "keywords": ("evergreen", "creator", "craft", "archive", "classic"),
+    },
+    "viral_potential": {
+        "display_name": "Viral Potential",
+        "description": "Share-ready angles with breakout energy.",
+        "keywords": ("viral", "share", "breakout", "explode", "clip"),
+    },
+    "community_sparks": {
+        "display_name": "Community Sparks",
+        "description": "Conversation starters that light up your circle.",
+        "keywords": ("community", "together", "collab", "circle", "crew"),
+    },
+    "opportunity_zones": {
+        "display_name": "Opportunity Zones",
+        "description": "Open lanes where your next post can land clean.",
+        "keywords": ("opportunity", "lane", "gap", "opening", "chance"),
+    },
+    "rising_niches": {
+        "display_name": "Rising Niches",
+        "description": "Emerging corners of the map with room to lead.",
+        "keywords": ("niche", "rising", "emerging", "lane", "vertical"),
+    },
+    "creator_wins": {
+        "display_name": "Creator Wins",
+        "description": "Proof points, milestones, and celebrate-able progress.",
+        "keywords": ("win", "wins", "milestone", "progress", "success"),
+    },
+    "accountability_themes": {
+        "display_name": "Accountability Themes",
+        "description": "Check-ins and commitments that keep the streak honest.",
+        "keywords": ("account", "accountability", "checkin", "commit", "habit", "draft", "pause"),
+    },
+    "uplift_stories": {
+        "display_name": "Uplift Stories",
+        "description": "Forward-looking recovery energy without stigma or shame.",
+        "keywords": ("recovery", "uplift", "hope", "rebuild", "safe"),
+    },
+    "motivation_mindset": {
+        "display_name": "Motivation & Mindset",
+        "description": "Fuel for focus, grit, and choosing the next small move.",
+        "keywords": ("motivation", "mindset", "mentalhealth", "focus", "grit", "calm"),
+    },
+    "breakthrough_moments": {
+        "display_name": "Breakthrough Moments",
+        "description": "Turning-point clips that mark a clear level-up.",
+        "keywords": ("breakthrough", "turnaround", "levelup", "shift", "aha"),
+    },
+}
+
+_CREATOR_CLUSTER_SLUGS = tuple(CREATOR_MOMENTUM_CLUSTERS.keys())
+
+# Direct topic → cluster slug (covers TOPIC_HINTS + common aliases)
+TOPIC_TO_CREATOR_CLUSTER: dict[str, str] = {
+    "recovery": "uplift_stories",
+    "motivation": "motivation_mindset",
+    "mentalhealth": "motivation_mindset",
+    "calm": "motivation_mindset",
+    "draft": "accountability_themes",
+    "pause": "accountability_themes",
+    "momentum": "growth_boosters",
+    "creator": "evergreen_creators",
+    "safe": "uplift_stories",
+    "spike": "growth_boosters",
+    "account": "accountability_themes",
+    "growth": "growth_boosters",
+    "engagement": "engagement_drivers",
+    "audience": "audience_builders",
+    "viral": "viral_potential",
+    "community": "community_sparks",
+    "uplift": "uplift_stories",
+    "breakthrough": "breakthrough_moments",
+}
+
+
+def map_topic_to_creator_cluster(topic: str) -> str:
+    """Map a raw topic token onto a Creator Momentum cluster slug."""
+    t = str(topic or "").strip().lower()
+    if not t:
+        return "opportunity_zones"
+    if t in TOPIC_TO_CREATOR_CLUSTER:
+        return TOPIC_TO_CREATOR_CLUSTER[t]
+    if t in CREATOR_MOMENTUM_CLUSTERS:
+        return t
+    for slug, meta in CREATOR_MOMENTUM_CLUSTERS.items():
+        for kw in meta.get("keywords") or ():
+            if kw == t or kw in t or t in kw:
+                return slug
+    # Stable fallback so free tokens still land in the positive galaxy
+    idx = sum(ord(c) for c in t) % len(_CREATOR_CLUSTER_SLUGS)
+    return _CREATOR_CLUSTER_SLUGS[idx]
+
+
+def creator_cluster_meta(slug: str) -> dict[str, str]:
+    meta = CREATOR_MOMENTUM_CLUSTERS.get(slug) or CREATOR_MOMENTUM_CLUSTERS["opportunity_zones"]
+    return {
+        "display_name": str(meta["display_name"]),
+        "description": str(meta["description"]),
+    }
 
 
 def extract_topics(item: dict[str, Any]) -> list[str]:
@@ -82,6 +243,8 @@ def extract_topics(item: dict[str, Any]) -> list[str]:
             seen.add(hint)
     for tok in tokens:
         if len(tok) < 4 or tok in STOPWORDS or tok in seen:
+            continue
+        if tok in BLOCKED_TOPIC_TOKENS:
             continue
         if tok.isalpha() or tok.isalnum():
             topics.append(tok)
@@ -323,17 +486,44 @@ def build_topics_response(*, max_results: int = 24) -> dict[str, Any]:
     items = _feed_items(max_results=max_results)
     cache_topics_for_items(items)
     clusters = cluster_items_by_topic(items)
-    cluster_items = [
-        {
-            "id": f"topic_{topic}",
-            "topic": topic,
-            "count": len(members),
-            "items": members[:8],
-        }
-        for topic, members in sorted(
-            clusters.items(), key=lambda kv: len(kv[1]), reverse=True
-        )
-    ]
+
+    # Re-bucket into Creator Momentum Clusters (positive display galaxy)
+    merged: dict[str, dict[str, Any]] = {}
+    for topic, members in clusters.items():
+        if str(topic).lower() in BLOCKED_TOPIC_TOKENS:
+            continue
+        slug = map_topic_to_creator_cluster(topic)
+        bucket = merged.get(slug)
+        if not bucket:
+            meta = creator_cluster_meta(slug)
+            bucket = {
+                "id": f"topic_{slug}",
+                "topic": slug,
+                "display_name": meta["display_name"],
+                "description": meta["description"],
+                "count": 0,
+                "items": [],
+                "source_topics": [],
+                "_seen": set(),
+            }
+            merged[slug] = bucket
+        if topic not in bucket["source_topics"]:
+            bucket["source_topics"].append(topic)
+        for member in members:
+            mid = str(member.get("id") or "")
+            if mid and mid in bucket["_seen"]:
+                continue
+            if mid:
+                bucket["_seen"].add(mid)
+            if len(bucket["items"]) < 8:
+                bucket["items"].append(member)
+
+    cluster_items = []
+    for slug, bucket in sorted(merged.items(), key=lambda kv: len(kv[1]["_seen"]), reverse=True):
+        seen = bucket.pop("_seen", set())
+        bucket["count"] = len(seen) if seen else len(bucket["items"])
+        cluster_items.append(bucket)
+
     return {
         "ok": True,
         "platform": "unified",
@@ -341,7 +531,11 @@ def build_topics_response(*, max_results: int = 24) -> dict[str, Any]:
         "title": "Topic Clusters",
         "items": cluster_items,
         "count": len(cluster_items),
-        "meta": {"cluster_count": len(cluster_items), "item_count": len(items)},
+        "meta": {
+            "cluster_count": len(cluster_items),
+            "item_count": len(items),
+            "galaxy": "creator_momentum",
+        },
     }
 
 

@@ -2,20 +2,78 @@
 {% block title %}Publish Ready — {{ app_name }}{% endblock %}
 {% block content %}
 {% set uc = ui_copy or {} %}
-<main class="publish-page v16-shell app-main page-container hybrid-glow" id="publish-ready-root">
-  <div class="publish-banner">
-    <p class="v16-kicker">CrashoutRecovery v16</p>
-    <h1 class="console-title title neon-title" data-ui-copy="publish_banner">{{ uc.publish_banner.label }}</h1>
-    <p class="console-desc" data-ui-copy="publish_banner" data-ui-field="tooltip">{{ uc.publish_banner.tooltip }}</p>
+<main class="publish-page publish-page--launchpad feed-page--holo v16-shell app-main page-container hybrid-glow" id="publish-ready-root">
+  <div class="launchpad-wrapper">
+    <header class="launchpad-header publish-banner">
+      <p class="v16-kicker">CrashoutRecovery v16</p>
+      <h1 class="console-title title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🚀</span>
+        <span data-ui-copy="publish_launchpad">{{ uc.publish_launchpad.label }}</span>
+      </h1>
+      <p class="console-desc" data-ui-copy="publish_launchpad" data-ui-field="tooltip">{{ uc.publish_launchpad.tooltip }}</p>
+      <p class="launchpad-sub" data-ui-copy="publish_banner">{{ uc.publish_banner.label }}</p>
+    </header>
+
+    <div class="launchpad-actions" role="group" aria-label="Launch controls">
+      <a class="launch-btn launch-btn--ready neon-btn btn" href="#publish-checklist" data-ui-copy="publish_btn_ready">{{ uc.publish_btn_ready.label }}</a>
+      <a class="launch-btn launch-btn--launch neon-btn btn" href="/feed/all" data-ui-copy="publish_btn_launch">{{ uc.publish_btn_launch.label }}</a>
+      <a class="launch-btn launch-btn--boost neon-btn btn" href="/growth/score" data-ui-copy="publish_btn_boost">{{ uc.publish_btn_boost.label }}</a>
+    </div>
+
+    <section class="launchpad-ideas" aria-labelledby="launchpad-ideas-title">
+      <h2 id="launchpad-ideas-title" class="launchpad-section-title neon-title" data-ui-copy="publish_ideas">{{ uc.publish_ideas.label }}</h2>
+      <div class="launchpad-grid">
+        <a class="idea-card holo-card neon-card unified-card" href="/">
+          <span class="idea-icon" aria-hidden="true">🛡️</span>
+          <h3 class="idea-title" data-ui-copy="nav_home">{{ uc.nav_home.label }}</h3>
+          <p class="idea-desc" data-ui-copy="publish_idea_recovery" data-ui-field="tooltip">{{ uc.publish_idea_recovery.tooltip }}</p>
+          <span class="idea-cta" data-ui-copy="publish_btn_launch">{{ uc.publish_btn_launch.label }}</span>
+        </a>
+        <a class="idea-card holo-card neon-card unified-card" href="/feed/all">
+          <span class="idea-icon" aria-hidden="true">🔥</span>
+          <h3 class="idea-title" data-ui-copy="unified_feed">{{ uc.unified_feed.label }}</h3>
+          <p class="idea-desc" data-ui-copy="publish_idea_feed" data-ui-field="tooltip">{{ uc.publish_idea_feed.tooltip }}</p>
+          <span class="idea-cta" data-ui-copy="publish_btn_launch">{{ uc.publish_btn_launch.label }}</span>
+        </a>
+        <a class="idea-card holo-card neon-card unified-card" href="/topics">
+          <span class="idea-icon" aria-hidden="true">🌌</span>
+          <h3 class="idea-title" data-ui-copy="topic_clusters">{{ uc.topic_clusters.label }}</h3>
+          <p class="idea-desc" data-ui-copy="publish_idea_topics" data-ui-field="tooltip">{{ uc.publish_idea_topics.tooltip }}</p>
+          <span class="idea-cta" data-ui-copy="publish_btn_boost">{{ uc.publish_btn_boost.label }}</span>
+        </a>
+        <a class="idea-card holo-card neon-card unified-card" href="/recommendations">
+          <span class="idea-icon" aria-hidden="true">✨</span>
+          <h3 class="idea-title" data-ui-copy="recommendations">{{ uc.recommendations.label }}</h3>
+          <p class="idea-desc" data-ui-copy="publish_idea_recs" data-ui-field="tooltip">{{ uc.publish_idea_recs.tooltip }}</p>
+          <span class="idea-cta" data-ui-copy="publish_btn_launch">{{ uc.publish_btn_launch.label }}</span>
+        </a>
+        <a class="idea-card holo-card neon-card unified-card" href="/growth/score">
+          <span class="idea-icon" aria-hidden="true">📈</span>
+          <h3 class="idea-title" data-ui-copy="growth_score">{{ uc.growth_score.label }}</h3>
+          <p class="idea-desc" data-ui-copy="publish_idea_growth" data-ui-field="tooltip">{{ uc.publish_idea_growth.tooltip }}</p>
+          <span class="idea-cta" data-ui-copy="publish_btn_boost">{{ uc.publish_btn_boost.label }}</span>
+        </a>
+        <a class="idea-card holo-card neon-card unified-card" href="/oauth/youtube">
+          <span class="idea-icon" aria-hidden="true">📺</span>
+          <h3 class="idea-title" data-ui-copy="youtube_connect">{{ uc.youtube_connect.label }}</h3>
+          <p class="idea-desc" data-ui-copy="publish_idea_youtube" data-ui-field="tooltip">{{ uc.publish_idea_youtube.tooltip }}</p>
+          <span class="idea-cta" data-ui-copy="publish_btn_ready">{{ uc.publish_btn_ready.label }}</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="launchpad-checklist-section" aria-labelledby="launchpad-check-title">
+      <h2 id="launchpad-check-title" class="launchpad-section-title neon-title" data-ui-copy="publish_checklist_title">{{ uc.publish_checklist_title.label }}</h2>
+      <ul class="publish-checklist" id="publish-checklist">
+        <li data-check="routing">Routing stable</li>
+        <li data-check="api">API stable</li>
+        <li data-check="intelligence">Intelligence layers stable</li>
+        <li data-check="growth">Growth engine stable</li>
+        <li data-check="staff">Staff console stable</li>
+        <li data-check="multi">Multi-platform ingestion stable</li>
+      </ul>
+    </section>
   </div>
-  <ul class="publish-checklist" id="publish-checklist">
-    <li data-check="routing">Routing stable</li>
-    <li data-check="api">API stable</li>
-    <li data-check="intelligence">Intelligence layers stable</li>
-    <li data-check="growth">Growth engine stable</li>
-    <li data-check="staff">Staff console stable</li>
-    <li data-check="multi">Multi-platform ingestion stable</li>
-  </ul>
 </main>
 {% endblock %}
 {% block scripts %}

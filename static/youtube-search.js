@@ -1,5 +1,6 @@
 /**
  * YouTube search — GET /api/youtube/search?q=...
+ * Neon Video Console hologram cards
  */
 (function () {
   function escapeHtml(str) {
@@ -20,13 +21,17 @@
       : `<div class="unified-card-placeholder" aria-hidden="true"></div>`;
 
     return `
-      <article class="unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
-        <a class="unified-card-link" href="${href}">
+      <article class="holo-card yt-video-card unified-card neon-card" data-id="${escapeHtml(item.id)}" style="animation-delay:${rank * 40}ms">
+        <a class="unified-card-link holo-inner" href="${href}">
           ${media}
           <div class="unified-card-body">
             <span class="platform-badge platform-badge--youtube">YouTube</span>
-            <h3 class="unified-card-title title neon-title">${title}</h3>
-            ${channel ? `<p class="unified-card-channel">${channel}</p>` : ""}
+            <h3 class="unified-card-title holo-title title neon-title">${title}</h3>
+            ${channel ? `<p class="unified-card-channel holo-desc">${channel}</p>` : ""}
+            <div class="holo-meta">
+              <span>YOUTUBE</span>
+              <span>SCAN</span>
+            </div>
           </div>
         </a>
       </article>`;

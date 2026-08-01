@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Creator Vault — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main vault-page feed-page--holo page-container hybrid-glow" id="vault-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="creator_vault">{{ uc.creator_vault.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🗄️</span>
+        <span data-ui-copy="creator_vault">{{ uc.creator_vault.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="creator_vault" data-ui-field="tooltip">{{ uc.creator_vault.tooltip }}</p>
+    </header>
+
+    <section class="vault-upload holo-card">
+      <label class="studio-field"><span data-ui-copy="vault_title">{{ uc.vault_title.label }}</span>
+        <input id="vault-title" type="text" maxlength="80" placeholder="Draft title">
+      </label>
+      <label class="studio-field"><span data-ui-copy="vault_type">{{ uc.vault_type.label }}</span>
+        <select id="vault-type">
+          <option value="clip">Clip</option>
+          <option value="draft">Draft</option>
+          <option value="thumbnail">Thumbnail</option>
+          <option value="script">Script</option>
+        </select>
+      </label>
+      <label class="studio-field"><span data-ui-copy="vault_notes">{{ uc.vault_notes.label }}</span>
+        <textarea id="vault-notes" rows="2" maxlength="300" placeholder="Notes for later…"></textarea>
+      </label>
+      <button type="button" class="launch-btn launch-btn--launch" id="vault-add" data-ui-copy="vault_add">{{ uc.vault_add.label }}</button>
+    </section>
+
+    <div id="vault-files-root" class="expand-grid" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-vault.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorVault?.mount?.("#vault-root");
+  });
+</script>
+{% endblock %}

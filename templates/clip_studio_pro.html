@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Clip Studio Pro — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main studio-pro-page feed-page--holo page-container hybrid-glow" id="studio-pro-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="clip_studio_pro">{{ uc.clip_studio_pro.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🎞️</span>
+        <span data-ui-copy="clip_studio_pro">{{ uc.clip_studio_pro.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="clip_studio_pro" data-ui-field="tooltip">{{ uc.clip_studio_pro.tooltip }}</p>
+      <p class="unified-feed-actions">
+        <a class="feed-cta neon-btn btn" href="/creator/studio" data-ui-copy="clip_studio">{{ uc.clip_studio.label }}</a>
+        <a class="feed-cta feed-cta--ghost btn neon-btn" href="/assistant" data-ui-copy="creator_assistant">{{ uc.creator_assistant.label }}</a>
+      </p>
+    </header>
+
+    <section class="studio-pro-timeline holo-card">
+      <h2 class="neon-title" data-ui-copy="studio_timeline">{{ uc.studio_timeline.label }}</h2>
+      <div class="pro-track" id="studio-pro-track"></div>
+    </section>
+
+    <section class="studio-preview holo-card">
+      <div class="studio-tools">
+        <label class="studio-field"><span data-ui-copy="clip_caption">{{ uc.clip_caption.label }}</span>
+          <textarea id="pro-caption" rows="2" maxlength="160"></textarea>
+        </label>
+        <label class="studio-field"><span data-ui-copy="studio_thumb_design">{{ uc.studio_thumb_design.label }}</span>
+          <select id="pro-thumb">
+            <option value="cyan" data-ui-copy="studio_thumb_cyan">{{ uc.studio_thumb_cyan.label }}</option>
+            <option value="magenta" data-ui-copy="studio_thumb_magenta">{{ uc.studio_thumb_magenta.label }}</option>
+            <option value="dual" data-ui-copy="studio_thumb_dual">{{ uc.studio_thumb_dual.label }}</option>
+          </select>
+        </label>
+        <button type="button" class="launch-btn launch-btn--ready" id="pro-caption-ai" data-ui-copy="studio_caption_ai">{{ uc.studio_caption_ai.label }}</button>
+        <button type="button" class="launch-btn launch-btn--boost" id="pro-boost" data-ui-copy="clip_boost">{{ uc.clip_boost.label }}</button>
+      </div>
+      <div class="studio-player" id="pro-preview" data-frame="neon">
+        <p class="studio-player-label" data-ui-copy="clip_preview">{{ uc.clip_preview.label }}</p>
+      </div>
+    </section>
+    <div class="home-actions">
+      <a class="home-btn" href="/oauth/youtube" data-ui-copy="platform_youtube">{{ uc.platform_youtube.label }}</a>
+      <a class="home-btn" href="/auth/tiktok/login" data-ui-copy="platform_tiktok">{{ uc.platform_tiktok.label }}</a>
+      <a class="home-btn" href="/publish" data-ui-copy="publish_launchpad">{{ uc.publish_launchpad.label }}</a>
+    </div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/clip-studio-pro.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutClipStudioPro?.mount?.("#studio-pro-root");
+  });
+</script>
+{% endblock %}

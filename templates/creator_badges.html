@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Creator Badges — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main badges-page feed-page--holo page-container hybrid-glow" id="creator-badges-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="creator_badges">{{ uc.creator_badges.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🏅</span>
+        <span data-ui-copy="creator_badges">{{ uc.creator_badges.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="creator_badges" data-ui-field="tooltip">{{ uc.creator_badges.tooltip }}</p>
+    </header>
+    <p class="badge-earned-today" id="badges-earned-today" hidden data-ui-copy="badges_earned_today">{{ uc.badges_earned_today.label }}</p>
+    <div class="badge-shelf expand-grid" id="badges-shelf-root" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-badges.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorBadges?.mount?.("#creator-badges-root");
+  });
+</script>
+{% endblock %}

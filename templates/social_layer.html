@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Social — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main social-page feed-page--holo page-container hybrid-glow" id="social-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="social_layer">{{ uc.social_layer.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🤝</span>
+        <span data-ui-copy="social_layer">{{ uc.social_layer.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="social_layer" data-ui-field="tooltip">{{ uc.social_layer.tooltip }}</p>
+    </header>
+    <h2 class="launchpad-section-title" data-ui-copy="social_creators">{{ uc.social_creators.label }}</h2>
+    <div id="social-creators-root" class="expand-grid" aria-live="polite"></div>
+    <h2 class="launchpad-section-title" data-ui-copy="social_signals">{{ uc.social_signals.label }}</h2>
+    <div id="social-signals-root" class="notify-list" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/social-layer.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutSocialLayer?.mount?.("#social-root");
+  });
+</script>
+{% endblock %}

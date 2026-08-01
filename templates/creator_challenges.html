@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Challenges — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main challenges-page feed-page--holo page-container hybrid-glow" id="challenges-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="creator_challenges">{{ uc.creator_challenges.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🎯</span>
+        <span data-ui-copy="creator_challenges">{{ uc.creator_challenges.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="creator_challenges" data-ui-field="tooltip">{{ uc.creator_challenges.tooltip }}</p>
+    </header>
+    <div id="challenges-list-root" class="expand-grid" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-challenges.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorChallenges?.mount?.("#challenges-root");
+  });
+</script>
+{% endblock %}

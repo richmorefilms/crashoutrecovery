@@ -201,7 +201,27 @@
   },
   "creator_home_hero": {
     "label": "Welcome to Crashout Recovery",
-    "tooltip": "Your retro-arcade creator hub"
+    "tooltip": "Your neon arcade creator hub — upliftment, momentum, accountability."
+  },
+  "creator_home_welcome": {
+    "label": "Creator Home",
+    "tooltip": "Your neon arcade creator hub — upliftment, momentum, accountability."
+  },
+  "creator_home_onboard": {
+    "label": "Soft start",
+    "tooltip": "Pick one tile. One small move beats a spiral — upliftment, accountability, forward momentum."
+  },
+  "creator_home_btn_start": {
+    "label": "START",
+    "tooltip": "Open the Unified Feed hologram hub."
+  },
+  "creator_home_btn_boost": {
+    "label": "BOOST",
+    "tooltip": "Check your Growth Score health meter."
+  },
+  "creator_home_btn_explore": {
+    "label": "EXPLORE",
+    "tooltip": "Browse Topic Clusters in the creator galaxy."
   },
   "creator_dashboard_holo": {
     "label": "Creator Dashboard",
@@ -534,5 +554,609 @@
   "badge_normalized": {
     "label": "Normalized",
     "tooltip": "Unified envelope card."
+  },
+  "pwa_install": {
+    "label": "Install Crashout Recovery",
+    "tooltip": "Add Crashout Recovery to your home screen for a full-screen neon creator app."
+  },
+  "pwa_install_confirm": {
+    "label": "INSTALL",
+    "tooltip": "Install the Crashout Recovery app."
+  },
+  "pwa_install_dismiss": {
+    "label": "LATER",
+    "tooltip": "Hide the install prompt for now."
+  },
+  "pwa_ios_hint": {
+    "label": "Add to Home Screen",
+    "tooltip": "On iPhone: Share → Add to Home Screen."
+  },
+  "pwa_offline": {
+    "label": "You're offline",
+    "tooltip": "Neon shell is cached — reconnect or jump back to Creator Home."
+  },
+  "pwa_retry": {
+    "label": "RETRY",
+    "tooltip": "Try loading again."
+  },
+  "growth_timeline": {
+    "label": "Creator Timeline",
+    "tooltip": "Your story of progress — daily momentum, weekly consistency, monthly growth arcs."
+  },
+  "growth_timeline_empty": {
+    "label": "No timeline yet",
+    "tooltip": "No momentum history yet."
+  },
+  "growth_timeline_daily": {
+    "label": "Daily momentum",
+    "tooltip": "Day-by-day creator momentum."
+  },
+  "growth_timeline_weekly": {
+    "label": "Weekly consistency",
+    "tooltip": "Consistency across the week."
+  },
+  "growth_timeline_monthly": {
+    "label": "Monthly growth arcs",
+    "tooltip": "Longer arcs of creator growth."
+  },
+  "growth_peak": {
+    "label": "Momentum Peak",
+    "tooltip": "A high-signal day on your timeline."
+  },
+  "growth_streak": {
+    "label": "Consistency Streak",
+    "tooltip": "Days you stayed above your average momentum."
+  },
+  "clip_studio": {
+    "label": "Clip Studio",
+    "tooltip": "Trim, caption, and boost clips before you launch."
+  },
+  "clip_preview": {
+    "label": "Neon preview",
+    "tooltip": "Live preview of your clip frame."
+  },
+  "clip_trim": {
+    "label": "Trim",
+    "tooltip": "Set clip length in seconds."
+  },
+  "clip_caption": {
+    "label": "Caption",
+    "tooltip": "Write a short upliftment-friendly caption."
+  },
+  "clip_thumb": {
+    "label": "Thumbnail",
+    "tooltip": "Pick a neon frame style."
+  },
+  "clip_boost": {
+    "label": "BOOST CLIP",
+    "tooltip": "Mark this clip ready to launch."
+  },
+  "clip_boosted": {
+    "label": "CLIP BOOSTED",
+    "tooltip": "Clip marked for launch energy."
+  },
+  "clip_export": {
+    "label": "Export lanes",
+    "tooltip": "Send boosted clips toward YouTube or TikTok."
+  },
+  "opportunity_radar": {
+    "label": "Opportunity Radar",
+    "tooltip": "Scan rising topics and momentum clusters before you chase noise."
+  },
+  "radar_scanning": {
+    "label": "Scanning creator galaxy…",
+    "tooltip": "Radar is reading topic momentum."
+  },
+  "radar_ready": {
+    "label": "Scan complete — rising lanes locked",
+    "tooltip": "Opportunities are ready."
+  },
+  "radar_opportunity": {
+    "label": "opportunity",
+    "tooltip": "Opportunity strength."
+  },
+  "radar_add_launchpad": {
+    "label": "Add to Launchpad",
+    "tooltip": "Send this opportunity to Publish Ready."
+  },
+  "recovery_mode": {
+    "label": "Recovery Mode",
+    "tooltip": "Daily check-in for upliftment and accountability — zero stigma."
+  },
+  "recovery_checkin": {
+    "label": "Daily check-in",
+    "tooltip": "Reset, reflect, or rebuild — your call."
+  },
+  "recovery_reset": {
+    "label": "RESET",
+    "tooltip": "Soft reset without shame."
+  },
+  "recovery_reflect": {
+    "label": "REFLECT",
+    "tooltip": "Log a clear-eyed reflection."
+  },
+  "recovery_rebuild": {
+    "label": "REBUILD",
+    "tooltip": "Lock one forward rebuild move."
+  },
+  "recovery_reset_done": {
+    "label": "Reset noted",
+    "tooltip": "Reset noted. Soft landing."
+  },
+  "recovery_reflect_done": {
+    "label": "Reflection logged",
+    "tooltip": "Reflection logged. Clear eyes."
+  },
+  "recovery_rebuild_done": {
+    "label": "Rebuild locked",
+    "tooltip": "Rebuild move locked. Forward."
+  },
+  "recovery_consistency": {
+    "label": "Consistency",
+    "tooltip": "Emotional consistency dial — empowerment only."
+  },
+  "recovery_uplift": {
+    "label": "Upliftment stories",
+    "tooltip": "Short rails of forward momentum."
+  },
+  "creator_badges": {
+    "label": "Creator Badges",
+    "tooltip": "Glow achievements for consistency, growth, creativity, recovery, and community."
+  },
+  "badges_earned_today": {
+    "label": "Earned Today",
+    "tooltip": "You unlocked at least one badge today."
+  },
+  "badge_consistency": {
+    "label": "Consistency",
+    "tooltip": "Showed up with steady habits."
+  },
+  "badge_growth": {
+    "label": "Growth",
+    "tooltip": "Moved the creator health meter forward."
+  },
+  "badge_creativity": {
+    "label": "Creativity",
+    "tooltip": "Tried a fresh angle."
+  },
+  "badge_recovery": {
+    "label": "Recovery",
+    "tooltip": "Chose accountability over spiral."
+  },
+  "badge_community": {
+    "label": "Community",
+    "tooltip": "Connected without toxicity."
+  },
+  "badge_unlocked": {
+    "label": "Unlocked",
+    "tooltip": "Badge earned."
+  },
+  "badge_locked": {
+    "label": "Keep going",
+    "tooltip": "Still in progress."
+  },
+  "notifications": {
+    "label": "Notifications",
+    "tooltip": "Glow alerts for recommendations, topics, growth, monetization, and YouTube."
+  },
+  "notifications_refresh": {
+    "label": "REFRESH",
+    "tooltip": "Reload creator alerts."
+  },
+  "notifications_clear": {
+    "label": "CLEAR",
+    "tooltip": "Clear the alert shelf."
+  },
+  "notifications_empty": {
+    "label": "No alerts",
+    "tooltip": "No alerts yet."
+  },
+  "notifications_refreshed": {
+    "label": "Alerts refreshed",
+    "tooltip": "Notification shelf refreshed."
+  },
+  "notifications_cleared": {
+    "label": "Alerts cleared",
+    "tooltip": "Notification shelf cleared."
+  },
+  "creator_economy": {
+    "label": "Creator Economy",
+    "tooltip": "Predictive earnings lanes and boost potential — creator-friendly, no gambling vibes."
+  },
+  "economy_boost": {
+    "label": "Boost Potential",
+    "tooltip": "Average readiness across monetization lanes."
+  },
+  "economy_lanes": {
+    "label": "Lane optimizer",
+    "tooltip": "Tune which monetization lanes are ready to work."
+  },
+  "economy_projections": {
+    "label": "Cross-platform projections",
+    "tooltip": "Steady projections for YouTube, Shorts, TikTok, and Ads."
+  },
+  "economy_optimizer": {
+    "label": "lane optimizer",
+    "tooltip": "Lane readiness score."
+  },
+  "creator_identity": {
+    "label": "Creator Identity",
+    "tooltip": "Your neon creator home — bio, links, level, and streak."
+  },
+  "identity_name": {
+    "label": "Display name",
+    "tooltip": "How you show up in the neon hub."
+  },
+  "identity_bio": {
+    "label": "Bio",
+    "tooltip": "Short upliftment-first bio."
+  },
+  "identity_links": {
+    "label": "Links",
+    "tooltip": "Public creator links."
+  },
+  "identity_save": {
+    "label": "SAVE IDENTITY",
+    "tooltip": "Save your creator identity locally."
+  },
+  "identity_saved": {
+    "label": "Identity saved",
+    "tooltip": "Creator identity saved."
+  },
+  "identity_level": {
+    "label": "Creator Level",
+    "tooltip": "Level from badges and consistency streak."
+  },
+  "identity_streak_note": {
+    "label": "Streak",
+    "tooltip": "Days of safe, forward moves."
+  },
+  "social_layer": {
+    "label": "Social",
+    "tooltip": "Follow creators and send signal boosts — zero toxicity."
+  },
+  "social_creators": {
+    "label": "Creators to follow",
+    "tooltip": "Upliftment-first peers."
+  },
+  "social_signals": {
+    "label": "Signal feed",
+    "tooltip": "Achievements and recovery support signals."
+  },
+  "social_follow": {
+    "label": "FOLLOW",
+    "tooltip": "Follow this creator."
+  },
+  "social_following": {
+    "label": "FOLLOWING",
+    "tooltip": "You already follow this creator."
+  },
+  "social_signal_boost": {
+    "label": "SIGNAL BOOST",
+    "tooltip": "Send an upliftment signal."
+  },
+  "social_boosted": {
+    "label": "Signal boost sent",
+    "tooltip": "Uplift signal delivered."
+  },
+  "social_signal_recovery": {
+    "label": "Recovery support",
+    "tooltip": "Support someone in Recovery Mode."
+  },
+  "social_signal_badge": {
+    "label": "Creator achievement",
+    "tooltip": "A peer unlocked a badge."
+  },
+  "social_signal_launch": {
+    "label": "Launch energy",
+    "tooltip": "A peer boosted a clip."
+  },
+  "creator_challenges": {
+    "label": "Challenges",
+    "tooltip": "Weekly neon missions for healthy growth."
+  },
+  "challenge_publish": {
+    "label": "Publish 3 clips",
+    "tooltip": "Ship three launch-ready ideas."
+  },
+  "challenge_clusters": {
+    "label": "Explore 2 clusters",
+    "tooltip": "Visit two topic clusters."
+  },
+  "challenge_opportunity": {
+    "label": "Boost 1 opportunity",
+    "tooltip": "Act on one radar opportunity."
+  },
+  "challenge_streak": {
+    "label": "Maintain consistency streak",
+    "tooltip": "Keep Recovery Mode consistency alive."
+  },
+  "challenge_tick": {
+    "label": "LOG PROGRESS",
+    "tooltip": "Log one step on this mission."
+  },
+  "challenge_go": {
+    "label": "GO",
+    "tooltip": "Open the related tool."
+  },
+  "challenge_complete": {
+    "label": "Mission complete",
+    "tooltip": "Weekly mission finished."
+  },
+  "creator_assistant": {
+    "label": "Creator Assistant",
+    "tooltip": "Neon copilot for ideas, scripts, thumbnails, recovery, and lanes."
+  },
+  "assist_idea": {
+    "label": "IDEA",
+    "tooltip": "Generate a clip idea."
+  },
+  "assist_script": {
+    "label": "SCRIPT",
+    "tooltip": "Draft a short script."
+  },
+  "assist_thumb": {
+    "label": "THUMB",
+    "tooltip": "Suggest a thumbnail prompt."
+  },
+  "assist_recover": {
+    "label": "RECOVER",
+    "tooltip": "One accountable next step."
+  },
+  "assist_earn": {
+    "label": "EARN",
+    "tooltip": "Monetization lane suggestion."
+  },
+  "assist_prompt": {
+    "label": "Prompt",
+    "tooltip": "Tell the copilot what you need."
+  },
+  "assist_run": {
+    "label": "ASK COPILOT",
+    "tooltip": "Run the assistant."
+  },
+  "assist_thinking": {
+    "label": "Thinking…",
+    "tooltip": "Assistant is working."
+  },
+  "assist_result": {
+    "label": "Copilot reply",
+    "tooltip": "Assistant response."
+  },
+  "creator_vault": {
+    "label": "Creator Vault",
+    "tooltip": "Store clips, drafts, thumbnails, and scripts in a neon workspace."
+  },
+  "vault_title": {
+    "label": "Title",
+    "tooltip": "Name this vault item."
+  },
+  "vault_type": {
+    "label": "Type",
+    "tooltip": "Clip, draft, thumbnail, or script."
+  },
+  "vault_notes": {
+    "label": "Notes",
+    "tooltip": "Optional notes for later."
+  },
+  "vault_add": {
+    "label": "ADD TO VAULT",
+    "tooltip": "Save into local vault (PWA-friendly)."
+  },
+  "vault_empty": {
+    "label": "Empty vault",
+    "tooltip": "Vault is empty — add a draft."
+  },
+  "vault_remove": {
+    "label": "REMOVE",
+    "tooltip": "Remove from vault."
+  },
+  "vault_untitled": {
+    "label": "Untitled draft",
+    "tooltip": "Default vault title."
+  },
+  "vault_saved": {
+    "label": "Saved to vault",
+    "tooltip": "Item stored in Creator Vault."
+  },
+  "feed_signals": {
+    "label": "Creator Signals",
+    "tooltip": "Unified feed of activity, social boosts, challenges, vault, and identity updates."
+  },
+  "signal_strength": {
+    "label": "Signal Strength",
+    "tooltip": "How strong your cross-platform creator signals are right now."
+  },
+  "sig_local_vault": {
+    "label": "Vault upload",
+    "tooltip": "Local vault activity signal."
+  },
+  "sig_local_identity": {
+    "label": "Identity update",
+    "tooltip": "Local identity activity signal."
+  },
+  "sig_local_challenge": {
+    "label": "Challenge progress",
+    "tooltip": "Local challenge activity signal."
+  },
+  "creator_rooms": {
+    "label": "Creator Rooms",
+    "tooltip": "Group creator spaces with shared challenges, vault folders, and upliftment chat."
+  },
+  "room_chat": {
+    "label": "Neon chat rail",
+    "tooltip": "Upliftment-only room messages."
+  },
+  "room_chat_uplift": {
+    "label": "SEND UPLIFT",
+    "tooltip": "Post an upliftment message."
+  },
+  "room_chat_support": {
+    "label": "SEND SUPPORT",
+    "tooltip": "Post a supportive check-in."
+  },
+  "room_momentum": {
+    "label": "Room Momentum",
+    "tooltip": "Shared energy dial for this room."
+  },
+  "room_seed_1": {
+    "label": "Welcome — upliftment only in this room.",
+    "tooltip": "Seed chat message."
+  },
+  "room_seed_2": {
+    "label": "Shared challenge board is open.",
+    "tooltip": "Seed chat message."
+  },
+  "room_chat_uplift_msg": {
+    "label": "Uplift pulse shared with the room.",
+    "tooltip": "Uplift chat line."
+  },
+  "room_chat_support_msg": {
+    "label": "Sending quiet support — you got this.",
+    "tooltip": "Support chat line."
+  },
+  "clip_studio_pro": {
+    "label": "Clip Studio Pro",
+    "tooltip": "Multi-clip timeline, captions, thumbnails, and boost export lanes."
+  },
+  "studio_timeline": {
+    "label": "Multi-clip timeline",
+    "tooltip": "Arrange hook, body, and CTA clips."
+  },
+  "studio_thumb_design": {
+    "label": "Thumbnail designer",
+    "tooltip": "Pick a neon thumbnail frame."
+  },
+  "studio_thumb_cyan": {
+    "label": "Cyan ring",
+    "tooltip": "Cyan thumbnail frame."
+  },
+  "studio_thumb_magenta": {
+    "label": "Magenta pulse",
+    "tooltip": "Magenta thumbnail frame."
+  },
+  "studio_thumb_dual": {
+    "label": "Dual glow",
+    "tooltip": "Dual neon thumbnail frame."
+  },
+  "studio_caption_ai": {
+    "label": "GENERATE CAPTION",
+    "tooltip": "Ask the assistant for a short caption."
+  },
+  "studio_clip_hook": {
+    "label": "Hook",
+    "tooltip": "Opening clip segment."
+  },
+  "studio_clip_body": {
+    "label": "Body",
+    "tooltip": "Middle clip segment."
+  },
+  "studio_clip_cta": {
+    "label": "CTA",
+    "tooltip": "Closing clip segment."
+  },
+  "recovery_journal": {
+    "label": "Recovery Journal",
+    "tooltip": "Daily hologram entries, mood dial, momentum prompts, and streak keeper."
+  },
+  "journal_streak": {
+    "label": "Streak Keeper",
+    "tooltip": "Days in a row with a journal entry."
+  },
+  "journal_mood": {
+    "label": "Mood dial",
+    "tooltip": "How the day feels on a 0–100 dial."
+  },
+  "journal_prompt": {
+    "label": "Momentum reflection",
+    "tooltip": "What moved forward today?"
+  },
+  "journal_placeholder": {
+    "label": "What moved forward today?",
+    "tooltip": "Journal entry prompt."
+  },
+  "journal_save": {
+    "label": "SAVE ENTRY",
+    "tooltip": "Save today’s hologram entry and sync to vault."
+  },
+  "journal_empty": {
+    "label": "No entries yet",
+    "tooltip": "Start with one short reflection."
+  },
+  "journal_saved": {
+    "label": "Journal saved",
+    "tooltip": "Entry stored and synced to vault."
+  },
+  "creator_sync": {
+    "label": "Creator Sync",
+    "tooltip": "Export, import, and merge Identity, Vault, Challenges, Social, and Assistant state across devices."
+  },
+  "sync_idle": {
+    "label": "Sync idle",
+    "tooltip": "No sync action running."
+  },
+  "sync_export": {
+    "label": "EXPORT",
+    "tooltip": "Copy local creator state as JSON."
+  },
+  "sync_import": {
+    "label": "IMPORT",
+    "tooltip": "Replace local keys from JSON payload."
+  },
+  "sync_merge": {
+    "label": "MERGE",
+    "tooltip": "Offline-friendly merge of payload into local keys."
+  },
+  "sync_exported": {
+    "label": "Exported",
+    "tooltip": "Snapshot ready to copy."
+  },
+  "sync_imported": {
+    "label": "Imported",
+    "tooltip": "Payload applied."
+  },
+  "sync_merged": {
+    "label": "Merged offline changes",
+    "tooltip": "Payload merged with local state."
+  },
+  "sync_error": {
+    "label": "Invalid sync payload",
+    "tooltip": "Could not read that payload."
+  },
+  "sync_ready": {
+    "label": "ready",
+    "tooltip": "Key present on this device."
+  },
+  "sync_empty": {
+    "label": "empty",
+    "tooltip": "Key not set on this device."
+  },
+  "developer_api": {
+    "label": "Developer API",
+    "tooltip": "Public endpoints for signals, topics, momentum, and vault metadata — plus a neon explorer."
+  },
+  "api_rate_chip": {
+    "label": "Soft rate limit",
+    "tooltip": "Public endpoints use a per-user soft cap."
+  },
+  "api_try": {
+    "label": "TRY",
+    "tooltip": "Call this public endpoint."
+  },
+  "api_ep_signals": {
+    "label": "Feed signals",
+    "tooltip": "GET /api/public/feed/signals"
+  },
+  "api_ep_topics": {
+    "label": "Topic clusters",
+    "tooltip": "GET /api/public/topics"
+  },
+  "api_ep_momentum": {
+    "label": "Momentum score",
+    "tooltip": "GET /api/public/momentum"
+  },
+  "api_ep_vault": {
+    "label": "Vault metadata",
+    "tooltip": "GET /api/public/vault/meta"
   }
 }

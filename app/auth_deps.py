@@ -42,6 +42,7 @@ PUBLIC_PREFIXES = (
     "/api/growth",
     "/api/multi",
     "/api/stories",
+    "/api/public",
     "/ads",
     "/stories",
     "/media",
@@ -75,9 +76,19 @@ PUBLIC_PREFIXES = (
     "/public",
     "/publish",
     "/multi",
+    "/recovery",
+    "/notifications",
+    "/economy",
+    "/social",
+    "/challenges",
+    "/assistant",
+    "/vault",
+    "/rooms",
+    "/sync",
+    "/developer",
 )
 
-PUBLIC_EXACT = {"/", "/favicon.ico"}
+PUBLIC_EXACT = {"/", "/favicon.ico", "/manifest.webmanifest", "/sw.js", "/offline"}
 
 # /team/* is not public: mutating handlers require staff via Depends(require_staff).
 # Read-only team helpers (model/topics/check/block/preview) stay open at the route layer.

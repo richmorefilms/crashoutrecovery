@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Creator Signals — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main signals-page feed-page--holo page-container hybrid-glow" id="feed-signals-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="feed_signals">{{ uc.feed_signals.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">📶</span>
+        <span data-ui-copy="feed_signals">{{ uc.feed_signals.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="feed_signals" data-ui-field="tooltip">{{ uc.feed_signals.tooltip }}</p>
+    </header>
+    <section class="economy-boost holo-card">
+      <h2 class="neon-title" data-ui-copy="signal_strength">{{ uc.signal_strength.label }}</h2>
+      <div class="stat-meter economy-meter" id="signal-strength-meter" style="--stat:0"><div class="stat-meter-fill"></div></div>
+      <p class="stat-value" id="signal-strength-value">—</p>
+    </section>
+    <div id="feed-signals-list" class="notify-list" aria-live="polite"></div>
+    <p id="feed-signals-error" class="unified-feed-error" hidden role="alert"></p>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/feed-signals.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutFeedSignals?.mount?.("#feed-signals-root");
+  });
+</script>
+{% endblock %}

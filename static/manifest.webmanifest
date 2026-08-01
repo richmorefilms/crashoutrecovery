@@ -1,0 +1,33 @@
+{
+  "name": "Crashout Recovery",
+  "short_name": "Crashout",
+  "description": "Neon arcade creator hub — upliftment, momentum, and accountability for adults 18+.",
+  "start_url": "/creator/home",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00eaff",
+  "lang": "en-US",
+  "categories": ["productivity", "social", "entertainment"],
+  "icons": [
+    {
+      "src": "/static/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -34,6 +34,7 @@ from app.growth_routes import router as growth_router
 from app.monetization_routes import router as monetization_router
 from app.multiplatform_routes import router as multiplatform_router
 from app.oauth_routes import router as oauth_router
+from app.public_api_routes import router as public_api_router
 from app.ranking_routes import router as ranking_router
 from app.recommendation_routes import router as recommendation_router
 from app.suggest_engine import build_suggestion
@@ -94,6 +95,7 @@ def create_app() -> FastAPI:
     app.include_router(growth_router)
     app.include_router(multiplatform_router)
     app.include_router(monetization_router)
+    app.include_router(public_api_router)
     app.include_router(youtube_router)
     app.include_router(tiktok_router)
     app.include_router(ranking_router)
@@ -330,6 +332,119 @@ def create_app() -> FastAPI:
         return templates.TemplateResponse(
             request, "oauth_youtube_callback.html", _page_ctx()
         )
+
+    @app.get("/manifest.webmanifest")
+    async def pwa_manifest():
+        path = STATIC_DIR / "manifest.webmanifest"
+        return FileResponse(
+            path,
+            media_type="application/manifest+json",
+            headers={"Cache-Control": "public, max-age=3600"},
+        )
+
+    @app.get("/sw.js")
+    async def pwa_service_worker():
+        path = STATIC_DIR / "sw.js"
+        return FileResponse(
+            path,
+            media_type="application/javascript; charset=utf-8",
+            headers={
+                "Cache-Control": "no-cache",
+                "Service-Worker-Allowed": "/",
+            },
+        )
+
+    @app.get("/offline", response_class=HTMLResponse)
+    async def offline_page(request: Request):
+        return templates.TemplateResponse(request, "offline.html", _page_ctx())
+
+    @app.get("/creator/home", response_class=HTMLResponse)
+    async def creator_home_page(request: Request):
+        return templates.TemplateResponse(request, "creator_home.html", _page_ctx())
+
+    @app.get("/creator/studio", response_class=HTMLResponse)
+    async def creator_studio_page(request: Request):
+        return templates.TemplateResponse(request, "clip_studio.html", _page_ctx())
+
+    @app.get("/creator/badges", response_class=HTMLResponse)
+    async def creator_badges_page(request: Request):
+        return templates.TemplateResponse(request, "creator_badges.html", _page_ctx())
+
+    @app.get("/topics/radar", response_class=HTMLResponse)
+    async def topics_radar_page(request: Request):
+        return templates.TemplateResponse(
+            request, "opportunity_radar.html", _page_ctx()
+        )
+
+    @app.get("/recovery/mode", response_class=HTMLResponse)
+    async def recovery_mode_page(request: Request):
+        return templates.TemplateResponse(request, "recovery_mode.html", _page_ctx())
+
+    @app.get("/notifications", response_class=HTMLResponse)
+    async def notifications_page(request: Request):
+        return templates.TemplateResponse(request, "notifications.html", _page_ctx())
+
+    @app.get("/economy", response_class=HTMLResponse)
+    async def creator_economy_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "creator_economy.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/creator/profile", response_class=HTMLResponse)
+    async def creator_identity_page(
+        request: Request, id: str | None = Query(default=None)
+    ):
+        return templates.TemplateResponse(
+            request, "creator_identity.html", _page_ctx(creator_id=id or "")
+        )
+
+    @app.get("/social", response_class=HTMLResponse)
+    async def social_layer_page(request: Request):
+        return templates.TemplateResponse(request, "social_layer.html", _page_ctx())
+
+    @app.get("/challenges", response_class=HTMLResponse)
+    async def creator_challenges_page(request: Request):
+        return templates.TemplateResponse(
+            request, "creator_challenges.html", _page_ctx()
+        )
+
+    @app.get("/assistant", response_class=HTMLResponse)
+    async def creator_assistant_page(request: Request):
+        return templates.TemplateResponse(
+            request, "creator_assistant.html", _page_ctx()
+        )
+
+    @app.get("/vault", response_class=HTMLResponse)
+    async def creator_vault_page(request: Request):
+        return templates.TemplateResponse(request, "creator_vault.html", _page_ctx())
+
+    @app.get("/feed/signals", response_class=HTMLResponse)
+    async def feed_signals_page(request: Request):
+        return templates.TemplateResponse(request, "feed_signals.html", _page_ctx())
+
+    @app.get("/rooms", response_class=HTMLResponse)
+    async def creator_rooms_page(request: Request):
+        return templates.TemplateResponse(request, "creator_rooms.html", _page_ctx())
+
+    @app.get("/creator/studio/pro", response_class=HTMLResponse)
+    async def creator_studio_pro_page(request: Request):
+        return templates.TemplateResponse(request, "clip_studio_pro.html", _page_ctx())
+
+    @app.get("/recovery/journal", response_class=HTMLResponse)
+    async def recovery_journal_page(request: Request):
+        return templates.TemplateResponse(
+            request, "recovery_journal.html", _page_ctx()
+        )
+
+    @app.get("/sync", response_class=HTMLResponse)
+    async def creator_sync_page(request: Request):
+        return templates.TemplateResponse(request, "creator_sync.html", _page_ctx())
+
+    @app.get("/developer/api", response_class=HTMLResponse)
+    async def developer_api_page(request: Request):
+        return templates.TemplateResponse(request, "developer_api.html", _page_ctx())
 
     @app.get("/creator/dashboard", response_class=HTMLResponse)
     async def creator_dashboard_page(

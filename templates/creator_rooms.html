@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Creator Rooms — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main rooms-page feed-page--holo page-container hybrid-glow" id="rooms-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="creator_rooms">{{ uc.creator_rooms.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🏠</span>
+        <span data-ui-copy="creator_rooms">{{ uc.creator_rooms.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="creator_rooms" data-ui-field="tooltip">{{ uc.creator_rooms.tooltip }}</p>
+    </header>
+    <div id="rooms-grid-root" class="expand-grid" aria-live="polite"></div>
+    <section class="room-chat holo-card" aria-labelledby="room-chat-title">
+      <h2 id="room-chat-title" class="neon-title" data-ui-copy="room_chat">{{ uc.room_chat.label }}</h2>
+      <div id="room-chat-rail" class="notify-list"></div>
+      <div class="home-actions">
+        <button type="button" class="home-btn" data-chat="uplift" data-ui-copy="room_chat_uplift">{{ uc.room_chat_uplift.label }}</button>
+        <button type="button" class="home-btn" data-chat="support" data-ui-copy="room_chat_support">{{ uc.room_chat_support.label }}</button>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-rooms.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorRooms?.mount?.("#rooms-root");
+  });
+</script>
+{% endblock %}

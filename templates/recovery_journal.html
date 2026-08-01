@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Recovery Journal — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main recovery-journal-page feed-page--holo page-container hybrid-glow" id="recovery-journal-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="recovery_journal">{{ uc.recovery_journal.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">📓</span>
+        <span data-ui-copy="recovery_journal">{{ uc.recovery_journal.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="recovery_journal" data-ui-field="tooltip">{{ uc.recovery_journal.tooltip }}</p>
+      <p class="unified-feed-actions">
+        <a class="feed-cta neon-btn btn" href="/recovery/mode" data-ui-copy="recovery_mode">{{ uc.recovery_mode.label }}</a>
+        <a class="feed-cta feed-cta--ghost btn neon-btn" href="/vault" data-ui-copy="creator_vault">{{ uc.creator_vault.label }}</a>
+      </p>
+    </header>
+
+    <section class="identity-card holo-card">
+      <p class="badge-earned-today" id="journal-streak" data-ui-copy="journal_streak">{{ uc.journal_streak.label }}</p>
+      <label class="studio-field"><span data-ui-copy="journal_mood">{{ uc.journal_mood.label }}</span>
+        <input id="journal-mood" type="range" min="0" max="100" value="55">
+      </label>
+      <div class="v16-dial dial-core-meter" id="journal-mood-dial" style="--score:55">
+        <div class="v16-dial-inner dial-core">
+          <span class="v16-dial-value" id="journal-mood-value">55</span>
+          <span class="v16-dial-label" data-ui-copy="journal_mood">{{ uc.journal_mood.label }}</span>
+        </div>
+      </div>
+      <label class="studio-field"><span data-ui-copy="journal_prompt">{{ uc.journal_prompt.label }}</span>
+        <textarea id="journal-entry" rows="4" maxlength="600" data-ui-copy="journal_placeholder" data-ui-field="label" placeholder="{{ uc.journal_placeholder.label }}"></textarea>
+      </label>
+      <button type="button" class="launch-btn launch-btn--launch" id="journal-save" data-ui-copy="journal_save">{{ uc.journal_save.label }}</button>
+    </section>
+    <div id="journal-list-root" class="notify-list" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/recovery-journal.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutRecoveryJournal?.mount?.("#recovery-journal-root");
+  });
+</script>
+{% endblock %}

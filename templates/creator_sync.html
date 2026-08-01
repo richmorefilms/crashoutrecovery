@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Creator Sync — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main sync-page feed-page--holo page-container hybrid-glow" id="sync-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="creator_sync">{{ uc.creator_sync.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🔄</span>
+        <span data-ui-copy="creator_sync">{{ uc.creator_sync.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="creator_sync" data-ui-field="tooltip">{{ uc.creator_sync.tooltip }}</p>
+    </header>
+    <p class="timeline-chip" id="sync-status-chip" data-ui-copy="sync_idle">{{ uc.sync_idle.label }}</p>
+    <div class="home-actions">
+      <button type="button" class="home-btn" id="sync-export" data-ui-copy="sync_export">{{ uc.sync_export.label }}</button>
+      <button type="button" class="home-btn" id="sync-import" data-ui-copy="sync_import">{{ uc.sync_import.label }}</button>
+      <button type="button" class="home-btn" id="sync-merge" data-ui-copy="sync_merge">{{ uc.sync_merge.label }}</button>
+    </div>
+    <textarea id="sync-payload" class="sync-payload" rows="12" spellcheck="false" aria-label="Sync payload"></textarea>
+    <div id="sync-keys-root" class="expand-grid" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-sync.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorSync?.mount?.("#sync-root");
+  });
+</script>
+{% endblock %}

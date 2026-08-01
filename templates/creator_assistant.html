@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Creator Assistant — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main assistant-page feed-page--holo page-container hybrid-glow" id="assistant-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="creator_assistant">{{ uc.creator_assistant.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🧠</span>
+        <span data-ui-copy="creator_assistant">{{ uc.creator_assistant.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="creator_assistant" data-ui-field="tooltip">{{ uc.creator_assistant.tooltip }}</p>
+    </header>
+
+    <section class="assistant-console holo-card">
+      <div class="home-actions assistant-presets" role="group">
+        <button type="button" class="home-btn" data-assist="idea" data-ui-copy="assist_idea">{{ uc.assist_idea.label }}</button>
+        <button type="button" class="home-btn" data-assist="script" data-ui-copy="assist_script">{{ uc.assist_script.label }}</button>
+        <button type="button" class="home-btn" data-assist="thumb" data-ui-copy="assist_thumb">{{ uc.assist_thumb.label }}</button>
+        <button type="button" class="home-btn" data-assist="recover" data-ui-copy="assist_recover">{{ uc.assist_recover.label }}</button>
+        <button type="button" class="home-btn" data-assist="earn" data-ui-copy="assist_earn">{{ uc.assist_earn.label }}</button>
+      </div>
+      <label class="studio-field"><span data-ui-copy="assist_prompt">{{ uc.assist_prompt.label }}</span>
+        <textarea id="assistant-input" rows="3" maxlength="500" placeholder="Type a spike or idea…"></textarea>
+      </label>
+      <button type="button" class="launch-btn launch-btn--boost" id="assistant-run" data-ui-copy="assist_run">{{ uc.assist_run.label }}</button>
+      <div id="assistant-output" class="assistant-output" aria-live="polite"></div>
+    </section>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-assistant.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorAssistant?.mount?.("#assistant-root");
+  });
+</script>
+{% endblock %}

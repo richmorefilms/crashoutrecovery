@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Recovery Mode — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main recovery-mode-page feed-page--holo page-container hybrid-glow" id="recovery-mode-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="recovery_mode">{{ uc.recovery_mode.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🛡️</span>
+        <span data-ui-copy="recovery_mode">{{ uc.recovery_mode.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="recovery_mode" data-ui-field="tooltip">{{ uc.recovery_mode.tooltip }}</p>
+    </header>
+
+    <section class="recovery-checkin holo-card">
+      <h2 class="neon-title" data-ui-copy="recovery_checkin">{{ uc.recovery_checkin.label }}</h2>
+      <p class="expand-sub" id="recovery-checkin-note" data-ui-copy="recovery_checkin" data-ui-field="tooltip">{{ uc.recovery_checkin.tooltip }}</p>
+      <div class="home-actions recovery-actions">
+        <button type="button" class="home-btn" data-recovery-act="reset" data-ui-copy="recovery_reset">{{ uc.recovery_reset.label }}</button>
+        <button type="button" class="home-btn" data-recovery-act="reflect" data-ui-copy="recovery_reflect">{{ uc.recovery_reflect.label }}</button>
+        <button type="button" class="home-btn" data-recovery-act="rebuild" data-ui-copy="recovery_rebuild">{{ uc.recovery_rebuild.label }}</button>
+      </div>
+      <div class="momentum-dial recovery-dial">
+        <div class="dial-ring" aria-hidden="true"></div>
+        <div class="v16-dial dial-core-meter" id="recovery-consistency-dial" style="--score:40">
+          <div class="v16-dial-inner dial-core">
+            <span class="v16-dial-value" id="recovery-consistency-value">40</span>
+            <span class="v16-dial-label" data-ui-copy="recovery_consistency">{{ uc.recovery_consistency.label }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="uplift-rail-title">
+      <h2 id="uplift-rail-title" class="launchpad-section-title" data-ui-copy="recovery_uplift">{{ uc.recovery_uplift.label }}</h2>
+      <div class="expand-grid" id="recovery-uplift-root"></div>
+    </section>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/recovery-mode.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutRecoveryMode?.mount?.("#recovery-mode-root");
+  });
+</script>
+{% endblock %}

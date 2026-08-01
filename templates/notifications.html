@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Notifications — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main notifications-page feed-page--holo page-container hybrid-glow" id="notifications-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="notifications">{{ uc.notifications.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🔔</span>
+        <span data-ui-copy="notifications">{{ uc.notifications.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="notifications" data-ui-field="tooltip">{{ uc.notifications.tooltip }}</p>
+    </header>
+    <div class="home-actions">
+      <button type="button" class="home-btn" id="notifications-refresh" data-ui-copy="notifications_refresh">{{ uc.notifications_refresh.label }}</button>
+      <button type="button" class="home-btn" id="notifications-clear" data-ui-copy="notifications_clear">{{ uc.notifications_clear.label }}</button>
+    </div>
+    <div id="notifications-list-root" class="notify-list" aria-live="polite"></div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/notifications.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutNotifications?.mount?.("#notifications-root");
+  });
+</script>
+{% endblock %}

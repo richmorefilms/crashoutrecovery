@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Clip Studio — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main studio-page feed-page--holo page-container hybrid-glow" id="clip-studio-root">
+  <div class="expand-wrapper">
+    <header class="expand-hero">
+      <p class="v16-kicker" data-ui-copy="clip_studio">{{ uc.clip_studio.label }}</p>
+      <h1 class="expand-title neon-title">
+        <span class="feed-header-icon" aria-hidden="true">🎬</span>
+        <span data-ui-copy="clip_studio">{{ uc.clip_studio.label }}</span>
+      </h1>
+      <p class="expand-sub" data-ui-copy="clip_studio" data-ui-field="tooltip">{{ uc.clip_studio.tooltip }}</p>
+    </header>
+
+    <section class="studio-preview holo-card" aria-label="Preview">
+      <div class="studio-player" id="studio-player">
+        <p class="studio-player-label" data-ui-copy="clip_preview">{{ uc.clip_preview.label }}</p>
+      </div>
+      <div class="studio-tools">
+        <label class="studio-field"><span data-ui-copy="clip_trim">{{ uc.clip_trim.label }}</span>
+          <input type="range" id="studio-trim" min="0" max="60" value="15">
+        </label>
+        <label class="studio-field"><span data-ui-copy="clip_caption">{{ uc.clip_caption.label }}</span>
+          <input type="text" id="studio-caption" maxlength="120" placeholder="One small move…">
+        </label>
+        <label class="studio-field"><span data-ui-copy="clip_thumb">{{ uc.clip_thumb.label }}</span>
+          <select id="studio-thumb">
+            <option value="neon">Neon frame</option>
+            <option value="calm">Calm frame</option>
+            <option value="bold">Bold frame</option>
+          </select>
+        </label>
+        <button type="button" class="launch-btn launch-btn--boost" id="studio-boost" data-ui-copy="clip_boost">{{ uc.clip_boost.label }}</button>
+      </div>
+    </section>
+
+    <section class="studio-export" aria-labelledby="studio-export-title">
+      <h2 id="studio-export-title" class="launchpad-section-title" data-ui-copy="clip_export">{{ uc.clip_export.label }}</h2>
+      <div class="expand-grid" id="studio-clips-root"></div>
+    </section>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/clip-studio.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutClipStudio?.mount?.("#clip-studio-root");
+  });
+</script>
+{% endblock %}

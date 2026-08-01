@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Offline — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main offline-page feed-page--holo page-container hybrid-glow" id="offline-root">
+  <div class="home-wrapper offline-wrapper">
+    <header class="home-hero">
+      <h1 class="home-title">
+        <span class="feed-header-icon" aria-hidden="true">📡</span>
+        <span data-ui-copy="pwa_offline">{{ uc.pwa_offline.label }}</span>
+      </h1>
+      <p class="home-subtitle" data-ui-copy="pwa_offline" data-ui-field="tooltip">{{ uc.pwa_offline.tooltip }}</p>
+    </header>
+    <section class="home-actions">
+      <a class="home-btn" href="/creator/home" data-ui-copy="creator_home">{{ uc.creator_home.label }}</a>
+      <a class="home-btn" href="/creator/dashboard" data-ui-copy="creator_hub">{{ uc.creator_hub.label }}</a>
+      <button type="button" class="home-btn" onclick="location.reload()" data-ui-copy="pwa_retry">{{ uc.pwa_retry.label }}</button>
+    </section>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+{% endblock %}

@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Crashout Recovery — unified creator intelligence for adults 18+.">
+  <meta name="theme-color" content="#00eaff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Crashout">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
   <title>{% block title %}{{ app_name }}{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +97,7 @@
     <ul class="app-nav-drawer-list">
       <li class="app-nav-drawer-section" data-ui-copy="nav_section_discover">Discover</li>
       <li>
-        <a class="app-nav-drawer-link" href="/creator/dashboard">
+        <a class="app-nav-drawer-link" href="/creator/home">
           <span class="nav-icon" aria-hidden="true">🏠</span>
           <span data-ui-copy="creator_home">Creator Home</span>
         </a>
@@ -104,6 +112,13 @@
         <a class="app-nav-drawer-link" href="/feed/all">
           <span class="nav-icon" aria-hidden="true">🔥</span>
           <span data-ui-copy="unified_feed">Unified Feed</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/feed/signals">
+          <span class="nav-icon" aria-hidden="true">📶</span>
+          <span data-ui-copy="feed_signals">Creator Signals</span>
+          <span class="nav-pulse creator-pulse" aria-hidden="true" hidden></span>
         </a>
       </li>
       <li>
@@ -123,6 +138,91 @@
         <a class="app-nav-drawer-link" href="/creator/dashboard">
           <span class="nav-icon" aria-hidden="true">🎮</span>
           <span data-ui-copy="creator_hub">Creator Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/creator/profile">
+          <span class="nav-icon" aria-hidden="true">👤</span>
+          <span data-ui-copy="creator_identity">Creator Identity</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/creator/studio">
+          <span class="nav-icon" aria-hidden="true">🎬</span>
+          <span data-ui-copy="clip_studio">Clip Studio</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/creator/studio/pro">
+          <span class="nav-icon" aria-hidden="true">🎞️</span>
+          <span data-ui-copy="clip_studio_pro">Clip Studio Pro</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/rooms">
+          <span class="nav-icon" aria-hidden="true">🏛️</span>
+          <span data-ui-copy="creator_rooms">Creator Rooms</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/sync">
+          <span class="nav-icon" aria-hidden="true">🔄</span>
+          <span data-ui-copy="creator_sync">Creator Sync</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/vault">
+          <span class="nav-icon" aria-hidden="true">🗄️</span>
+          <span data-ui-copy="creator_vault">Creator Vault</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/assistant">
+          <span class="nav-icon" aria-hidden="true">🧠</span>
+          <span data-ui-copy="creator_assistant">Creator Assistant</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/challenges">
+          <span class="nav-icon" aria-hidden="true">🎯</span>
+          <span data-ui-copy="creator_challenges">Challenges</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/social">
+          <span class="nav-icon" aria-hidden="true">🤝</span>
+          <span data-ui-copy="social_layer">Social</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/creator/badges">
+          <span class="nav-icon" aria-hidden="true">🏅</span>
+          <span data-ui-copy="creator_badges">Creator Badges</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/notifications">
+          <span class="nav-icon" aria-hidden="true">🔔</span>
+          <span data-ui-copy="notifications">Notifications</span>
+          <span class="nav-pulse" aria-hidden="true" hidden></span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/recovery/mode">
+          <span class="nav-icon" aria-hidden="true">🛡️</span>
+          <span data-ui-copy="recovery_mode">Recovery Mode</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/recovery/journal">
+          <span class="nav-icon" aria-hidden="true">📓</span>
+          <span data-ui-copy="recovery_journal">Recovery Journal</span>
+        </a>
+      </li>
+      <li>
+        <a class="app-nav-drawer-link" href="/economy">
+          <span class="nav-icon" aria-hidden="true">💹</span>
+          <span data-ui-copy="creator_economy">Creator Economy</span>
         </a>
       </li>
       <li>
@@ -163,12 +263,24 @@
         </a>
       </li>
       <li>
+        <a class="app-nav-drawer-link" href="/topics/radar">
+          <span class="nav-icon" aria-hidden="true">📡</span>
+          <span data-ui-copy="opportunity_radar">Opportunity Radar</span>
+        </a>
+      </li>
+      <li>
         <a class="app-nav-drawer-link" href="/topic-graph">
           <span class="nav-icon" aria-hidden="true">🕸️</span>
           <span data-ui-copy="topic_graph">Topic Graph</span>
         </a>
       </li>
       <li class="app-nav-drawer-section" data-ui-copy="nav_section_multi">Multi-platform</li>
+      <li>
+        <a class="app-nav-drawer-link" href="/developer/api">
+          <span class="nav-icon" aria-hidden="true">🧪</span>
+          <span data-ui-copy="developer_api">Developer API</span>
+        </a>
+      </li>
       <li>
         <a class="app-nav-drawer-link" href="/multi/instagram">
           <span class="nav-icon" aria-hidden="true">📸</span>
@@ -337,5 +449,9 @@
   <script src="/static/auth.js"></script>
   <script src="/static/tiktok-auth.js"></script>
   <script src="/static/nav-drawer.js"></script>
+  <script src="/static/neon-mobile.js"></script>
+  <script src="/static/notifications.js"></script>
+  <script src="/static/feed-signals.js"></script>
+  <script src="/static/pwa-install.js"></script>
 </body>
 </html>

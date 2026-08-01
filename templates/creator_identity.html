@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Creator Identity — {{ app_name }}{% endblock %}
+{% block content %}
+{% set uc = ui_copy or {} %}
+<main class="app-main creator-identity-page feed-page--holo page-container hybrid-glow" id="creator-identity-root" data-creator-id="{{ creator_id or '' }}">
+  <div class="expand-wrapper">
+    <header class="expand-hero identity-hero">
+      <div class="identity-avatar" aria-hidden="true">
+        <span class="identity-ring"></span>
+        <span class="identity-core">C</span>
+      </div>
+      <h1 class="expand-title neon-title" data-ui-copy="creator_identity">{{ uc.creator_identity.label }}</h1>
+      <p class="expand-sub" data-ui-copy="creator_identity" data-ui-field="tooltip">{{ uc.creator_identity.tooltip }}</p>
+    </header>
+
+    <section class="identity-card holo-card">
+      <label class="studio-field"><span data-ui-copy="identity_name">{{ uc.identity_name.label }}</span>
+        <input id="identity-name" type="text" maxlength="40" placeholder="Creator name">
+      </label>
+      <label class="studio-field"><span data-ui-copy="identity_bio">{{ uc.identity_bio.label }}</span>
+        <textarea id="identity-bio" maxlength="240" rows="3" placeholder="Upliftment · momentum · accountability"></textarea>
+      </label>
+      <label class="studio-field"><span data-ui-copy="identity_links">{{ uc.identity_links.label }}</span>
+        <input id="identity-links" type="text" maxlength="200" placeholder="youtube.com/@you · tiktok.com/@you">
+      </label>
+      <button type="button" class="launch-btn launch-btn--launch" id="identity-save" data-ui-copy="identity_save">{{ uc.identity_save.label }}</button>
+    </section>
+
+    <section class="identity-meters expand-grid">
+      <article class="holo-card">
+        <h3 class="neon-title" data-ui-copy="identity_level">{{ uc.identity_level.label }}</h3>
+        <div class="v16-dial dial-core-meter" id="identity-level-dial" style="--score:25">
+          <div class="v16-dial-inner dial-core">
+            <span class="v16-dial-value" id="identity-level-value">1</span>
+            <span class="v16-dial-label">LVL</span>
+          </div>
+        </div>
+      </article>
+      <article class="holo-card">
+        <h3 class="neon-title" data-ui-copy="recovery_streak">{{ uc.recovery_streak.label }}</h3>
+        <p class="stat-value" id="identity-streak-value">0</p>
+        <p class="expand-sub" data-ui-copy="identity_streak_note" data-ui-field="tooltip">{{ uc.identity_streak_note.tooltip }}</p>
+      </article>
+    </section>
+
+    <div class="home-actions">
+      <a class="home-btn" href="/creator/badges" data-ui-copy="creator_badges">{{ uc.creator_badges.label }}</a>
+      <a class="home-btn" href="/growth/score" data-ui-copy="growth_score">{{ uc.growth_score.label }}</a>
+      <a class="home-btn" href="/profile" data-ui-copy="auth">{{ uc.auth.label }}</a>
+    </div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script type="application/json" id="ui-copy-data">{{ ui_copy | tojson }}</script>
+<script src="/static/ui-copy.js"></script>
+<script src="/static/creator-identity.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    window.CrashoutCreatorIdentity?.mount?.("#creator-identity-root");
+  });
+</script>
+{% endblock %}

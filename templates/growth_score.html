@@ -18,6 +18,14 @@
     </header>
 
     <div id="growth-score-root" class="score-console console-grid grid" aria-live="polite"></div>
+
+    <section class="momentum-timeline" aria-labelledby="timeline-title">
+      <h2 id="timeline-title" class="launchpad-section-title neon-title" data-ui-copy="growth_timeline">{{ uc.growth_timeline.label }}</h2>
+      <p class="timeline-lede" data-ui-copy="growth_timeline" data-ui-field="tooltip">{{ uc.growth_timeline.tooltip }}</p>
+      <div id="growth-timeline-root" class="timeline-panel holo-card" aria-live="polite"></div>
+      <div class="timeline-chips" id="growth-timeline-chips" aria-live="polite"></div>
+    </section>
+
     <p id="growth-score-empty" class="unified-feed-empty" hidden>No growth score yet.</p>
     <p id="growth-score-error" class="unified-feed-error" hidden role="alert"></p>
   </div>
